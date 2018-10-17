@@ -1,0 +1,304 @@
+% !TeX spellcheck = de_DE
+\documentclass[12pt,parskip=full]{scrartcl}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{color}
+\usepackage{amsmath,amssymb,amstext,mathtools,amsthm}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{stmaryrd}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{bookmarksnumbered}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usepackage{enumitem}
+\setenumerate{label=\arabic*)}
+
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\setH}{\mathbb{H}}
+\newcommand{\setk}{\Bbbk}
+\newcommand{\ldot}{\,.\,}
+\newcommand{\Forall}{~\forall}
+\newcommand{\Exists}{~\exists}
+
+\newcommand{\corners}[1]{{\ulcorner #1 \urcorner }}
+\newcommand{\dotminus}{\buildrel\textstyle.\over{\hbox{\vrule height3pt depth0pt width0pt}{\smash-}}}
+\newcommand{\abs}[1]{{\left| #1 \right|}}
+\newcommand{\dabs}[1]{{\left\lVert #1 \right\rVert}}
+\newcommand{\heading}{\underline}
+ 
+\theoremstyle{definition}
+\newtheorem{theorem}{Satz}[section]
+\newtheorem{corollary}[theorem]{Folgerung}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Beispiel}
+\newtheorem*{axiom}{Axiom}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Bemerkung}
+
+\hfuzz=5pt
+ 
+\title{Skript Modelltheorie}
+\author{Lukas Metzger}
+\date{\today}
+ 
+\begin{document}
+	\maketitle
+	
+	\setcounter{section}{-1}
+	\section{Motivation}
+	
+	\heading{Aus der Linearen Algebra}
+	\begin{itemize}
+		\item $K$-Vektorräume, Untervektorräume, Homomorphismen
+		\item Gruppen, Untergruppen, Homomorphismen
+		\item Ringe, Unterringe, Homomorphismen
+		\item Körper, Teilkörper, Homomorphismen
+	\end{itemize}
+
+	\heading{Entwicklungsschritte}
+	\begin{itemize}
+		\item Suche nach allgemeiner Theorie $\Rightarrow$ universelle Algebra.
+		\item Modelltheorie (universelle Algebra + Logik)
+		\item Kategorientheorie
+	\end{itemize}
+
+	\heading{Beispiel von Ax}
+	
+	Sei $K$ ein Körper, und $P(X) \in K[X]$. $P$ definiert eine Abbildung $\tilde{P}: K \to K$.
+	
+	$P$ hat die Hopf-Eigenschaft, wenn gilt:
+	\begin{center}
+		Wenn $\tilde{P}$ injektiv ist, dann ist $\tilde{P}$ surjektiv.
+	\end{center}
+
+	Jedes Polynom hat über einem endlichen Körper die Hopf-Eigenschaft.
+	
+	\heading{Formalisierung der Hopf-Eigenschaft}
+	\begin{equation*}
+		\forall y \forall z (P(y = P(z) \rightarrow y = z)
+	\end{equation*}
+	\begin{equation*}
+		\forall w \exists v P(v) = w
+	\end{equation*}
+	
+	Für jedes $n$
+	\begin{equation*}
+		\forall x_0, \dots, x_n \left(\forall y \forall z \left(\sum_{i=0}^{n} x_i y^i = \sum_{i=0}^n x_i z^i \rightarrow y = z\right) \rightarrow \forall w \exists v \sum_{i=0}^n x_i v^i = w\right)
+	\end{equation*}
+	Logik
+	\begin{equation*}
+		\underset{\text{log. äquivalent}}{\sim} \forall x_0, \dots \forall x_n \forall w \exists v \exists y \exists z \left( \sum_{i=0}^{n} x_i y^i = \sum_{i=0}^n x_i z^i \right) \rightarrow \sum_{i=0}^n x_i v^i = w
+	\end{equation*}
+	
+	
+	\begin{example}
+		\begin{equation*}
+			\mathbb{F}_{p^n} \underset{\text{erfüllt}}{\models} HE(n) \underset{\forall \exists- \text{Präservation}}{\Rightarrow} \underbrace{\bigcup_{n \in \setN} \mathbb{F}_{p^n}}_{\tilde{\mathbb{F}}_p = \text{ der algebraische Abschluss von } \mathbf{F_p}} \models HE(n)
+		\end{equation*}
+	\end{example}
+
+	\begin{example}
+		Aus dem Kompaktheitssatz folgt: $\setC = \lim\limits_{p \to \infty} \tilde{\mathbb{F}}_p$
+	\end{example}
+
+	\section{Grundbegriffe}
+	
+	\subsection{\texorpdfstring{$\mathcal{L}$-Strukturen}{L-Strukturen}}
+	
+	\begin{example}
+		Der angeordnete Körper der reellen Zahlen $(\setR, \underbrace{+, \cdot}_\text{zweistellig}, \underbrace{-}_\text{einstellig}, \underbrace{0, 1}_\text{konstanten}, \underbrace{<}_\text{zweistellige Relation})$
+	\end{example}
+	
+	\begin{definition}[$\mathcal{L}$-Struktur]
+		Sei $\mathcal{L}$ eine Menge von
+		\begin{itemize}
+			\item Funktionszeichen $f_i \quad (i \in I)$
+			\item Relationszeichen $R_j \quad (j \in J)$
+		\end{itemize}
+		
+		Jedes Zeichen hat ein festes $n \in \setN$ als Stelligkeit (arity).
+		
+		$\mathcal{L}$ heißt Sprache / Signatur / similarity type.
+		
+		Eine $\mathcal{L}$-Struktur $\mathfrak{A}$ besteht aus
+		\begin{itemize}
+			\item einer nicht-leeren Menge $A$ (Universum, Träger, Grundmenge)
+			\item einer $n$-stellige Funktion $f^\mathfrak{A}: A^n \to A$ für jedes $n$-stellige Funktionszeichen $f \in \mathcal{L}$
+			\item einer $n$-stellige Relation $R^\mathfrak{A} \subseteq A^n$ für jedes $n$-stellige Relationszeichen $R \in \mathcal{L}$
+		\end{itemize}
+	
+		\heading{$n = 0$}
+		
+		$A^0 = \{ \emptyset \}$
+		
+		$0$-stellige Funktion in $\mathfrak{A}$: $f^\mathfrak{A}: \{ \emptyset \} \to A$ ist eindeutig bestimmt durch $f(\emptyset) \in A$. Daher entsprechen $0$-stellige Funktionen den Konstanten.
+		
+		$0$-stellige Relationen in $\mathfrak{A}$:
+		\begin{equation*}
+			R^\mathfrak{A} \subseteq \{ \emptyset \} \begin{cases}
+				\text{entweder} & R = \{ \emptyset \} \,\hat{=}\, \text{wahr}\\
+				\text{oder} & R = \emptyset \,\hat{=}\, \text{falsch}
+			\end{cases}
+		\end{equation*}
+		Daher entsprechen $0$-stellige Relationszeichen den Aussagenvariablen
+	\end{definition}
+
+	\begin{example}
+		\begin{enumerate}[label=\alph*)]
+			\item Zu jeder Menge $A \neq \emptyset$ und jeder Sprache $\mathcal{L}$ kann ich eine $\mathcal{L}$-Struktur mit Träger $A$ finden!
+			\item $\mathcal{L} = \{ R \}$, $R$ 2-stelliges Relationssymbol
+			\begin{align*}
+				\mathfrak{Q}_1 = (\setQ, <), &\qquad\text{d.h.}\quad R^{\mathfrak{Q}_1} = \{ (q_1, q_2) \in \setQ^2 \mid q_1 < q_2 \} \\
+				\mathfrak{Q}_2 = (\setQ, <), &\qquad\text{d.h.}\quad R^{\mathfrak{Q}_2} = \{ (q_1, q_2) \in \setQ^2 \mid q_1 < q_2 \}
+			\end{align*}
+			sind zwei verschiedene $\mathcal{L}$-Strukturen auf $\setQ$.
+			\item $\mathcal{L}_{HGr} = \{ \circ \}$ und $\mathcal{L}_Gr = \{ \circ, {}^{-1}, e \}$
+			
+			Gruppen sind $\mathcal{L}_{Gr}$-Strukturen $\mathfrak{G}$ mit:
+			\begin{itemize}
+				\item $\circ^\mathfrak{G}$ ist assoziativ
+				\item $e^\mathfrak{G} \circ^\mathfrak{G} g = g \circ^\mathfrak{G} e^\mathfrak{G} = g$ für alle $g \in G$
+				\item $g \circ ^\mathfrak{G} g^{-1^\mathfrak{G}} = g^{-1^\mathfrak{G}} = e^\mathfrak{G}$
+			\end{itemize}
+		
+			Alternativ sind Gruppen $\mathcal{L}_{HGr}$-Strukturen $\mathfrak{G}$ mit
+			\begin{itemize}
+				\item $\circ^\mathfrak{G}$ ist assoziativ
+				\item es gibt ein neutrales Element
+				\item es gibt inverse Elemente
+			\end{itemize}
+		\end{enumerate}
+	\end{example}
+
+	\begin{definition}
+		Seien $\mathfrak{A}$ und $\mathfrak{B}$ $\mathcal{L}$-Strukturen. $h: A \to B$ heißt
+		\begin{enumerate}[label=\alph*)]
+			\item $\mathcal{L}$-Homomorphismus, falls
+			\begin{equation*}
+				h(f^\mathfrak{A}(a_1, \dots, a_n)) = f^\mathfrak{B}(h(a_1), \dots, h(a_n))
+			\end{equation*}
+			für alle $n$ und $a_1, \dots, a_n \in A$, und $n$-stellige $f \in \mathcal{L}$ und
+			\begin{equation*}
+				(a_1, \dots, a_n) \in R^\mathfrak{A} \Rightarrow (h(a_1), \dots, h(a_n)) \in R^\mathfrak{B}
+			\end{equation*}
+			für alle $n$ und $a_1, \dots, a_n \in A$, und $n$-stellige $R \in \mathcal{L}$.
+			\item Starker Homomorphismus, falls zusätzlich $\Leftrightarrow$ im zweiten Teil gilt.
+			\item $\mathcal{L}$-Einbettung falls $h$ injektiver starker $\mathcal{L}$-Homomorphismus ist.
+			\item $\mathcal{L}$-Isomorphismus falls $h$ bijektiver starker $\mathcal{L}$-Homomorphismus ist und $h^{-1}$ ebenfalls.
+			\item $\mathfrak{A}$ und $\mathfrak{B}$ heißen $\mathcal{L}$-Isomorph falls es ein $\mathcal{L}$-Isomorphismus $h: \mathfrak{A} \to \mathfrak{B}$ gibt.
+			\item Ein $\mathcal{L}$-Isomorphismus $h: \mathfrak{A} \to \mathfrak{A}$ heißt $\mathcal{L}$-Automorphismus.
+			\item Falls $A \subseteq B$, dann heißt $\mathfrak{A}$ $\mathcal{L}$-Unterstruktur von $\mathfrak{B}$ beziehungsweise $\mathfrak{B}$ $\mathcal{L}$-Oberstruktur von $\mathfrak{A}$, falls die Identität $id_A: A \to B$ eine $\mathcal{L}$-Einbettung ist.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		Falls $\mathcal{L}' \subseteq \mathcal{L}$, dann wird jede $\mathcal{L}$-Struktur $\mathfrak{A}$ durch vergessen zu einer $\mathcal{L}'$-Struktur $\mathfrak{A}_{\upharpoonright \mathcal{L}'}$ (Redukt von $\mathfrak{A}$).
+	\end{remark}
+
+	\begin{remark}
+		Jeder Halbgruppenhomomorphismus zwischen Gruppen ist ein Gruppenhomomorphismus.
+		
+		Falls $\mathfrak{G}_1, \mathfrak{G}_2$ $\mathcal{L}_{Gr}$-Strukturen sind und $h: G_1 \to G_2$ $L_{HGr}$ Homomorphismus (genau genommen ${G_1}_{\upharpoonright \mathcal{L}_{HGr}}$ und ${G_2}_{\upharpoonright \mathcal{L}_{HGr}}$) dann ist $h$ automatisch ein $\mathcal{L}_{Gr}$-Homomorphismus.
+		
+		Dies stimmt nicht für Monoide statt Gruppen.
+	\end{remark}
+
+	\begin{remark}""
+		\begin{enumerate}
+			\item Wenn $h: \mathfrak{A} \to \mathfrak{B}$ ein injektiver Homomorphismus ist (d.h. es existiert Sprache $\mathcal{L}$, die im Hintergrund fest ist, $\mathfrak{A},\mathfrak{B}$ sind $\mathcal{L}$-Strukturen, $h$ ist $\mathcal{L}$-Homomorphismus) dann existiert auf $h(A)$ eine $\mathcal{L}$-Struktur $h(\mathfrak{A})$, so dass $h: \mathfrak{A} \xrightarrow{\sim} h(\mathfrak{A})$, aber $h(\mathfrak{A})$ ist nicht notwendigerweise Unterstruktur von $\mathfrak{B}$.
+			\item Der Schnitt von $\mathcal{L}$-Unterstrukturen ist wieder eine $\mathcal{L}$-Unterstruktur.
+		\end{enumerate}
+	\end{remark}
+	
+	\begin{corollary}
+		Wenn $\mathfrak{A}$ eine $\mathcal{L}$-Struktur und $C \subset A$ ist, dann existiert die von $C$ erzeugte $\mathcal{L}$-Unterstruktur $\langle C \rangle_\mathcal{L} = \langle C \rangle$ das heißt die kleinste Unterstruktur von $\mathfrak{A}$, deren Trägermenge $C$ enthält.
+		
+		Die Trägermenge von $\langle C \rangle$ erhält man dadurch, dass man $C$ unter den Funktionen $f^\mathfrak{A}$ abschließt.
+		
+		$R^{\langle C \rangle}$ ist dann $R^\mathfrak{A} \cap \langle C \rangle \times \dots \times \langle C \rangle$
+	\end{corollary}
+
+	\subsection{\texorpdfstring{$\mathcal{L}$-Formeln}{L-Formeln}}
+
+	\heading{Verwendete Symbole:}
+	\begin{itemize}
+		\item Funktions- und Relationszeichen aus $\mathcal{L}$:
+		\begin{equation*}
+			f_i, R_j, \dots, +, \circ, \leq
+		\end{equation*}
+		\item Gleichheitszeichen: $\doteq$ (Zieglersche Konvention)
+		\item Klammern: $()$
+		\item Quantoren: $\forall \quad \exists$
+		\item aussagenlogische Junktoren: $\underset{\text{Negation}}{\lnot}, \underset{\text{und}}{\land}, \underset{\text{oder}}{\lor}, \underset{\text{Implikation}}{\rightarrow}, \underset{\text{Äquivalent}}{\leftrightarrow}, \underset{\text{Falsum}}{\bot}, \underset{\text{Verum}}{\top}$
+		\item Individuenvariablen: $v_0, v_1, \dots$
+	\end{itemize}
+
+	\begin{definition}[$\mathcal{L}$-Terme]
+		$\mathcal{L}$-Terme sind:
+		\begin{itemize}
+			\item Individuenvariablen
+			\item Wenn $f$ ein $n$-stelliges Funktionszeichen in $\mathcal{L}$ ist und $\tau_1, \dots, \tau_n$ sind $\mathcal{L}$-Terme dann ist $f \tau_1 \dots \tau_n$ ein $\mathcal{L}$-Term.
+		\end{itemize}
+	\end{definition}
+
+	\begin{remark}""
+		\begin{itemize}
+			\item Es gilt die eindeutige Lesbarkeit der Terme
+			\item Bei Zeichen wie $+, \cdot$ schreibt man traditionell $v_1 + v_2$ statt $+ v_1 v_2$ muss aber bei Verschachtelungen klammern.
+		\end{itemize}
+	\end{remark}
+
+	\begin{definition}[Auswertung von Termen in Strukturen]
+		Eine Belegung der Individuenvariablen mit Elementen einer Struktur für eine $\mathcal{L}$-Struktur $\mathfrak{A}$ ist eine Abbildung $\beta: \{ v_0, v_1, \dots \} \to A$.
+		
+		Die Auswertung von einem Term in einer Struktur bezüglich einer Belegung $\tau^\mathfrak{A}[\beta]$ ist induktiv definiert durch:
+		\begin{align*}
+			v_i^\mathfrak{A}[\beta] &\coloneqq \beta(v_i) \\
+			f \tau_1 \dots \tau_n {}^\mathfrak{A} [\beta] &\coloneqq f^\mathfrak{A}(\tau_1^\mathfrak{A}[\beta], \dots, \tau_n^\mathfrak{A}[\beta])
+		\end{align*}
+	\end{definition}
+
+	\begin{definition}[$\mathcal{L}$-Formeln]
+		$\mathcal{L}$-Formeln sind
+		\begin{itemize}
+			\item $\bot \quad \top$
+			\item $\tau_1 \doteq \tau_2$ für $\mathcal{L}$-Terme $\tau_1, \tau_2$
+			\item $R \tau_1 \dots \tau_n$ für $\mathcal{L}$-Terme $\tau_1, \dots, \tau_n$ und $n$-stelliges $R \in \mathcal{L}$
+		\end{itemize}
+	\end{definition}
+
+	\begin{definition}[Auswertung von $\mathcal{L}$-Formeln in Strukturen]""\\
+		$\mathfrak{A}$ ist Modell von $\varphi$ unter $\beta$ oder formal $\mathfrak{A} \models \varphi[\beta]$
+		\begin{itemize}
+			\item stets gilt $\mathfrak{A} \models \top[\beta]$
+			\item nie gilt $\mathfrak{A} \models \bot[\beta]$
+			\item $\mathfrak{A} \models \corners{\tau_1 \doteq \tau_2}[\beta] \Leftrightarrow \tau_1^\mathfrak{A}[\beta] = \tau_2^\mathfrak{A}[\beta]$
+			\item $\mathfrak{A} \models R \tau_1 \dots \tau_n [\beta] \Leftrightarrow (\tau_1^\mathfrak{A}[\beta], \dots, \tau_n^\mathfrak{A}[\beta]) \in R^\mathfrak{A}$
+			\item Wenn $\varphi, \varphi_1, \varphi_2$ $\mathcal{L}$-Formeln sind, dann auch
+			\begin{align*}
+				&\lnot \varphi && \mathfrak{A} \models \lnot \varphi[\beta] \Leftrightarrow \mathfrak{A} \not\models \varphi[\beta] \\
+				&(\varphi_1 \land \varphi_2) && \mathfrak{A} \models (\varphi_1 \land \varphi_2) [\beta] \Leftrightarrow \mathfrak{A} \models \varphi_1[\beta] \text{ und } \mathfrak{A} \models \varphi_2[\beta] \\
+				&(\varphi_1 \lor \varphi_2) && \mathfrak{A} \models (\varphi_1 \lor \varphi_2) [\beta] \Leftrightarrow \mathfrak{A} \models \varphi_1[\beta] \text{ oder } \mathfrak{A} \models \varphi_2[\beta] \\
+				&(\varphi_1 \rightarrow \varphi_2)  && \mathfrak{A} \models (\varphi_1 \rightarrow \varphi_2) [\beta] \Leftrightarrow \text{Wenn } \mathfrak{A} \models \varphi_1[\beta] \text{ dann } \mathfrak{A} \models \varphi_2[\beta] \\
+				&(\varphi_1 \leftrightarrow \varphi_2)  && \mathfrak{A} \models (\varphi_1 \leftrightarrow \varphi_2) [\beta] \Leftrightarrow (\mathfrak{A} \models \varphi_1[\beta] \Leftrightarrow \mathfrak{A} \models \varphi_2[\beta]) \\
+				&\exists v_i \varphi && \text{Es gibt ein $a \in A$ so dass $\mathfrak{A} \models \varphi\left[\beta \frac{a}{v_i}\right]$}\\
+				&\forall v_i \varphi && \text{Für alle $a \in A$ gilt dass $\mathfrak{A} \models \varphi\left[\beta \frac{a}{v_i}\right]$}
+			\end{align*}
+		\end{itemize}
+	\end{definition}
+
+\end{document}
+
