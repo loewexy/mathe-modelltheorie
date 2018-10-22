@@ -299,6 +299,143 @@
 			\end{align*}
 		\end{itemize}
 	\end{definition}
+	
+	\begin{example}
+		$\forall v_0 \underbrace{((\forall v_1 \underbrace{R v_0 v_1}_\text{Wirkungsbereich $\forall v_1$}) \lor R v_1 v_0)}_\text{Wirkungsbereich $\forall v_0$}$
+		
+		Variablen im Wirkungsbereich eines Quantors heißen gebundene Variablen, alle anderen heißen freie Variablen.
+	\end{example}
+
+	\begin{remark}
+		$\tau^\mathfrak{A}[\beta]$ beziehungsweise $\mathfrak{A} \models \varphi[\beta]$ hängt nur insofern von $\beta$ ab, als man wissen muss, was $\beta$ mit den freien Variablen macht.
+	\end{remark}
+
+	\begin{definition}[$\mathcal{L}$-Aussage]
+		Eine $\mathcal{L}$-Aussage ($\mathcal{L}$-Satz, geschlossene Formel) ist eine $\mathcal{L}$-Formel ohne freie Variablen.
+	\end{definition}
+	
+	\begin{theorem}
+		Für $\mathcal{L}$-Aussagen $\varphi$ ist $\mathfrak{A} \models \varphi[\beta]$ unabhängig von $\beta$.
+		
+		Man schreibt:
+		\begin{align*}
+			\mathfrak{A} & \models \varphi \\
+			\mathfrak{A} & \not\models \varphi
+		\end{align*}
+	\end{theorem}
+
+	\begin{definition}""
+		\begin{enumerate}
+			\item Eine $\mathcal{L}$-Formel $\varphi$ ist allgemeingültig ($\models \varphi, \vdash \varphi$), falls $\mathfrak{A} \models \varphi[\beta]$ für alle $\mathfrak{A}$ und $\beta$.
+			\item $\mathcal{L}$-Formeln $\varphi$ und $\psi$ sind logisch äquivalent ($\varphi \sim \psi$), falls
+			\begin{equation*}
+				\mathfrak{A} \models \varphi[\beta] \Leftrightarrow \mathfrak{A} \models \psi[\beta]
+			\end{equation*}
+			für alle $\mathfrak{A}$ und $\beta$.
+			\item $\psi$ folgt aus $\phi = \{ \varphi_i \mid i \in I \}$, falls:
+			\begin{equation*}
+				\mathfrak{A} \models \varphi_i[\beta] \text{ für alle $i \in I$} \quad\Longrightarrow\quad \mathfrak{A} \models \psi[\beta] \text{ für alle $\mathfrak{A}$ und $\beta$}
+			\end{equation*}
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		$\varphi \sim \psi \quad\Leftrightarrow\quad \vdash (\varphi \leftrightarrow \psi)$
+	\end{remark}
+
+	\begin{remark}
+		Für $\mathcal{L} \subseteq \mathcal{L'}$ und eine $\mathcal{L}$-Formel $\varphi$ gilt: $\vdash_\mathcal{L} \varphi \Rightarrow \vdash_\mathcal{L'} \varphi$
+	\end{remark}
+
+	\begin{theorem}
+		Jede $\mathcal{L}$-Formel $\varphi$ ist äquivalent zu einer $\mathcal{L}$-Formel in der folgenden Form:
+		\begin{equation*}
+			\underbrace{Q_1 v_{i_1} \dots Q_n v_{i_n}}_\text{pränexe Normalform} \underbrace{\bigvee_{j \in J} \bigwedge_{k \in K_j} (\lnot) \varphi_1{i,j}}_\text{disjunktive Normalform}
+		\end{equation*}
+		mit $Q_i \in \{ \exists, \forall \}$.
+	\end{theorem}
+
+	\subsection{Theorien}
+	
+	\begin{definition}
+		\begin{enumerate}
+			\item Eine $\mathcal{L}$-Theorie $T$ ist eine Menge von $\mathcal{L}$-Aussagen.
+			\item Eine Struktur $\mathfrak{A}$ ist Modell einer Theorie $T$, $\mathfrak{A} \models T$, falls $\mathfrak{A} \models \varphi$ für jedes $\varphi \in T$..
+			\item $\operatorname{Mod}(T) = \{ \mathfrak{A} \text{ $\mathcal{L}$-Struktur} \mid \mathfrak{A} \models T \}$ heißt Modellklasse von $T$. \\
+			\heading{Achtung:} $\operatorname{Mod}(T)$ ist im Allgemeinen keine Menge!
+			\item $T$ ist konsistent (bzw. Widerspruchsfrei) falls $T$ mindestens ein Modell hat (d.h. $\operatorname{Mod}(T) \neq \emptyset$).
+			\item Eine Klasse $\mathcal{K}$ von $\mathcal{L}$-Strukturen heißt elementar, falls es eine Theorie $T$ gibt mit $\operatorname{Mod}(T) = \mathcal{K}$.
+			\item Sei $\mathfrak{A}$ $\mathcal{L}$-Struktur. Dann ist
+			\begin{equation*}
+				\operatorname{Th}(\mathfrak{A}) \coloneqq \{ \text{$\varphi$ $\mathcal{L}$-Aussage} \mid \mathfrak{A} \models \varphi \}
+			\end{equation*}
+			die vollständige Theorie von $\mathfrak{A}$.
+			\item Zwei $\mathcal{L}$-Strukturen $\mathfrak{A}, \mathfrak{B}$ heißen elementar äquivalent, $\mathfrak{A} \equiv \mathfrak{B}$, falls $\operatorname{Th}(\mathfrak{A}) = \operatorname{Th}(\mathfrak{B})$.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{example}""
+		\begin{enumerate}
+			\item Wenn $\mathfrak{A}$ endlich ist und $\mathfrak{B} \equiv \mathfrak{A}$, dann ist $\mathfrak{B}$ bereits isomorph zu $\mathfrak{A}$.
+			\item $(\setQ, +, -, \cdot, 0, 1) \not\equiv (\setR, +, - , \cdot, 0, 1)$, da
+			\begin{align*}
+				(\setQ, +, -, \cdot, 0, 1) &\not\models \exists v_0 (v_0 \cdot v_0 = 1 + 1) \\(\setR, +, -, \cdot, 0, 1) &\models \exists v_0 (v_0 \cdot v_0 = 1 + 1)
+			\end{align*}
+			\item $(\overline{\setQ} \cap \setR, +, -, \cdot, 0, 1) \equiv (\setR, +, -, \cdot, 0, 1)$ mit $\overline{\setQ} = \{ c \in \setC \mid \text{ es gibt ein $P \in \setQ[X]$ so dass $P(c) = 0$} \}$ (algebraischer Abschluss von $\setQ$) (Beweis dazu ist nicht trivial)
+		\end{enumerate}
+	\end{example}
+
+	\begin{definition}
+		Seien $T, T'$ $\mathcal{L}$-Theorien, $\varphi$ $\mathcal{L}$-Aussage
+		\begin{enumerate}
+			\item $T \vdash \varphi$, falls gilt
+			\begin{equation*}
+				\mathfrak{A} \models T \quad\Longrightarrow\quad \mathfrak{A} \models \varphi
+			\end{equation*}
+			für alle $\mathfrak{A}$.
+			\item $T^\vdash \coloneqq \{ \varphi \text{ $\mathcal{L}$-Aussage}n \mid T \vdash \varphi \}$ heißt der deduktive Abschluss von $T$.
+			\item $T$ ist deduktiv abgeschlossen $:\Leftrightarrow T = T^\vdash$.
+			\item $T$ und $T'$ heißen äquivalent $T \equiv T'$ falls $T^\vdash = T'^\vdash$.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}""
+		\begin{itemize}
+			\item $T \subseteq T^\vdash = {T^\vdash}^\vdash$
+			\item $\mathfrak{A} \models T \Rightarrow \mathfrak{A} \models T^\vdash$ beziehungsweise $\operatorname{Mod}(T) = \operatorname{Mod}(T^\vdash)$
+			\item $T^\vdash$ ist die maximale Theorie $T' \supseteq T$ mit der Eigenschaft $\operatorname{Mod}(T) = \operatorname{Mod}(T^\vdash)$
+		\end{itemize}
+	\end{remark}
+
+	\begin{remark}
+		Wenn $\mathfrak{A} \models \varphi$ und $\varphi' \sim \varphi$, dann gilt $\mathfrak{A} \models \varphi'$.
+		
+		Daher unterscheidet man ab sofort logisch äquivalente Formeln nicht mehr.
+		
+		Formal: definiere $\mathfrak{A} \models \varphi/\sim$ für Äquivalenzklassen $[\varphi] = \varphi/\sim = \{ \varphi' \mid \varphi \sim \varphi' \}$
+	\end{remark}
+
+	\begin{theorem}
+		Die $\mathcal{L}$-Formeln bis auf logische Äquivalenz bilden eine boolesche Algebra $\mathcal{F}_\infty(\mathcal{L})$. Die Formeln deren freie Variablen in $\{v_0, \dots, v_{n-1}\}$ enthalten sind bilden eine boolesche Algebra $\mathcal{F}_n(\mathcal{L})$ das bedeutet:
+		
+		$\mathcal{F}_i(\mathcal{L})$ ist eine partielle Ordnung $[\varphi] \leq [\psi]$ falls $\vdash (\varphi \rightarrow \psi)$ mit
+		\begin{itemize}
+			\item einem maximalen Element $[\top]$
+			\item einem minimalen Element $[\bot]$
+			\item je zwei Elemente $[\varphi], [\psi]$ haben
+			\begin{itemize}
+				\item ein Supremum $[(\varphi \lor \psi)]$
+				\item ein Infimum $[(\varphi \land \psi)]$
+			\end{itemize}
+			\item jedes Element $[\varphi]$ hat ein Komplement $\lnot \varphi$ das heißt
+			\begin{itemize}
+				\item $[(\varphi \land \lnot \varphi)] = [\bot]$ und
+				\item $[(\varphi \lor \lnot \varphi)] = [\top]$
+			\end{itemize}
+		\end{itemize}
+	
+		Die Boolesche Algebra ist dann die Struktur $(\mathcal{F}_i(\mathcal{L}), \land, \lor, \lnot, \top, \bot)$ wobei $[\varphi] \land [\psi] = [(\varphi \land \psi)]$ etc.
+	\end{theorem}
 
 \end{document}
 
