@@ -415,7 +415,7 @@
 		Formal: definiere $\mathfrak{A} \models \varphi/\sim$ für Äquivalenzklassen $[\varphi] = \varphi/\sim = \{ \varphi' \mid \varphi \sim \varphi' \}$
 	\end{remark}
 
-	\begin{theorem}
+	\begin{theorem}[Tarski-Lindenbaum-Algebren]
 		Die $\mathcal{L}$-Formeln bis auf logische Äquivalenz bilden eine boolesche Algebra $\mathcal{F}_\infty(\mathcal{L})$. Die Formeln deren freie Variablen in $\{v_0, \dots, v_{n-1}\}$ enthalten sind bilden eine boolesche Algebra $\mathcal{F}_n(\mathcal{L})$ das bedeutet:
 		
 		$\mathcal{F}_i(\mathcal{L})$ ist eine partielle Ordnung $[\varphi] \leq [\psi]$ falls $\vdash (\varphi \rightarrow \psi)$ mit
@@ -436,6 +436,157 @@
 	
 		Die Boolesche Algebra ist dann die Struktur $(\mathcal{F}_i(\mathcal{L}), \land, \lor, \lnot, \top, \bot)$ wobei $[\varphi] \land [\psi] = [(\varphi \land \psi)]$ etc.
 	\end{theorem}
+
+	\begin{definition}
+		Wenn $\mathfrak{B} = (B, \cap, \cup {}^C, 0, 1)$ beziehungsweise $(B, \subseteq)$ eine Boolesche Algebra ist, dann ist
+		\begin{equation*}
+			\mathfrak{B}^* = (B, \cup, \cap, {}^C, 1, 0) \text{ beziehungsweise } (B, \supseteq)
+		\end{equation*}
+		ebenfalls eine Boolesche Algebra, die duale Algebra und
+		\begin{equation*}
+			\mathfrak{B} \to \mathfrak{B}^*, b \mapsto b^C
+		\end{equation*}
+		ist Isomorphismus Boolescher Algebren. Insbesondere gilt
+		\begin{align*}
+			(a \cup b)^C &= a^C \cap b^C \\
+			(a \cap b)^C &= a^C \cup b^C
+		\end{align*}
+	\end{definition}
+
+	\begin{theorem}[Stonescher Repräsentationssatz]
+		Jede Boolesche Algebra ist Unteralgebra einer Potenzmengenalgebra.
+	\end{theorem}
+
+	\begin{remark}
+		$\varphi \vdash \psi$ ist partielle Ordnung auf den Äquivalenzklassen $[\varphi]$.
+		\begin{itemize}
+			\item reflexiv: $\varphi \vdash \varphi$
+			\item transitiv: $\varphi \vdash \psi, \psi \vdash \chi \Rightarrow \varphi \vdash \chi$
+			\item antisymmetrisch: $\varphi \vdash \psi, \psi \vdash \varphi \Rightarrow \varphi \sim \psi$
+		\end{itemize}
+	\end{remark}
+
+	\begin{definition}[Filter]
+		Ein Filter in einer Booleschen Algebra $\mathfrak{B}$ ist eine Teilmenge $F \subseteq B$ mit
+		\begin{itemize}
+			\item $1 \in F, 0 \notin F$
+			\item Wenn $b \in F, b \subseteq b'$ dann $b' \in F$
+			\item Wenn $b_1, b_2 \in F$, dann auch $b_1 \cap b_2 \in F$
+		\end{itemize}
+	\end{definition}
+
+	\begin{remark}
+		Das duale Konzept heißt Ideal.
+	\end{remark}
+
+	\begin{example}""
+		\begin{itemize}
+			\item Wenn $0 \neq b \in B$, dann ist
+			\begin{equation*}
+				\langle b \rangle \coloneqq \{ b^i \in B \mid b \subseteq b' \}
+			\end{equation*}
+			ein Filter, der von $b$ erzeugt Hauptfilter.
+			\item $\mathfrak{P}(\setN) = \operatorname{Pot}(\setN)$ der Frechet-Filter ist
+			\begin{equation*}
+				\{ X \subseteq \setN \mid \setN \setminus X \text{ endlich} \}
+			\end{equation*}
+			\item Sei $T$ eine konsistente $\mathcal{L}$-Theorie, dann ist $T^\vdash$ ein Filter in $\mathcal{F}_0(\mathcal{L})$ der von $T$ erzeugte Filter.
+		\end{itemize}
+	\end{example}
+
+	\begin{remark}
+		\begin{align*}
+			\text{$T$ ist inkonsistent} &\Longleftrightarrow \bot \in T^\vdash \\
+			&\Longleftrightarrow \text{alle $\varphi \in \mathcal{F}_0(\mathcal{L})$ liegen in $T^\vdash$} \\
+			&\Longleftrightarrow \text{es gibt ein $\varphi \in \mathcal{F}_0(\mathcal{L})$ mit $T \vdash \varphi$ und $T \vdash \lnot \varphi$}
+		\end{align*}
+	\end{remark}
+
+	\begin{definition}
+		\begin{enumerate}
+			\item Eine $\mathcal{L}$-Theorie $T$ heißt vollständig, falls für jede $\varphi \in \mathcal{F}_0(\mathcal{L})$ entweder $T \vdash \varphi$ oder $T \vdash \lnot \varphi$ (insbesondere sind vollständige Theorien konsistent)
+			\item Ein Filter in einer Booleschen Algebra $\mathfrak{B}$ heißt Ultrafilter, falls $F$ Filter ist und für alle $b \in B$ gilt entweder $b \in F$ oder $b^C \in F$.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		\begin{enumerate}
+			\item $T$ ist vollständig $\Leftrightarrow$ $T^\vdash$ ist Ultrafilter in $\mathcal{F}_0(\mathcal{L})$
+			\item $\mathfrak{A}$ ist $\mathcal{L}$-Struktur, dann ist $\operatorname{Th}(\mathfrak{A}) = \{ \varphi \in \mathcal{F}_0(\mathcal{L}) \mid \mathfrak{A} \models \varphi \}$ vollständig. Man schreibt auch $\operatorname{Th}(\mathfrak{A}) = \operatorname{Th}(\mathfrak{A})^\vdash$.
+		\end{enumerate}
+	\end{remark}
+
+	\begin{definition}
+		$\mathfrak{A}$ sei eine $\mathcal{L}$-Struktur.
+		\begin{enumerate}
+			\item Definiere
+			\begin{equation*}
+				\mathcal{L}_A \coloneqq \mathcal{L} \;\dot{\cup}\; \{ c_a \mid a \in A \}
+			\end{equation*}
+			$\mathfrak{A}$ wird kanonisch zu einer $\mathcal{L}_A$-Struktur $\mathfrak{A}_A$ expandiert durch
+			\begin{equation*}
+				c_a^{\mathfrak{A}_A} = a
+			\end{equation*}
+			\item Das atomare Diagramm von $\mathfrak{A}, \operatorname{Diag}(\mathfrak{A})$ besteht aus allen atomaren und negiert-atomaren $\mathcal{L}_A$-Aussagen, die in $\mathfrak{A}$ gelten
+			\begin{equation*}
+				\operatorname{Diag}(\mathfrak{A}) = \{ \text{$\varphi$ atomar oder $\varphi = \lnot \psi, \psi$ atomare $\mathcal{L}_A$-Aussage} \mid \mathfrak{A} \models \varphi \}
+			\end{equation*}
+			Das positive atomare Diagramm ist
+			\begin{equation*}
+				\operatorname{Diag}^+(\mathfrak{A}) = \{ \text{$\varphi$ atomare $\mathcal{L}_A$-Aussage} \mid \mathfrak{A} \models \varphi \}
+			\end{equation*}
+		\end{enumerate}
+	\end{definition}
+
+	\begin{theorem}
+		$h: A \to B$ ist $\mathcal{L}$-Einbettung $\mathfrak{A} \hookrightarrow \mathfrak{B}$ genau dann, wenn $\mathfrak{B}_h \models \operatorname{Diag(\mathfrak{A})}$ wobei $\mathfrak{B}_h = \left(\mathfrak{B}, (h(a))_{a \in A} \right)$.
+	\end{theorem}
+
+	\begin{proof}
+		$h$ injektiv 
+		
+		$\Leftrightarrow$ für alle $a \neq a'$ gilt $h(a) \neq h(a')$ 
+		
+		$\Leftrightarrow$ für alle $a \neq a'$ gilt $\mathfrak{B}_h \models \underbrace{\lnot c_a = c_a'}_{\in \operatorname{Diag}(\mathfrak{A})}$
+		
+		$h$ starker Homomorphismus
+		
+		$\Leftrightarrow$ für alle $n$ und $a_1, \dots, a_n$
+		\begin{align*}
+			&\begin{cases}
+				\text{falls $f^\mathfrak{A}(a_1, \dots, a_n) \overset{(\neq)}{=} a$, dann $f^\mathfrak{B}(h(a_1), \dots, h(a_n) \overset{(\neq)}{=} h(a)$} \\
+				\text{falls (nicht) $R^\mathfrak{A}(a_1, \dots, a_n)$, dann (nicht) $R^\mathfrak{B}(h(a_1), \dots, h(a_n))$}
+			\end{cases} \\
+			\Leftrightarrow&\begin{cases}
+				\mathfrak{B}_h \models (\lnot) f(c_{a_1}, \dots, c_{a_n}) = c_a \\
+				\mathfrak{B}_h \models (\lnot) R(c_{a_0}, \dots, c_{a_n})
+			\end{cases}
+		\end{align*}
+	\end{proof}
+
+	\begin{theorem}
+		$h: A \to B$ ist $\mathcal{L}$-Homomorphismus $\mathfrak{A} \to \mathfrak{B}$ $\Leftrightarrow$ $\mathfrak{B}_h \models \operatorname{Diag}^+(\mathfrak{A})$
+	\end{theorem}
+
+	\begin{proof}
+		Wie eben.
+	\end{proof}
+
+	\section{Elementar Unterstrukturen und Kompaktheit}
+	
+	\subsection{Elementare Unterstrukturen}
+	
+	\begin{definition}
+		Seien $\mathfrak{A}, \mathfrak{B}$ $\mathcal{L}$-Strukturen. \begin{enumerate}
+			\item $h: A \to B$ heißt elementare Abbildung, wenn für alle $\mathcal{L}$-Formeln $\varphi = \varphi(v_0, \dots, v_{n-1})$ und $a_1, \dots, a_n \in A$ gilt:
+			
+			Wenn $\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1})$, dann $\mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1})$ durch betrachten von $\lnot \varphi$ folgt
+			\begin{equation*}
+				\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1}) \Leftrightarrow \mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1}))
+			\end{equation*}
+			\item $\mathfrak{A}$ heißt elementare Unterstruktur von $\mathfrak{B}$, $\mathfrak{A} \preceq \mathfrak{B}$, falls $A \subseteq B$ und $id_A: A \to B$ elementare  Abbildung.
+		\end{enumerate}
+	\end{definition}
 
 \end{document}
 
