@@ -12,6 +12,7 @@
 \usepackage{stmaryrd}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{bookmarksnumbered}
+\usepackage{mathtools}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -43,10 +44,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Beispiel}
-\newtheorem*{axiom}{Axiom}
-
-\theoremstyle{remark}
-\newtheorem*{remark}{Bemerkung}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{remark}[theorem]{Bemerkung}
 
 \hfuzz=5pt
  
@@ -559,7 +558,7 @@
 			\end{cases} \\
 			\Leftrightarrow&\begin{cases}
 				\mathfrak{B}_h \models (\lnot) f(c_{a_1}, \dots, c_{a_n}) = c_a \\
-				\mathfrak{B}_h \models (\lnot) R(c_{a_0}, \dots, c_{a_n})
+				\mathfrak{B}_h \models (\lnot) R(c_{a_1}, \dots, c_{a_n})
 			\end{cases}
 		\end{align*}
 	\end{proof}
@@ -578,15 +577,116 @@
 	
 	\begin{definition}
 		Seien $\mathfrak{A}, \mathfrak{B}$ $\mathcal{L}$-Strukturen. \begin{enumerate}
-			\item $h: A \to B$ heißt elementare Abbildung, wenn für alle $\mathcal{L}$-Formeln $\varphi = \varphi(v_0, \dots, v_{n-1})$ und $a_1, \dots, a_n \in A$ gilt:
+			\item $h: A \to B$ heißt elementare Abbildung, wenn für alle $\mathcal{L}$-Formeln $\varphi = \varphi(v_0, \dots, v_{n-1})$ und $a_0, \dots, a_{n-1} \in A$ gilt:
 			
-			Wenn $\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1})$, dann $\mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1})$ durch betrachten von $\lnot \varphi$ folgt
+			Wenn $\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1})$, dann $\mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1})$. Durch Betrachten von $\lnot \varphi$ folgt
 			\begin{equation*}
 				\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1}) \Leftrightarrow \mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1}))
 			\end{equation*}
-			\item $\mathfrak{A}$ heißt elementare Unterstruktur von $\mathfrak{B}$, $\mathfrak{A} \preceq \mathfrak{B}$, falls $A \subseteq B$ und $id_A: A \to B$ elementare  Abbildung.
+			\item $\mathfrak{A}$ heißt elementare Unterstruktur von $\mathfrak{B}$, $\mathfrak{A} \preceq \mathfrak{B}$, falls $A \subseteq B$ und $id_A: A \to B$ elementare Abbildung.
 		\end{enumerate}
 	\end{definition}
+
+	\begin{remark}
+		$h: A \to B$ elementar $\Leftrightarrow$ $\mathfrak{B}_h \models \operatorname{Th}(\mathfrak{A}_A) \supseteq \operatorname{Th}(\mathfrak{A}) \cup \operatorname{Diag}(\mathfrak{A})$
+		
+		Also: Wenn $\mathfrak{A} \preceq \mathfrak{B}$ dann $\mathfrak{A} \equiv \mathfrak{B}$ und $\mathfrak{A} \subseteq \mathfrak{B}$.
+		
+		Die Umkehrung gilt nicht!
+		
+		Aber
+		\begin{equation*}
+			\mathfrak{A} \preceq \mathfrak{B} \Leftrightarrow (\mathfrak{A} \subseteq \mathfrak{B} \text{ und } \mathfrak{A} \equiv \mathfrak{B})
+		\end{equation*}
+	\end{remark}
+
+	\begin{example}
+		$(\setN, <) \supseteq (\setN \setminus \{ 0 \}, <)$
+		
+		$(\setN, <) \cong (\setN \setminus \{ 0 \}, <)$ also $(\setN, <) \equiv (\setN \setminus \{ 0 \}, <)$
+		
+		Variante 1: Sauber beweisen per Induktion über den Aufbau der Formeln
+		
+		Variante 2: Ist klar
+		
+		$(\setN \setminus \{ 0 \}, <) \npreceq (\setN, <)$ da $(\setN \setminus \{ 0 \}, <) \models \lnot \exists x \; x < 1$ aber $(\setN, <) \not\models \exists x \; x < 1$.
+	\end{example}
+
+	\begin{example}
+		$\mathcal{L} = \{ E \}$ $E$ zweistelliges Relationssymbol, $T = \text{$E$ ist Äquivalenzrelation}$
+		
+		Falls $\mathfrak{A} \models T$ und $\mathfrak{B} \supseteq \mathfrak{A}$ beliebige Oberstruktur. Dann bleibt Äquivalenz aus $\mathfrak{A}$ in $\mathfrak{B}$ erhalten und umgekehrt, aber es können Äquivalenzklassen in der Oberstruktur dazu kommen und größer werden.
+		
+		\begin{enumerate}
+			\item Wenn eine endliche Zahl von Äquivalenzklassen existieren, dann bleibt die Anzahl in der elementaren Oberstruktur erhalten.
+			\item Wenn eine endliche Äquivalenzklasse existiert, dann bleibt deren Größe in der elementaren Oberstruktur erhalten.
+			\item Wenn jede Äquivalenzklasse $n$ Elemente hat, dann hat auch in jeder Oberstruktur jede Äquivalenzklasse $n$ Elemente.
+			\item Für jedes $n \in N \setminus \{ 0 \}$ gibt es genau eine Äquivalenzklasse mit $n$ Elementen und keine unendliche Klasse. In einer Elementaren Oberstruktur kommen nur unendliche große Äquivalenzklassen dazu.
+		\end{enumerate}
+	\end{example}
+
+	\begin{theorem}[Tarskis Test]
+		Sei $\mathcal{L}$ eine Sprache, und $\mathfrak{B}$ eine $\mathcal{L}$-Struktur, und $A \subseteq B$. Dann ist $A$ genau dann Träger einer elementaren Unterstruktur von $\mathfrak{B}$, wenn für alle $\mathcal{L}_A$-Formeln $\varphi(v_0) \in \mathcal{F}_0(\mathcal{L}_A)$, die in $\mathfrak{B}$ erfüllt sind, gilt dass sie mit einem $a \in A$ erfüllt sind.
+		
+		Das heißt wenn $\mathfrak{B} \models \exists v_0 \varphi(v_0)$, dann existiert $x \in A$ mit $\mathfrak{B} \models \varphi(a)$.
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$\Rightarrow$} Angenommen $\mathfrak{A} \preceq \mathfrak{B} \models \exists v_0 \varphi(v_0)$ (wegen $\preceq$).
+		
+		Also existiert $a \in A$ mit $\mathfrak{A} \models \varphi(a)$, somit $\mathfrak{B} \models \varphi(a)$ (wegen $\preceq$)
+		
+		\heading{$\Leftarrow$} 
+		\begin{enumerate}
+			\item $\mathfrak{B} \models \exists v_0 v_0 \doteq v_0$
+		
+			Also gibt es $a \in A$ mit $\mathfrak{B} \models a \doteq a$ insbesondere $A \neq \emptyset$.
+			
+			\item Seien $f \in \mathcal{L}$ $n$-stellig, $a_1, \dots, a_n \in A$
+			\begin{equation*}
+				\mathfrak{B} \models \exists v_0 f a_1 \dots a_n \doteq v_0
+			\end{equation*}
+			\textit{Bedingung:} es existiert $a \in A$ mit $\mathfrak{B} \models f a_1 \dots a_n \doteq a$.
+			
+			Also $f^\mathfrak{B}(a_1, \dots, a_n) \in A$, das heißt $A$ ist Träger einer Unterstruktur.
+			\item Zeige per Induktion übe den Aufbau der $\mathcal{L}_A$-Formeln
+			\begin{equation*}
+				\mathfrak{A} \models \varphi \Leftrightarrow \mathfrak{B} \models \varphi
+			\end{equation*}
+			\begin{itemize}
+				\item Induktionsanfang: $\varphi$ Atomar
+				\begin{align*}
+					\mathfrak{A} \subseteq \mathfrak{B} &\Leftrightarrow id_A: A \to B \text{$\mathcal{L}_A$-Einbettung} \\
+					&\Leftrightarrow \mathcal{L}_h \models \operatorname{Diag}(\mathfrak{A}_A) = \operatorname{Diag(\mathfrak{A})} \\
+					&\Leftrightarrow \text{für alle atomaren Formeln $\varphi \in \mathcal{F}_0(\mathcal{L}_A)$ gilt: } (\mathfrak{A} \models \varphi \Leftrightarrow \mathfrak{B} \models \varphi)
+				\end{align*}
+				\item Induktionsschritte
+				\begin{equation*}
+					\mathfrak{A} \models \lnot \varphi \Leftrightarrow \mathfrak{A} \not\models \varphi \underset{\text{IV}}{\Leftrightarrow} \mathfrak{B} \not\models \varphi \Leftrightarrow \mathfrak{B} \models \lnot \varphi
+				\end{equation*}
+				\begin{equation*}
+					\mathfrak{A} \models (\varphi_1 \land \varphi_2) \Leftrightarrow \begin{cases}
+						\mathfrak{A} \models \varphi_1 \\
+						\text{und} \\
+						\mathfrak{A} \models \varphi_2
+					\end{cases} \quad\underset{\text{IV}}{\Longleftrightarrow}\quad \begin{drcases}
+						\mathfrak{B} \models \varphi_1 \\
+						\text{und} \\
+						\mathfrak{B} \models \varphi_2
+					\end{drcases} \Leftrightarrow \mathfrak{B} \models (\varphi_1 \land \varphi_2)
+				\end{equation*}
+				\begin{align*}
+					\mathfrak{A} \models \exists v_0 \varphi(v_0) &\Leftrightarrow \text{ex. $a \in A$ mit } \mathfrak{A} \models \varphi(a) \\
+					&\underset{\text{IV}}{\Leftrightarrow} \text{ex. $a \in A$ mit } \mathfrak{B} \models \varphi(a) \\&\Rightarrow \text{ex. $a \in B$ mit } \mathfrak{B} \models \varphi(a) \Leftrightarrow \mathfrak{B} \models \exists v_0 \varphi(v_0)
+				\end{align*}
+			\end{itemize}
+			Da $\{ \lnot, \land, \exists \}$ ein vollständiges Junktoren-Quantoren-System bilden ist die Aussage damit gezeigt.
+		\end{enumerate}
+	\end{proof}
+
+	\begin{corollary}
+		Sei $\mathfrak{B}$ $\mathcal{L}$-Struktur, $S \subseteq B$. Dann existiert eine elementare Unterstruktur $\mathfrak{A} \preceq \mathfrak{B}$ mit $S \subseteq A$ und $\abs{A} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}$.
+	\end{corollary}
 
 \end{document}
 
