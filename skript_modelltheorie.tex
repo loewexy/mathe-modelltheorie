@@ -583,20 +583,20 @@
 			\begin{equation*}
 				\mathfrak{A} \models \varphi(a_0, \dots, a_{n-1}) \Leftrightarrow \mathfrak{B} \models \varphi(h(a_0), \dots, h(a_{n-1}))
 			\end{equation*}
-			\item $\mathfrak{A}$ heißt elementare Unterstruktur von $\mathfrak{B}$, $\mathfrak{A} \preceq \mathfrak{B}$, falls $A \subseteq B$ und $id_A: A \to B$ elementare Abbildung.
+			\item $\mathfrak{A}$ heißt elementare Unterstruktur von $\mathfrak{B}$, $\mathfrak{A} \preccurlyeq \mathfrak{B}$, falls $A \subseteq B$ und $id_A: A \to B$ elementare Abbildung.
 		\end{enumerate}
 	\end{definition}
 
 	\begin{remark}
 		$h: A \to B$ elementar $\Leftrightarrow$ $\mathfrak{B}_h \models \operatorname{Th}(\mathfrak{A}_A) \supseteq \operatorname{Th}(\mathfrak{A}) \cup \operatorname{Diag}(\mathfrak{A})$
 		
-		Also: Wenn $\mathfrak{A} \preceq \mathfrak{B}$ dann $\mathfrak{A} \equiv \mathfrak{B}$ und $\mathfrak{A} \subseteq \mathfrak{B}$.
+		Also: Wenn $\mathfrak{A} \preccurlyeq \mathfrak{B}$ dann $\mathfrak{A} \equiv \mathfrak{B}$ und $\mathfrak{A} \subseteq \mathfrak{B}$.
 		
 		Die Umkehrung gilt nicht!
 		
 		Aber
 		\begin{equation*}
-			\mathfrak{A} \preceq \mathfrak{B} \Leftrightarrow (\mathfrak{A} \subseteq \mathfrak{B} \text{ und } \mathfrak{A} \equiv \mathfrak{B})
+			\mathfrak{A} \preccurlyeq \mathfrak{B} \Leftrightarrow (\mathfrak{A} \subseteq \mathfrak{B} \text{ und } \mathfrak{A} \equiv \mathfrak{B})
 		\end{equation*}
 	\end{remark}
 
@@ -632,9 +632,9 @@
 	\end{theorem}
 
 	\begin{proof}
-		\heading{$\Rightarrow$} Angenommen $\mathfrak{A} \preceq \mathfrak{B} \models \exists v_0 \varphi(v_0)$ (wegen $\preceq$).
+		\heading{$\Rightarrow$} Angenommen $\mathfrak{A} \preccurlyeq \mathfrak{B} \models \exists v_0 \varphi(v_0)$ (wegen $\preccurlyeq$).
 		
-		Also existiert $a \in A$ mit $\mathfrak{A} \models \varphi(a)$, somit $\mathfrak{B} \models \varphi(a)$ (wegen $\preceq$)
+		Also existiert $a \in A$ mit $\mathfrak{A} \models \varphi(a)$, somit $\mathfrak{B} \models \varphi(a)$ (wegen $\preccurlyeq$)
 		
 		\heading{$\Leftarrow$} 
 		\begin{enumerate}
@@ -685,8 +685,308 @@
 	\end{proof}
 
 	\begin{corollary}
-		Sei $\mathfrak{B}$ $\mathcal{L}$-Struktur, $S \subseteq B$. Dann existiert eine elementare Unterstruktur $\mathfrak{A} \preceq \mathfrak{B}$ mit $S \subseteq A$ und $\abs{A} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}$.
+		\label{cor:elUnterstruktExistiert}
+		Sei $\mathfrak{B}$ $\mathcal{L}$-Struktur, $S \subseteq B$. Dann existiert eine elementare Unterstruktur $\mathfrak{A} \preccurlyeq \mathfrak{B}$ mit $S \subseteq A$ und $\abs{A} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}$.
 	\end{corollary}
+
+	\begin{proof}
+		Definiere induktiv $S_i$ für $i \in \setN$.
+		\begin{align*}
+			S_0 &\coloneqq S \\
+			S_{i+1} &\coloneqq S_i \cup \{ a_\varphi \mid \varphi(x) \text{ $\mathcal{L}_{S_i}$-Formel} \mathfrak{B} \models \exists \varphi(x) \text{ und $a_\varphi$ ist ein Element mit $\mathfrak{B} \models \varphi(a_\varphi)$} \} \\
+			S_\omega &\coloneqq \bigcup_{i \in \omega} S_i
+		\end{align*}
+		Nach Konstruktion ist $S_\omega$ Träger einer elementaren Unterstruktur $\mathfrak{A} \preccurlyeq \mathfrak{B}$.
+		
+		Denn: Wenn $\mathfrak{B} \models \exists x \varphi(x), \varphi \in \mathcal{F}_1(\mathcal{L}_{S_\omega})$.
+		
+		Also existiert $n$ mit $\varphi \in \mathcal{F}_1(\mathcal{L}_{S_n})$, dann existiert $a_\varphi \in S_{n+1} \subseteq S_\omega$ mit $\mathfrak{B} \models \varphi(a_\varphi)$. Das heißt Tarskis Test gilt.
+		
+		\textit{Behauptung:} $\abs{S_\omega} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}$
+		
+		Per Induktion $\abs{S_i} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}$
+		
+		\heading{$i=0$}
+		\begin{equation*}
+			\abs{S_0} = \abs{S} \leq \max \{ \abs{S}, \abs{\mathcal{L}}, \aleph_0 \}
+		\end{equation*}
+		
+		\heading{$i \to i+1$}
+		\begin{align*}
+			\abs{S_{i+1}} &\leq \abs{S_i} + \underbrace{\abs{\mathcal{F}_1(\mathcal{L}_{S_i})}}_\text{endliche Folgen mit Zeichen aus $Z(S_i)$} \\
+			&\leq \abs{S_i} + \abs{Z(S_i)^{< \omega}} \\
+			&= \abs{S_i} + \abs{Z(S_i)} \\
+			&= \abs{S_i} + \abs{\mathcal{L}} + \aleph_0 + \abs{S_i} \\
+			&= \abs{\mathcal{L}} + \abs{S_i} + \aleph_0 \\
+			&\overset{\text{IV}}{\leq} \abs{\mathcal{L}} + \max \{ \abs{\mathcal{L}}, \abs{S}, \aleph_0 \} + \aleph_0 \\
+			&= \max \{ \abs{L}, \abs{S}, \aleph_0 \}
+		\end{align*}
+		wobei
+		\begin{equation*}
+			Z(S_i) = \mathcal{L} \cup \{ v_0, v_1, \dots \} \cup \{ \lnot, \lor, \land, \exists, \forall \} \cup S_i
+		\end{equation*}
+	\end{proof}
+
+	\begin{remark}
+		Für $\abs{\mathcal{L}} = \abs{S} = \aleph_0$ heißt die Folgerung auch Satz von Löwenheim.
+	\end{remark}
+
+	Sei $\mathfrak{A}_0 \subseteq \mathfrak{A}_1 \subseteq \mathfrak{A}_2 \subseteq \dots$ eine gerichtete Vereinigung.
+	
+	Es gibt eine eindeutig bestimmte $\mathcal{L}$-Struktur $\mathfrak{A}_\omega$ auf $\bigcup_{i \in \omega} A_i$, so dass $\mathfrak{A}_i \subseteq \mathfrak{A}_\omega$ für alle $i$.
+	
+	\begin{theorem}
+		Falls $\mathfrak{A}_0 \preccurlyeq \mathfrak{A}_1 \preccurlyeq \mathfrak{A}_2 \preccurlyeq \dots$ dann gilt $\mathfrak{A}_i \preccurlyeq \mathfrak{A}_\omega$ für alle $i$.
+	\end{theorem}
+
+	\begin{proof}
+		Induktion über den Aufbau der Formeln: $\mathfrak{A}_i \models \varphi \Leftrightarrow \mathfrak{A}_\omega \models \varphi$ für $\varphi \in \mathcal{F}_0(\mathcal{L}_{A_i})$
+		
+		\heading{Atomar:} da $\mathfrak{A}_i \subseteq \mathfrak{A}_\omega$
+		
+		\heading{Negation und Konjunktion:} wie letztes Mal
+		
+		\heading{Existenzquantor:} $\mathfrak{A}_i \models \exists x \varphi(x)$ dann $\mathfrak{A}_i \models \varphi(a)$ für ein $a \in A_i$.
+		
+		$\overset{\text{IV}}{\Rightarrow} \mathfrak{A}_\omega \models \varphi(a)$ also $\mathfrak{A}_\omega \models \exists x \varphi(x)$.
+		
+		$\mathfrak{A}_\omega \models \exists x \varphi(x)$, dann $\mathfrak{A}_\omega \models \varphi(a)$ für ein $a \in A_\omega$. Das heißt ex existiert $n \geq i$ mit $a \in A_n$.
+		
+		Also gilt $\mathfrak{A}_n \models \varphi(a)$ und somit
+		\begin{equation*}
+			\mathfrak{A}_i \preccurlyeq \mathfrak{A}_n \models \exists x \varphi(x) \Rightarrow \mathfrak{A}_i \models \exists x \varphi()x
+		\end{equation*}
+	\end{proof}
+
+	\subsection{Kompaktheitssatz und Ultraprodukte}
+	
+	\begin{theorem}[Kompaktheitssatz]
+		Sei $\mathcal{L}$ eine Sprache und $T$ eine $\mathcal{L}$-Theorie.
+		
+		$T$ hat genau dann ein Modell, wenn jede endliche Teiltheorie $T_0 \subseteq T$ ein Modell hat.
+	\end{theorem}
+
+	\begin{corollary}[Satz von Löwenheim-Skolem-Tarski aufwärts]
+		Sei $\mathcal{L}$ eine Sprache und $\mathfrak{A}$ eine unendliche $\mathcal{L}$-Struktur.
+		Dann existiert zu jeder Kardinalzahl $\kappa \geq \max \{ \abs{A}, \abs{\mathcal{L}} \}$ ein $\mathfrak{B} \succcurlyeq \mathfrak{A}$ mit $\abs{B} = \kappa$.
+	\end{corollary}
+
+	\begin{proof}
+		Betrachte $\mathcal{L}^c \coloneqq \mathcal{L}_A \;\dot{\cup}\; \{ c_i \mid i < \kappa \}$
+		
+		und die $\mathcal{L}^C$-Theorie $T^c \coloneqq \operatorname{Th}(\mathfrak{A}_A) \;\cup\; \{ \lnot c_i \doteq c_j \mid i \neq j \}$
+		
+		Zeige mit dem Kompaktheitssatz: $T^c$ ist konsistent.
+		
+		Sei $T_0 \subseteq_\text{endl} T^c$.
+		
+		Dann $T_0 \subseteq \operatorname{Th}(\mathfrak{A}) \cup \{ \lnot c_i \doteq c_j \mid i,j \in \text{ endlicher Menge} \}$.
+		
+		$\mathfrak{A}$ wird Modell von $T_0$, indem man die endlich vielen Konstanten in $T_0$ durch beliebige, paarweise verschiedene Elemente von $A$ interpretiert.
+		
+		Sei $\mathcal{L}' \models T^c$.
+		
+		Dann ist $\underbrace{\mathcal{L}' \upharpoonright_\mathcal{L}}_\text{Redukt auf $\mathcal{L}$} \succcurlyeq \mathfrak{A}$ und $\abs{B'} \geq \kappa$.
+		
+		Wähle Teilmenge $S \subseteq B$, die $A$ enthält und so, dass $\abs{S} = \kappa$. Wende Folgerung \ref{cor:elUnterstruktExistiert} auf $\mathfrak{B}'_A$ an.
+		
+		Dann erhält man $\mathfrak{B} \preccurlyeq \mathfrak{B}'_A$ in $\mathcal{L}_A$ mit $\abs{B} \geq \abs{S} = \kappa$ und $\abs{B} \leq \max \{ \abs{\mathcal{L}_A}, \abs{S}, \aleph_0 \} = \kappa$
+		
+		Und
+		\begin{equation*}
+			\begin{drcases}
+				\mathfrak{A} \preccurlyeq \mathfrak{B}' \text{ in $\mathcal{L}_A$} \\
+				\mathfrak{B} \preccurlyeq \mathfrak{B}' \text{ in $\mathcal{L}_A$} \\
+				A \subseteq B'
+			\end{drcases} \Rightarrow \mathfrak{A} \preccurlyeq \mathfrak{B}
+		\end{equation*}
+	\end{proof}
+
+	\heading{Ultraprodukte}
+
+	Seien $\mathfrak{A}_i$ $\mathcal{L}$-Strukturen $(i \in I)$ und sei
+	\begin{equation*}
+		\prod_{i \in I} A_i = \{ p: I \to \bigcup_{i \in I} A_i \mid p(i) \in A_i \}
+	\end{equation*}
+	Mit dem Auswahlaxiom gilt:
+	\begin{equation*}
+		A_i \neq \emptyset \text{ für alle $i \in I$} \Rightarrow \prod_{i \in I} A_i \neq \emptyset
+	\end{equation*}
+	
+	Definiere $\mathcal{L}$-Struktur $\prod_{i \in I} \mathfrak{A}_i$ auf $\prod_{i \in I} A_i$.
+	
+	\begin{align*}
+		f^\mathfrak{A}(p_1, \dots, p_n) = p \quad&\Leftrightarrow\quad \text{für alle $i \in I$ } p(i) =  f^{\mathfrak{A}_i}(p_1(i), \dots, p_n(i) \\
+		(p_1, \dots, p_n) \in R^\mathfrak{A} \quad&\Leftrightarrow\quad \text{für alle $i \in I$ } (p_1(i), \dots, p_n(i)) \in R^{\mathfrak{A}_i}
+	\end{align*}
+	
+	Betrachte Ultrafilter $\mathcal{U}$ in $\operatorname{Pot}(I)$ also
+	\begin{itemize}
+		\item $\mathcal{U} \subsetneq \operatorname{Pot}(I), \emptyset \notin \mathcal{U}$
+		\item Wenn $X \in \mathcal{U}, X \subseteq Y$, dann $Y \in \mathcal{U}$
+		\item Wenn $X,Y \in \mathcal{U}$, dann $X \cap Y \in \mathcal{U}$
+		\item Wenn $X \subseteq I$, dann entweder $X \in \mathcal{U}$ oder $I \setminus X \in \mathcal{U}$.
+	\end{itemize}
+
+	Ultrafilter $\mathcal{U}$ definiert eine Art Maß auf $\operatorname{Pot}(I)$
+	\begin{equation*}
+		\mu_\mathcal{U} = \chi_\mathcal{U}: X \mapsto \begin{cases}
+			1 & \text{wenn $X \in \mathcal{U}$} \\
+			0 & \text{wenn $X \notin \mathcal{U}$}
+		\end{cases}
+	\end{equation*}
+	$X$ mit $X \in \mathcal{U}$ heißt auch $\mathcal{U}$-groß.
+	
+	\begin{lemma}
+		Ein Ultrafilter $\mathcal{U}$ definiert eine Äquivalenzrelation $\sim_\mathcal{U}$ auf $\prod_{i \in I} A_i$ durch
+		\begin{equation*}
+			p \sim_\mathcal{U} p' :\Leftrightarrow \{ i \in I \mid p(i) = p'(i) \} \in \mathcal{U}
+		\end{equation*}
+	\end{lemma}
+
+	\begin{proof}
+		\begin{itemize}
+			\item Reflexiv: klar, da $I \in \mathcal{U}$
+			\item Symmetrie: klar per Definition
+			\item Transitivität: $p \sim_\mathcal{U} p' \sim_\mathcal{U} p''$
+			\begin{equation*}
+				\{ i \mid p(i) = p''(i) \} \supseteq \{ i \mid p(i) = p'(i) \} \cap \{ i \mid p'(i) = p''(i) \} \in \mathcal{U} \cap \mathcal{U} = \mathcal{U}.
+			\end{equation*}
+		\end{itemize}
+	\end{proof}
+
+	\begin{definition}
+		Seien $\mathfrak{A}_i (i \in I)$ $\mathcal{L}$-Strukturen, $\mathcal{U}$ ein Ultrafilter auf $I$.
+		
+		Das Ultraprodukt der $\mathfrak{A}_i$ bezüglich $\mathcal{U}$ ist die $\mathcal{L}$-Struktur
+		\begin{equation*}
+			\prod_{i \in I} \mathfrak{A}_i / \sim_\mathcal{U}
+		\end{equation*}
+		mit Träger $\prod_{i \in I} A_i / \sim_\mathcal{U}$ und
+		\begin{align*}
+			(p_1/\sim_\mathcal{U}, \dots, p_m/\sim_\mathcal{U}) \in R^{\prod_{i \in I} \mathfrak{A}_i / \sim_\mathcal{U}} \quad&:\Leftrightarrow\quad \{ i \mid (p_1(i), \dots, p_n(i)) \in R^\mathfrak{A}_i \} \in \mathcal{U} \\f^{\prod_{i \in I} \mathfrak{A}_i / \sim_\mathcal{U}}(p_1/\sim_\mathcal{U}, \dots, p_m/\sim_\mathcal{U}) = p/\sim_\mathcal{U} \quad&:\Leftrightarrow\quad \{ i \mid f^{\mathfrak{A}_i}(p_1(i), \dots, p_n(i) = p(i) \} \in \mathcal{U}
+		\end{align*}
+	\end{definition}
+	\begin{proof}
+		\heading{Wohldefiniertheit}
+		
+		Seien $p_1 \sim_\mathcal{U} p_1', \dots, p_n \sim_\mathcal{U} p_n'$ zu zeigen ist
+		\begin{equation*}
+			X \coloneqq \{ i \mid (p_1(i), \dots, p_n(i)) \in R^{\mathfrak{A}_i} \} \in \mathcal{U} \Leftrightarrow \{ i \mid (p_1'(i), \dots, p_n'(i)) \in R^{\mathfrak{A}_i} \} \in \mathcal{U}
+		\end{equation*}
+		
+		Sei $X_j = \{ i \mid p_j(i) = p_j'(i) \} \in \mathcal{U}$.
+		
+		Falls $X \in \mathcal{U}$ auf $X \cap X_1 \cap \dots \cap X_n \in \mathcal{U}$ gilt
+		\begin{equation*}
+			\begin{drcases}
+				(p_1(i), \dots, p_n(i)) \in R^{\mathfrak{A}_i} \\
+				p_1(i) = p_1'(i) \\
+				\vdots \\
+				p_n(i) = p_n'(i)
+			\end{drcases} \Rightarrow (p_1'(i), \dots, p_n'(i)) \in R^{\mathfrak{A}_i}
+		\end{equation*}
+		
+		Analog für Funktionszeichen.
+		
+		Warum existiert überhaupt solch ein $p_\mathcal{U}$?
+		
+		Man sieht, dass $f^{\prod_{i \in I} \mathfrak{A}_i} (p_1, \dots, p_n) / \mathcal{U}$ es tut.
+		
+		Falls $\mathfrak{A}_i = \mathfrak{A}$ für alle $i \in I$ dann heißt $\prod_{i \in I} \mathfrak{A}/\mathcal{U} = \mathfrak{A}^I/\mathcal{U}$ auch Ultrapotenz von $\mathfrak{A}$.
+	\end{proof}
+
+	\begin{theorem}[Satz von \L os]
+		Sei $\varphi$ eine $\mathcal{L}$-Aussage dann gilt
+		\begin{equation*}
+			\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models \varphi \quad\Leftrightarrow\quad \{ i \mid \mathfrak{A}_i \models \varphi \} \in \mathcal{U}
+		\end{equation*}
+		Insbesondere 
+		\begin{itemize}
+			\item falls $\mathfrak{A}_i \models T$ für alle $i$, dann $\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models T$
+			\item falls $\mathfrak{A}_i \equiv \mathfrak{A}_j$ für alle $i \in I$, dann $\prod \mathfrak{A}_i / \mathcal{U} \equiv \mathfrak{A}_i$
+		\end{itemize}
+	\end{theorem}
+
+	\begin{corollary}
+		\begin{equation*}
+		 \delta: \mathfrak{A} \to \mathfrak{A}^I / \mathcal{U}, \quad a \mapsto (a,a, \dots, a,a)/ \mathcal{U}
+		\end{equation*}
+		ist elementare Einbettung, das heißt
+		\begin{equation*}
+			\mathfrak{A} \preccurlyeq \mathfrak{A}^I/\mathcal{U}
+		\end{equation*}
+	\end{corollary}
+
+	\begin{proof} zum Satz von \L os (Skizze)
+		
+		Induktion über den Aufbau der Formeln
+		
+		\begin{itemize}
+			\item $\varphi$ atomar: Entweder Induktion über den Aufbau der Terme oder betrachte termreduzierte Formeln. Dazu sei $f$ einstellig und $c$ Konstante eine atomare Formel ist auch $f f c \doteq c$, diese ist aber äquivalent zu $\exists x (f c \doteq x  \land f x \doteq c)$. Das heißt ohne Einschränkung kann man nur atomare Formeln der Formen $R \tau_1 \dots \tau_n$ oder $\tau_1 \doteq \tau_2$ oder $f \tau_1 \dots \tau_n \doteq \tau$ betrachten, wobei $\tau_i, \tau$ Konstanten oder Individuenvariablen sind.
+			\item Satz von \L os für termreduzierte atomare Formeln ist im Wesentlichen die Definition der $\mathcal{L}$-Struktur auf $\prod A_i / \sim_\mathcal{U}$.
+			\item Induktion:
+			
+			Für und
+			\begin{align*}
+				&\prod \mathfrak{A}_i / \mathcal{U} \models (\varphi \land \psi) \\
+				\Leftrightarrow& \prod \mathfrak{A}_i / \mathcal{U} \models \phi \text{ und } \prod \mathfrak{A}_i / \mathcal{U} \models \psi \\
+				\Leftrightarrow& I_\varphi = \{ i \mid \mathfrak{A}_i \models \varphi \} \in \mathcal{U} \text{ und } I_\psi = \{ i \mid \mathfrak{A}_i \models \psi\} \in \mathcal{U} \\
+				\Leftrightarrow& \{ i \mid \mathfrak{A}_i \models \varphi \land \psi \} = I_\varphi \cap I_\psi \in \mathcal{U}
+			\end{align*}
+			
+			Für nicht
+			\begin{align*}
+				&\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models \lnot \varphi \\
+				\Leftrightarrow& \prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \not\models \varphi \\
+				\Leftrightarrow& I_\varphi = \{ i \mid \mathfrak{A}_i \models \varphi \} \notin \mathcal{U} \\
+				\overset{\text{Ultra}}{\Leftrightarrow}&  I \setminus I_\varphi \{ i \mid \mathfrak{A}_i \models \lnot \varphi \} \in \mathcal{U}
+			\end{align*}
+			
+			Für Existenz
+			\begin{align*}
+				&\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models \exists x \varphi \\
+				\Leftrightarrow& \text{ex existiert $p$ mit } \prod \mathfrak{A}_i/\mathcal{U} \models \varphi(p / \mathcal{U}) \\
+				\overset{\text{Ind.}}{\Leftrightarrow}& \text{es existiert $p$ mit } \{ i \mid \mathfrak{A}_i \models \varphi(p(i)) \} \in \mathcal{U} \\
+				\Leftrightarrow& \{ i \mid \text{ex $p(i) \in A_i$ mit } \mathfrak{A}_i \models \varphi(p(i)) \} \in \mathcal{U} \\
+				\Leftrightarrow& \{ i \mid \mathfrak{A}_i \models \exists x \varphi \} \in \mathcal{U}
+			\end{align*}
+		\end{itemize}
+	\end{proof}
+
+	\begin{remark}
+		\begin{itemize}
+			\item $\langle i \rangle = \{ X \subseteq I \mid i \in X \}$ Ultrafilter, der von $i$ erzeugte Haupt-Ultrafilter
+			\begin{equation*}
+				\prod_{i \in I} \mathfrak{A}_i/\langle i \rangle \cong \mathfrak{A}_i
+			\end{equation*}
+			\item Mit Lemma von Zorn (bzw. AC): Jeder eigentliche Filter kann zu einem Ultrafilter erweitert werden.
+		\end{itemize}
+	\end{remark}
+
+	\begin{definition}
+		Sei $I$ eine unendliche Menge, betrachte Filter der $\omega$-endlichen Mengen
+		\begin{equation*}
+			\mathcal{F} = \{ X \mid I \setminus X \text{ endlich} \}
+		\end{equation*}
+		$\mathcal{F}$ kann zu Ultrafilter $\mathcal{U}$ erweitert werden. Solche Ultrafilter heißen freie Ultrafilter. Dies sind die nicht-Haupt-Ultrafilter.
+	\end{definition}
+
+	\begin{remark}
+		Wenn $\mathfrak{A}$ endlich ist, dann ist $\mathfrak{A}^I/\mathcal{U} \cong \mathfrak{A}$.
+		
+		Wenn $\mathfrak{A}$ unendlich ist und $\mathcal{U}$ frei ist, dann ist häufig $\mathfrak{A} \precnsim \prod \mathfrak{A}_i / \mathcal{U}$.
+		
+		Wenn $\abs{A_i} < \abs{A_{i+1}}$ endlich ist und $\mathcal{U}$ frei, dann ist
+		\begin{equation*}
+			\abs{\prod_{i \in I} \mathfrak{A}_i / \mathcal{U}} = 2^{\aleph_0}
+		\end{equation*}
+		
+		Wenn $\abs{A_i} = \aleph_0$ für alle $i$ und $\mathcal{U}$ frei,
+		\begin{equation*}
+			\abs{\prod_{i \in I} \mathfrak{A}_i / \mathcal{U}} = 2^{\aleph_0}
+		\end{equation*}
+	\end{remark}
 
 \end{document}
 
