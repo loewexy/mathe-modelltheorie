@@ -988,5 +988,159 @@
 		\end{equation*}
 	\end{remark}
 
+	\begin{theorem}
+		Seien $\mathfrak{A}_i (i \in \setN)$ endliche $\mathcal{L}$-Strukturen. Für jedes $n \in \setN$ sei nur endlich oft $\abs{A_i} \leq n$. Sei $\mathcal{U}$ freier Ultrafilter auf $\setN$. Dann ist
+		\begin{equation*}
+			\abs{\prod_{i \in I} \mathfrak{A}_i / \mathcal{U}} = 2^{\aleph_0}
+		\end{equation*}
+	\end{theorem}
+
+	\begin{proof}
+		\begin{equation*}
+			\abs{\prod_{i \in \setN} A_i} \leq \sup \{ \abs{A_i} \mid i \in \setN \}^{\aleph_0} = \aleph_0^{\aleph_0} = 2^{\aleph_0}
+		\end{equation*}
+		Damit
+		\begin{equation*}
+			\abs{\prod A_i / \mathcal{U}} \leq 2^{\aleph_0}
+		\end{equation*}
+		
+		\heading{Für $\geq$:} Ohne Einschränkung sei $\abs{A_i} \leq \abs{A_{i+1}}$ und $\abs{A_i} = \{ 0, \dots, n_i \}$ mit $n_i = \abs{A_i} - 1$.
+		
+		Für $r,s \in \setR \cap [0,1)$ konstruiere $p_r \in \prod_{i \in I} A_i$ mit $r \neq s$, dann stimmen $p_r$ und $p_s$ nur auf endlich vielen Indizes überein.
+		
+		\begin{equation*}
+			p_r(i) \coloneqq j \Leftrightarrow r \in \left[ \frac{j}{A_i}, \frac{j+1}{A_i} \right)
+		\end{equation*}
+		
+		\begin{equation*}
+			\Rightarrow p_r \nsim_\mathcal{U} p_s
+		\end{equation*}
+	\end{proof}
+
+	\begin{proof} zum Kompaktheitssatz
+		
+		Sei $T$ eine endlich erfüllbare $\mathcal{L}$-Theorie. Zu zeigen ist $T$ ist konsistent.
+		
+		Sei $I = \operatorname{Pot}_{<\aleph_0}(T) = \{ T_0 \mid T_0 \subseteq_\text{endl} T \}$.
+		
+		Für $T_0 \subseteq_\text{endl} T$ d.h. $T_0 \in I$ sei $\langle T_0 \rangle = \{ T_1 \in I \mid T_0 \subseteq T_1 \}$.
+		
+		Sei weiter $\mathcal{F} = \{ \mathcal{X} \subseteq I \mid \text{ ex. $T_0 \in I$ mit } \langle T_0 \rangle \subseteq \mathcal{X} \}$.
+		
+		$\mathcal{F}$ ist Filter auf $I$:
+		\begin{itemize}
+			\item $\emptyset \in \mathcal{F}$
+			\item Monotonie: per Definition
+			\item $\mathcal{X}_1, \mathcal{X}_2 \in \mathcal{F}$, dann existiert $T_i \subseteq_\text{endl} T$ mit $\langle T_i \rangle \subseteq \mathcal{X}_i$. Dann gilt
+			\begin{equation*}
+				\langle T_1 \cup T_2 \rangle = \langle T_1 \rangle \cap \langle T_2 \rangle \subseteq \mathcal{X}_1 \cap \mathcal{X}_2
+			\end{equation*}
+		\end{itemize}
+	
+		Sei $\mathcal{U}$ ein Ultrafilter, der $\mathcal{F}$ erweitert. Wähle für jedes $T_0 \in I$ ein Modell $\mathfrak{M}_{T_0} \models T_0$ und setze $\mathfrak{M} \coloneq \prod_{T_0 \in I} \mathfrak{M}_{T_0} / \mathcal{U}$.
+		
+		Mit Satz von \L os: prüfe, dass $\varphi \in T \Rightarrow \mathfrak{M} \models \varphi$.
+		
+		\begin{equation*}
+			\{ T_1 \in I \mid \mathfrak{M}_{T_1} \models \varphi \} \supseteq \{ T1 \in I \mid \varphi \in T_1 \} = \langle \{ \varphi \} \rangle \in \mathcal{F} \subseteq \mathcal{U}
+		\end{equation*}
+	\end{proof}
+
+	\begin{definition}
+		$(X, \mathcal{O})$ heißt topologischer Raum und $\mathcal{O}$ heißt Topologie auf $X$), falls
+		\begin{itemize}
+			\item $\mathcal{O} \subseteq \operatorname{Pot(X)}$
+			\item $\mathcal{O}$ ist abgeschlossen bezüglich endlicher Schnitte und beliebiger Vereinigungen
+			\item Insbesondere $\emptyset, X \in \mathcal{O}$
+		\end{itemize}
+	
+		$U \in \mathcal{O}$ heißt offen beziehungsweise offene Menge $A \subseteq X$ mit $X \setminus A \in \mathcal{O}$ heißt offen bzw. offene Menge. $A \subseteq X$ mit $X \setminus A \in \mathcal{O}$ heißt abgeschlossen bzw. abgeschlossene Menge.
+	\end{definition}
+
+	\begin{definition}
+		$Q \subseteq \operatorname{Pot}(X)$ heißt Basis einer Topologie $\mathcal{O}$, falls $Q$ abgeschlossen ist bezüglich endlicher Schnitte.
+		
+		Dann ist $\mathcal{O} = \{ \bigcup Q_i \mid Q_i \in Q \} \cup \{ \emptyset, X \}$ eine Topologie, und zwar die kleinste, in der alle Mengen aus $Q$ offen sind.
+	\end{definition}
+
+	\begin{definition}
+		Eine Abbildung heißt stetig, falls Urbilder offener Mengen wieder offen sind.
+	\end{definition}
+
+	Sei $\mathfrak{B}$ eine Boolesche Algebra und $\mathcal{U}_\mathfrak{B}$ die Menge der Ultrafilter in $\mathfrak{B}$. Damit ist $\mathcal{U} \subseteq \operatorname{Pot}(B)$ also $\mathcal{U}_\mathfrak{B} \subseteq \operatorname{Pot}(\operatorname{Pot}(B))$.
+	
+	Für $a \in B$, definiere
+	\begin{equation*}
+		[[a]] \coloneqq \{ U \in \mathcal{U}_\mathfrak{B} \mid a \in U \} \subseteq \mathcal{U}_\mathfrak{B}
+	\end{equation*}
+	
+	\begin{theorem}""
+		\begin{enumerate}
+			\item $[[\cdot]]: \mathfrak{B} \hookrightarrow \operatorname{Pot}(\mathcal{U}_\mathfrak{B})$ ist Einbettung Boolescher Algebren (Teil des Stoneschen Repräsentationssatzes)
+			\item $\{ [[a]] \mid a \in B \}$ ist Basis einer Topologie auf $\mathcal{U}_\mathfrak{B}$.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{definition}
+		$\mathcal{U}_\mathfrak{B}$ heißt auch Stone-Raum $S(\mathfrak{B})$ von $\mathfrak{B}$.
+	\end{definition}
+
+	\begin{proof}""
+		\begin{enumerate}
+			\item
+			\begin{itemize}
+				\item $[[0]] = \emptyset$, da $0 \notin U$ per Definition
+				\item $[[1]] = U_\mathfrak{B}$, da $1 \in U$ für jedes $U$
+				\item $[[a \cap b]] = [[a]] \cap [[b]]$ folgt aus den Filtereigenschaften
+				\item $[[a \cup b]] = [[a]] \cup [[b]]$ folgt aus de Morgan und dem nächsten Schritt
+				\item $[[a^c]] = \{ U \mid a^c \in U \} \overset{\text{ultra}}{=} \{ U \mid a \notin U \} = [[a]]^c$
+			\end{itemize}
+			Das heißt $[[\cdot]]$ ist Homomorphismus der Booleschen Algebra.
+		
+			Fehlt noch injektivität: Seien $a \neq b$: Zu zeigen ist, es existiert ein Ultrafilter $U$ der $a$ und $b$ trennt, das heißt $a \in U \Leftrightarrow b \notin U$.
+		
+			Es gilt $a \nsubseteq b$ oder $b \nsubseteq a$ das heißt $a \cap b^c \neq \emptyset$ oder $a^c \cap b \neq \emptyset$.
+		
+			Es existiert also ultrafilter $U$ mit $a \cap b^c \in U$ oder $a^c \cap b \in U$.
+			
+			Falls z.B. $a \cap b^c \in U$, dann ist $a \in U, b^c \in U \Rightarrow b \notin U$.
+			\item Wegen $[[a]] \cap [[b]] = [[a \cap b]]$
+		\end{enumerate}
+	\end{proof}
+
+	\begin{remark}
+		Die Basis-offenen Mengen $[[a]]$ sind auch abgeschlossen, da $[[a]]^c = [[a^c]]$.
+		
+		Mengen die offen und abgeschlossen sind heißen clopen.
+		
+		Topologische Räume mit einer Basis aus clopen Mengen sind total unzusammenhängend.
+	\end{remark}
+
+	\begin{definition}
+		Ein topologischer Raum $(X, \mathcal{O})$ heißt kompakt, falls die endliche Überdeckungseigenschaft gilt:
+		
+		Falls $X = \bigcup_{i \in I} \{ U_i \mid U_i \text{ offen} \}$ dann existiert $I_0 \subseteq_\text{endl} I$ mit $X = \bigcup \{ U_i \mid i \in I_0 \}$
+		
+		Oder in äquivalenter Formulierung: $\bigcap \{ A_i \mid A_i \text{ abgeschlossen}, i \in I \} = \emptyset$ dann existiert $I_0 \subseteq_\text{endl} I$ mit $\bigcap \{ A_i \mid i \in I_0 \} = \emptyset$.
+	\end{definition}
+
+	\begin{theorem}
+		Der Stone-Raum ist kompakt.
+	\end{theorem}
+
+	\begin{remark}
+		Der Kompaktheitssatz ist äquivalent zur Kompaktheit von $S(\mathcal{F}_0(\mathcal{L}))$.
+		
+		Ohne Einschränkung sei $\bot \notin T$
+		\begin{equation*}
+			T \text{ inkonsistent} \qquad\Leftrightarrow\qquad \bigcap_{\varphi \in T} [[\varphi]] = \emptyset
+		\end{equation*}
+		und nach Kompaktheitssatz sagt es gibt endliches $T_0 \subseteq T$ so dass $T_0$ inkonsistent ist.
+		
+		Und mit der Kompaktheit von $S(\mathcal{F}_0(\mathcal{L}))$ existieren $\varphi_0, \dots, \varphi_n \in T$ mit $[\varphi_0[]] \cap \dots \cap [[\varphi_n]] = \emptyset$.
+		
+		Wir können im ersten Fall $T_0 = \{ \varphi_0, \dots, \varphi_n \}$ mit $\varphi_i$ aus dem zweiten Teil wählen.
+	\end{remark}
+
 \end{document}
 
