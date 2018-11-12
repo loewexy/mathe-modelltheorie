@@ -534,6 +534,10 @@
 			\begin{equation*}
 				\operatorname{Diag}^+(\mathfrak{A}) = \{ \text{$\varphi$ atomare $\mathcal{L}_A$-Aussage} \mid \mathfrak{A} \models \varphi \}
 			\end{equation*}
+			\item Das elementare Diagramm von $\mathfrak{A}$ ist
+			\begin{equation*}
+				\operatorname{Diag}_\mathfrak{A}(a) = \operatorname{Th}(\mathfrak{A}_A) = \{ \varphi \; \mathcal{L}_A\text{-Aussage} \abs{\mathfrak{A}} = \varphi \}
+			\end{equation*}
 		\end{enumerate}
 	\end{definition}
 
@@ -1009,7 +1013,7 @@
 		Für $r,s \in \setR \cap [0,1)$ konstruiere $p_r \in \prod_{i \in I} A_i$ mit $r \neq s$, dann stimmen $p_r$ und $p_s$ nur auf endlich vielen Indizes überein.
 		
 		\begin{equation*}
-			p_r(i) \coloneqq j \Leftrightarrow r \in \left[ \frac{j}{A_i}, \frac{j+1}{A_i} \right)
+			p_r(i) \coloneqq j \Leftrightarrow r \in \left[ \frac{j}{\abs{A_i}}, \frac{j+1}{\abs{A_i}} \right)
 		\end{equation*}
 		
 		\begin{equation*}
@@ -1054,7 +1058,7 @@
 			\item Insbesondere $\emptyset, X \in \mathcal{O}$
 		\end{itemize}
 	
-		$U \in \mathcal{O}$ heißt offen beziehungsweise offene Menge $A \subseteq X$ mit $X \setminus A \in \mathcal{O}$ heißt offen bzw. offene Menge. $A \subseteq X$ mit $X \setminus A \in \mathcal{O}$ heißt abgeschlossen bzw. abgeschlossene Menge.
+		$U \in \mathcal{O}$ heißt offen bzw. offene Menge, $A \subseteq X$ mit $X \setminus A \in \mathcal{O}$ heißt abgeschlossen bzw. abgeschlossene Menge.
 	\end{definition}
 
 	\begin{definition}
@@ -1067,7 +1071,7 @@
 		Eine Abbildung heißt stetig, falls Urbilder offener Mengen wieder offen sind.
 	\end{definition}
 
-	Sei $\mathfrak{B}$ eine Boolesche Algebra und $\mathcal{U}_\mathfrak{B}$ die Menge der Ultrafilter in $\mathfrak{B}$. Damit ist $\mathcal{U} \subseteq \operatorname{Pot}(B)$ also $\mathcal{U}_\mathfrak{B} \subseteq \operatorname{Pot}(\operatorname{Pot}(B))$.
+	Sei $\mathfrak{B}$ eine Boolesche Algebra und $\mathcal{U}_\mathfrak{B}$ die Menge der Ultrafilter in $\mathfrak{B}$. Damit ist $\mathcal{U} \in \operatorname{Pot}(B)$ also $\mathcal{U}_\mathfrak{B} \in \operatorname{Pot}(\operatorname{Pot}(B))$.
 	
 	Für $a \in B$, definiere
 	\begin{equation*}
@@ -1142,5 +1146,110 @@
 		Wir können im ersten Fall $T_0 = \{ \varphi_0, \dots, \varphi_n \}$ mit $\varphi_i$ aus dem zweiten Teil wählen.
 	\end{remark}
 
+	\subsubsection{Beispiele und Anwendungen}
+	
+	\begin{theorem}[Test von Vaught]
+		$T$ sei eine konsistente $\mathcal{L}$-Theorie ohne endliche Modelle und es gebe $\kappa > \max \{ \aleph_0, \abs{\mathcal{L}} \}$, so dass $T$ bis auf Isomorphie höchstens genau ein Modell der Kardinalität $\kappa$ hat. ($T$ ist $\kappa$-Kategorisch)
+		
+		Dann ist $T$ vollständig.
+	\end{theorem}
+
+	\begin{proof}
+		Seien $\mathfrak{A}, \mathfrak{B} \models T$ zu zeigen ist $\mathfrak{A} \equiv \mathfrak{B}$. $A$ und $B$ sind nach Voraussetzung unendlich.
+		
+		Sei $\kappa' > \max \{ \kappa, \abs{A}, \abs{B} \}$. Nach Löwenheim-Skolem-Tarski gibt es $\mathfrak{A}' \succcurlyeq \mathfrak{A}, \mathfrak{B}' \succcurlyeq \mathfrak{B}$ mit $\abs{A'} = \abs{B'} = \kappa'$ und wiederum nach Löwenheim-Skolem-Tarski existieren $\mathfrak{A}'' \preccurlyeq \mathfrak{A}', \mathfrak{B}'' \preccurlyeq \mathfrak{B}'$ mit $\abs{A''} = \abs{B''} = \kappa$. Damit gilt $\mathfrak{A} \equiv \mathfrak{A}' \equiv \mathfrak{A}'' \cong \mathfrak{B}'' \equiv \mathfrak{B}' \equiv \mathfrak{B}$ und $\cong \Rightarrow \equiv$.
+	\end{proof}
+
+	\begin{example}
+		\begin{enumerate}
+			\item $K$-Vektorräume, bis auf Isomorphie ist ein $K$-Vektorraum durch seine Dimension bestimmt. $\dim_K(V) \geq \abs{K} + \aleph_0 \Rightarrow \abs{V} = \dim_K(V)$.
+			
+			Übliche Axiomatisierung: $\mathcal{L}_\text{$K$-VR}= \{ +, -, 0, (\lambda_k)_{k \in K} \}$ und
+			\begin{align*}
+				T_\text{$K$-VR} &= \text{abelsche Gruppe} \\
+				& \cup \{ \forall v \lambda_k v + \lambda_{k'} v = \lambda_{k+k'} v \mid k, k' \in K \} \\
+				& \cup \{ \forall v \lambda_1 v = v \} \\
+				& \cup \dots \\
+				& \cup \{ \text{es gibt unendlich viele Elemente} \}
+			\end{align*}
+			
+			Aus LA: $T_\text{$K$-VR}$ ist $\kappa$-kategorisch für alle $\kappa \geq \abs{K} + \aleph_0$.
+			
+			Axiomatisierung von Vektorräumen über variablen Körpern
+			\begin{equation*}
+				\mathcal{L} = \{ +_V, -_V, 0_V, +_K, \cdot_K, -_K, 0_k, 1_k, V, K \}
+			\end{equation*}
+			mit $V,K$ einstellige Relationszeichen und man drückt aus $V,K$ ist Partition des Universums.
+			\begin{align*}
+				\forall x ( V x \lor K x) \\
+				\lnot \exists x (V x \land K x)
+			\end{align*}
+			
+			und zusätzlich $+_V, -_V, 0_V$ ist abelsche Gruppe auf $V$ und z.B. $\forall x \forall y (K x \rightarrow (x +_V y = 0_K))$.
+			
+			$+_K, \cdot_k, \dots$ ist Körper auf $K$ und zusätzlich noch die Vektorraumaxiome.
+			
+			\item Offene dichte lineare Ordnungen $\mathcal{L} = \{ < \}$. Die Theorie dazu nennen wir $T_{DLO}$.
+			\begin{itemize}
+				\item offen: kein Maximum und kein Minimum
+				\item dicht: $\forall x \forall y ( x < y \rightarrow \exists z (x < z \land z < y))$
+			\end{itemize}
+			Beispiele sind $(\setQ, <)$ und $(\setR, <)$
+			
+			\textit{Satz von Cantor:} $T_{DLO}$ ist $\aleph_0$-kategorisch
+			
+			\begin{proof}
+				Seien $(A, <), (B, <)$ abzählbare, offene, dichte lineare Ordnungen.
+				
+				Seien $\{ a_i \mid i \in \omega \} = A, \{ b_i \mid b \in \omega \} = B$ Aufzählungen der Universen.
+				
+				Konstruiere induktiv ordnungserhaltende Bijektion $\beta: A \to B$ und setze $\beta(a_0) = b_0$.
+				
+				\heading{Ungerade Induktionsschritte:} Sei $\beta$ bereits auf $A_n = \{ a_{i_0}, \dots, a_{i_n} \}$ definiert, $\abs{A_n}$ ist ungerade. Idee: stelle sicher, dass $\beta$ surjektiv wird.
+				
+				Wähle $j$ minimal mit $b_j \notin \beta(A_n)$. Wähle $a_{i_{n+1}}$ so, dass $\beta(a_j) \coloneqq b_j$ eine ordnungserhaltende Fortsetzung des bisher konstruierten $\beta$ ist. $a_{i_{n+1}}$ existiert, da offen und dicht, setze $b_{i_{n+1}} = b_j$.
+				
+				\heading{Gerade Induktionsschritte:} Idee: Stelle sicher, dass $\beta$ totale Funktion ist.
+				
+				Sei $j$ der kleinste Index, so dass $\beta(a_j)$ noch nicht definiert ist. Wähle $b_{i_{n+1}}$ so, dass $a_{i_{n+1}} \coloneqq a_{i_{n+1}} \coloneqq a_j \mapsto b_{i_{n+1}}$ ordnungserhaltende Fortsetzung ist.
+			\end{proof}
+		
+			Folgerung: $T_{DLO}$ ist vollständig.
+			
+			Aber: Für $k > \aleph_0$, gibt es $2^\kappa$ viele Modelle der Mächtigkeit $\kappa$, die paarweise $\ncong$.
+		\end{enumerate}
+	\end{example}
+
+	\heading{Anwendungen}
+	
+	\begin{itemize}
+		\item Vollständigkeit von Theorien
+		\item Nichtstandardmodelle
+		
+		Nichtstandard-Modelle der Peano-Arithmetik
+		\begin{equation*}
+			(\setN, +, \cdot) \precneqq \setN^*
+		\end{equation*}
+		Nichtstandard-Analysis
+		\begin{equation*}
+			(\setR, +, \cdot, <) \precneqq \setR^*
+		\end{equation*}
+		Unendliches Modell der Theorie der endlichen Körper der Charakteristik $p$, pseudo-endlicher Körper
+		\begin{equation*}
+			\prod_{n \in \setN} \mathbb{F}_{p^n} / \mathcal{U}
+		\end{equation*}
+		Besonderer Automorphismus
+		\begin{equation*}
+			\prod_{p \text{ prim}} (\tilde{\mathbb{F}}_p, \operatorname{Frob:} x \mapsto x^p) / \mathcal{U} = (\setC, \alpha)
+		\end{equation*}
+		
+		\item Transfer-Prinzipien
+		
+		$\mathcal{L}_{K_p} = \{ +, \cdot, -, 0, 1 \}$
+		
+		Eine $\mathcal{L}_{K_p}$-Aussage $\varphi$ gilt in allen Körpern der Charakteristik $0$ $\Leftrightarrow$ ex existiert $n_0 \in \setN$ so, dass $\varphi$ in allen Körpern der Charakteristik $p$ mit $p \geq n_0$ gilt.
+		
+		\item Nicht-Axiomatisierbarkeit
+	\end{itemize}
 \end{document}
 
