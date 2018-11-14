@@ -1251,5 +1251,254 @@
 		
 		\item Nicht-Axiomatisierbarkeit
 	\end{itemize}
-\end{document}
 
+	\section{Quantorenelimination}
+	
+	\begin{example}
+		$\mathfrak{R} = (\setR, +, \cdot, -, 0, 1)$ hat keine Quantorenelimination: $\exists y \; y \cdot y = 0$ ist in $\mathfrak{R}$ nicht äquivalent zu einer Formel ohne Quantoren.
+		
+		$\mathfrak{R}' = (\setR, +, \cdot, -, 0, 1, \leq)$ hat Quantorenelimination hier gilt dann:
+		\begin{equation*}
+			\exists y \; y \cdot y = x \qquad \sim \qquad 0 \leq x
+		\end{equation*}
+	\end{example}
+
+	\subsection{Erhaltungssätze (Präservationssätze)}
+	
+	\begin{definition}
+		$\varphi$ $\mathcal{L}$-Formel heißt
+		\begin{itemize}
+			\item quantorenfrei, wenn kein Quantor $\forall, \exists$ in $\varphi$ vorkommt
+			\item universell, wenn $\varphi$ von der Form ist:
+			\begin{equation*}
+				\forall v_{i_1} \dots \forall v_{i_n} \psi \qquad n \in \setN, \psi \text{ quantorenfrei}
+			\end{equation*}
+			\item existenziell, wenn $\varphi$ von der Form ist:
+			\begin{equation*}
+				\exists v_{i_1} \dots \exists v_{i_n} \psi \qquad n \in \setN, \psi \text{ quantorenfrei}
+			\end{equation*}
+			\item $\forall\exists$-Formel
+			\begin{equation*}
+				\forall v_{i_1} \dots \forall v_{i_n} \exists v_{i_{n+1}} \dots v_{i_m}  \psi \qquad n \leq m \in \setN, \psi \text{ quantorenfrei}
+			\end{equation*}
+		\end{itemize}
+	\end{definition}
+
+	\begin{remark}
+		$(\forall x \varphi \land \forall y \psi)$ ist nicht universell aber äquivalent zu einer universellen Formel.
+	\end{remark}
+
+	\begin{remark}
+		Quantorenfreie, universelle, existentielle und $\forall\exists$-Formeln sind bis auf logische Äquivalenz abgeschlossen unter $\land, \lor$.
+		
+		Quantorenfreie Formeln sind abgeschlossen unter $\lnot, \rightarrow, \leftrightarrow$.
+		
+		$\lnot$ universell $\sim$ existentiell
+		
+		$\lnot$ existentiell $\sim$ universell
+	\end{remark}
+
+	\begin{lemma}
+		Sei $\mathfrak{A} \subseteq \mathfrak{B}$ und $\varphi$ eine $\mathcal{L}_A$-Formel
+		\begin{enumerate}
+			\item Wenn $\varphi$ universell ist: $\mathfrak{B} \models \varphi \Rightarrow \mathfrak{A} \models \varphi$
+			\item Wenn $\varphi$ existentiell ist: $\mathfrak{A} \models \varphi \Rightarrow \mathfrak{B} \models \varphi$
+		\end{enumerate}
+	\end{lemma}
+	
+	\begin{proof}
+		\begin{enumerate}
+			\item $\varphi = \varphi(\overline{a}) = \forall v_{i_1}, \dots \forall v_{i_n} \psi(\overline{v}, \overline{a})$ mit $\psi$ quantorenfrei
+			
+			$\mathfrak{B} \models \varphi(\overline{a})$
+			
+			d.h. für jedes $\overline{b} \in B$ gilt $\mathfrak{B} \models \psi(\overline{b}, \overline{a})$
+			
+			Insbesondere für jedes $\overline{b} \in A$ gilt $\mathfrak{B} \models \psi(\overline{b}, \overline{a})$ quantorenfrei
+			
+			$\mathfrak{A} \subseteq \mathfrak{B}:$ für jedes $\overline{b} \in A$ gilt $\mathfrak{A} \models \psi(\overline{b}, \overline{a})$
+			
+			das heißt $\mathfrak{A} \models \underbrace{\forall \overline{v} \; \psi(\overline{v}, \overline{a})}_{\varphi(\overline{a})}$
+			
+			\item analog
+		\end{enumerate}
+	\end{proof}
+
+	\begin{lemma}[Zieglers Trennungslemma]
+		Seien $T, T'$ Theorien und $\mathcal{H}$ eine Menge von $\mathcal{L}$-Aussagen mit:
+		\begin{itemize}
+			\item $\bot, \top \in \mathcal{H}$
+			\item $\mathcal{H}$ abgeschlossen unter $\land, \lor$
+		\end{itemize}
+	
+		Dann sind äquivalent:
+		\begin{enumerate}
+			\item Für $\mathfrak{A} \models T, \mathfrak{B} \models T'$ gibt es $\varphi \in \mathcal{H}$ mit $\mathfrak{A} \models \varphi, \mathfrak{B} \models \lnot \varphi$ ($\varphi$ trennt $\mathfrak{A}$ von $\mathfrak{B}$)
+			\item Es gibt $\varphi \in \mathcal{H}$ mit $T \vdash \varphi, T' \vdash \lnot \varphi$  ($\varphi$ trennt $T$ von $T'$)
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{proof}
+		\heading{2) $\Rightarrow$ 1):} klar
+		
+		\heading{1) $\Rightarrow$ 2)}: Sei $\mathfrak{A} \models T$ und sei $\mathcal{H}_\mathfrak{A} \coloneqq \{ \varphi \in \mathcal{H} \mid \mathfrak{A} \models \varphi \}$
+		
+		$\mathcal{H}_\mathfrak{A} \cup T'$ ist inkonsistent.
+		
+		$\mathfrak{B} \models \mathcal{H}_\mathfrak{A} \cup T'$ nach Voraussetzung existiert $\varphi \in \mathcal{H}$ mit $\mathfrak{A} \models \varphi$ (d.h. $\varphi \in \mathcal{H}_\mathfrak{A}$) und damit $\mathfrak{B} \models \lnot \varphi$ $\lightning$
+		
+		Kompaktheit: Es gibt $\varphi_1, \dots, \varphi_n \in \mathcal{H}_\mathfrak{A}$ mit $\{ \varphi_1, \dots, \varphi_n \} \cup T'$ ist inkonsistent. Und damit $T' \cup \{ \varphi_1 \land \dots \land \varphi_n \}$ ist inkonsistent.
+		
+		$\Leftrightarrow T' \vdash \lnot (\underbrace{\varphi_1 \land \dots \land \varphi_n}_{\varphi_\mathfrak{A} \in \mathcal{H}_\mathfrak{A}})$
+		
+		$T \cup \{ \lnot \varphi_\mathfrak{A} \mid \mathfrak{A} \models T \}$ ist inkonsistent.
+		
+		Kompaktheit: Es gibt $\mathfrak{A}_1, \dots, \mathfrak{A}_m \models T$ mit \begin{align*}
+			&T \cup \{ \lnot \varphi_{\mathfrak{A}_1} , \dots, \lnot \varphi_{\mathfrak{A}_n} \} \text{ inkonsistent} \\
+			\Leftrightarrow& T \cup \{ \lnot \varphi_{\mathfrak{A}_1} \land \dots \land \lnot \varphi_{\mathfrak{A}_n} \} \text{ inkonsistent} \\
+			\Leftrightarrow& T \cup \{ \lnot (\varphi_{\mathfrak{A}_1} \lor \dots \lor \varphi_{\mathfrak{A}_n}) \} \text{ inkonsistent} \\
+			\Leftrightarrow& T \vdash \underbrace{\varphi_{\mathfrak{A}_1} \lor \dots \lor \varphi_{\mathfrak{A}_n}}_{\in \mathcal{H}}
+		\end{align*}
+		
+		Andererseits:
+		\begin{equation*}
+			T' \vdash \lnot \varphi_{\mathfrak{A}_1} \land \dots \land \lnot \varphi_{\mathfrak{A}_n} \qquad\sim\qquad \lnot(\varphi_{\mathfrak{A}_1} \lor \dots \lor \varphi_{\mathfrak{A}_n})
+		\end{equation*}
+	\end{proof}
+
+	\heading{Notationen:} Sei $\Delta$ Menge von $\mathcal{L}$-Formeln, $\mathfrak{A}, \mathfrak{B}$ $\mathcal{L}$-Strukturen, $h: A \to B$
+	\begin{equation*}
+		h: \mathfrak{A} \to_\Delta \mathfrak{B} :\Leftrightarrow \text{$h$ erhält die Gültigkeit von $\Delta$-Formeln mit Parametern aus $A$}
+	\end{equation*}
+	Das heißt
+	\begin{equation*}
+		\mathfrak{A} \models \delta(\overline{a}) \Rightarrow \mathfrak{B} \models \delta(h(\overline{a}))
+	\end{equation*}
+	\begin{equation*}
+		\Leftrightarrow \mathfrak{B}_h \models \operatorname{Th}_\Delta(\mathfrak{A}_A) = \{ \delta(\overline{a}) \mid \mathfrak{A} \models \delta(\overline{a}), \overline{a} \in A, \delta \in \Delta \}
+	\end{equation*}
+	
+	\begin{itemize}
+		\item $\Delta$ atomar: $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ $\Leftrightarrow$ $h$ Homomorphismus
+		\item $\Delta$ atomar, negiert atomar $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ $\Leftrightarrow$ $h$ Einbettung
+		\item $\Delta$ quantorenfrei $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ $\Leftrightarrow$ $h$ Einbettung
+		\item $\Delta$ alles $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ $\Leftrightarrow$ $h$ elementar
+	\end{itemize}
+
+	\begin{lemma}
+		Sei $T$ eine $\mathcal{L}$-Theorie, $\mathfrak{A}$ eine $\mathcal{L}$-Struktur. $\Delta$ abgeschlossen bezüglich $\hat{\exists}$ (Umbenennung von Variablen)
+		
+		$(v_0 \doteq c) \nsim v_1 \doteq c$
+		
+		Dann sind äquivalent
+		\begin{enumerate}
+			\item Jedes $\varphi \in \operatorname{Th}_\Delta(\mathfrak{A})$ ist konsistent mit $T$ (d.h. es existiert $\mathfrak{M}_\varphi \models T \cup \{ \varphi \}$)
+			\item Es gibt $\mathfrak{B} \models T$ und $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ (d.h. es existiert $\mathfrak{B} \models T \cup \operatorname{Th}_\Delta(\mathfrak{A}_A)$)
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{proof}
+		\heading{2) $\Rightarrow$ 1)}: klar
+		
+		\heading{1) $\Rightarrow$ 2)}: Zeige mit Kompaktheit: $T \cup \operatorname{Th}_\Delta(\mathfrak{A}_A)$ ist konsistent.
+		
+		Angenommen nicht. Dann gibt es $\delta_i(a_i)$ mit $T \cup \{ \delta_1(\overline{a_1}, \dots, \delta_n(\overline{a_n})) \}$ inkonsistent
+		
+		Ohne Einschränkung mit $\overline{a} = \overline{a_1} \cap \dots \cap \overline{a_n}$
+		\begin{equation*}
+			T \cup \{ \underbrace{\delta_1(\overline{a}), \dots, \delta_n(\overline{a})}_{\text{ersetze durch $\delta(\overline{a}) = \delta_1(\overline{a}) \land \dots \land \delta_n(\overline{a})$}} \}
+		\end{equation*}
+		
+		$\delta(\overline{a}) \in \Delta$
+		
+		$T \cup \{ \delta(\overline{a}) \}$ inkonsistent, das heißt $T \vdash \lnot \delta(\overline{a})$
+		
+		$T$ $\mathcal{L}$-Theorie, $\overline{a}$ Konstanten $\notin \mathcal{L}$
+		
+		Mit Logik folgt: $T \vdash \forall \overline{x} \lnot \delta(\overline{x}) \sim \lnot \underbrace{\exists \overline{x} \delta(\overline{x})}_{\in \Delta}$
+		
+		$\mathfrak{A} \models \delta(\overline{a}a)$ d.h. $\mathfrak{A} \models \exists \overline{x} \delta(\overline{x})$ aber $T \vdash \lnot \exists \overline{x} \delta(\overline{x})$ $\lightning$ zu 1)
+	\end{proof}
+
+	\begin{corollary}
+		Betrachte $\mathcal{L}$-Struktur $\mathfrak{B}$ und $T = \operatorname{Th}(\mathfrak{B})$.
+		
+		\begin{align*}
+			\text{Jedes $\varphi \in \operatorname{Th}_\Delta(\mathfrak{A})$}&\text{ ist konsistent mit $T$} &&\Leftrightarrow& \text{es gibt $\mathfrak{B}' \models T$ und}&\text{ $h: \mathfrak{A} \to_\Delta \mathfrak{B}$} \\
+			\Updownarrow& &&& \Updownarrow& \\
+			\operatorname{Th}_\Delta(\mathfrak{A}) &\subseteq \operatorname{Th}_\Delta(\mathfrak{B}) &&& \text{es gibt $\mathfrak{B}' \models T$ und}&\text{ $h: \mathfrak{A} \to_\Delta \mathfrak{B}$} \\
+			\Updownarrow& &&& \Updownarrow& \\
+			\mathfrak{A} \Rightarrow_\Delta& \mathfrak{B} &&& \text{es gibt $\mathfrak{B}' \equiv \mathfrak{B}$ }&\text{und $h: \mathfrak{A} \to_\Delta \mathfrak{B}'$}
+		\end{align*}
+	\end{corollary}
+
+	\begin{theorem}
+		Seien $T, T'$ $\mathcal{L}$-Theorien. Es sind äquivalent:
+		\begin{enumerate}
+			\item Es gibt universelle $\mathcal{L}$-Aussage $\varphi$, die $T$ von $T'$ trennt (d.h. $T \vdash \varphi, T' \vdash \lnot \varphi$)
+			\item Wenn $\mathfrak{A} \models T, \mathfrak{B} \models T'$, dann ist $\mathfrak{B}$ keine Unterstruktur von $\mathfrak{A}$
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{1) $\Rightarrow$ 2):} $\mathfrak{A} \models T$, also $\mathfrak{A} \models \varphi$, $\varphi$ universell.
+		
+		Wenn $\mathfrak{B} \subseteq \mathfrak{A}$, dann $\mathfrak{B} \models \varphi$ (Lemma) also $\mathfrak{B} \not\models T'$.
+		
+		\heading{$\lnot$1) $\Rightarrow$ $\lnot$2):} Trennungslemma: es gibt $\mathfrak{A} \models T, \mathfrak{B} \models T'$ und keine universelle Aussage trennt $\mathfrak{A}$ von $\mathfrak{B}$, d.h. $\mathfrak{A} \Rightarrow_\forall \mathfrak{B}$
+		
+		äquivalent: $\mathfrak{B} \Rightarrow_\exists \mathfrak{A}$
+		
+		Folgerung: Es gibt ein $\mathfrak{A}' \equiv \mathfrak{A}$ mit $h: \mathfrak{B} \to_\exists \mathfrak{A}'$
+		
+		Da qf $\subseteq \exists$ insbesondere $\mathfrak{B} \models T' \subseteq \mathfrak{A}' \models T$
+	\end{proof}
+
+	\begin{corollary}
+		Sei $T$ $\mathcal{L}$-Theorie und $\varphi$ eine $\mathcal{L}$-Formel. Dann sind äquivalent:
+		\begin{enumerate}
+			\item Es gibt universelles $\psi$ mit $T \models \forall \overline{x} (\varphi(\overline{x}) \leftrightarrow \psi(\overline{x})$
+			\item Falls $\mathfrak{A} \models T, \mathfrak{B} \models T, \mathfrak{A} \subseteq \mathfrak{B}$
+			
+			Für alle $\overline{a} \in A$ gilt: $\mathfrak{B} \models \varphi(\overline{a}) \Rightarrow \mathfrak{A} \models \varphi(\overline{a})$
+		\end{enumerate}
+	\end{corollary}
+
+	\begin{proof}
+		\heading{1) $\Rightarrow$ 2):}
+		\begin{equation*}
+			\mathfrak{B} \models \varphi(\overline{a}) \Leftrightarrow \mathfrak{B} \models \psi(\overline{a}) \Rightarrow \mathfrak{A} \models \psi(\overline{a}) \Leftrightarrow \mathfrak{A} \models \varphi(\overline{a})
+		\end{equation*}
+		
+		\heading{2) $\Rightarrow$ 1):}
+		Seien $\overline{c}$ neue Konstanten (für $\overline{a}$) und
+		\begin{align*}
+			\mathcal{L}_c = \mathcal{L} \cup \{ \overline{c} \} \\
+			T^+ = T \cup \{ \varphi(\overline{c}) \} \\
+			T^- =  T \cup \{ \lnot \varphi(\overline{c}) \}
+		\end{align*}
+		$\mathcal{L}_c$-Theorien
+		
+		2) sagt Unterstrukturen von Modellen von $T^+$ die Modelle von $T$ sind, sind Modelle von $T^+$ also nicht Modelle von $T^-$-
+		
+		Mit dem Satz folgt: Es gibt eine universelle $\mathcal{L}_c$ Aussage $\psi^{(c)}$ die $T^+$ von $T^-$ trennt, das heißt
+		\begin{equation*}
+			T^+ \vdash \psi(\overline{c}), T \vdash \lnot \psi(\overline{c})
+		\end{equation*}
+		Es folgt
+		\begin{align*}
+			T \cup \{ \varphi(\overline{c}) &\vdash \psi(\overline{c}) \} & T &\vdash \varphi(\overline{c}) \rightarrow \psi(\overline{c}) \\
+			T \cup \{ \varphi(\overline{c}) \} &\vdash \psi(\overline{c}) & T &\vdash \lnot \varphi(\overline{c}) \rightarrow \lnot \psi(\overline{c})
+		\end{align*}
+		$\overline{c}$ kommt in $T$ vor, also:
+		\begin{align*}
+			T &\vdash \forall x (\varphi(x) \rightarrow \psi(x)) \\
+			T &\vdash \forall x (\lnot \varphi(x) \rightarrow \lnot \psi(x))
+		\end{align*}
+		\begin{equation*}
+			T \vdash \forall x (\varphi(x) \leftrightarrow \psi(x))
+		\end{equation*}
+		
+	\end{proof}
+
+\end{document}
