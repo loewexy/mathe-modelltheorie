@@ -1498,7 +1498,209 @@
 		\begin{equation*}
 			T \vdash \forall x (\varphi(x) \leftrightarrow \psi(x))
 		\end{equation*}
-		
 	\end{proof}
 
+	\begin{definition}
+		$T_\forall \coloneqq = \{ \varphi \text{universelle $\mathcal{L}$-Aussage} \mid T \vdash \varphi \}$
+		
+		(Falls $T = T^\vdash$ dann $T_\forall = T \cap \forall$)
+		
+		Analog: $T_\exists, T_{\exists\forall}, \dots$
+	\end{definition}
+
+	\begin{corollary}
+		$T$ ist universell, d.h. $T_\forall^\vdash = T^\vdash$. (äquivalent $T$ ist $\forall$-Axiomatisierbar, d.h. es bit $\varphi_i$ universell mit $\{ \varphi_i \mid i \in I \}^\vdash = T^\vdash$)
+		
+		$\Leftrightarrow$ wenn $\mathfrak{A} \subseteq \mathfrak{B}$ und $\mathfrak{B} \models T$, dann $\mathfrak{A} \models T$
+	\end{corollary}
+	\begin{proof}
+		\heading{$\Rightarrow$} Wenn $\mathfrak{B} \models T$ und $\mathfrak{A} \subseteq \mathfrak{B}$ dann $\mathfrak{A} \models T_\forall$ also $\mathfrak{A} \models T_\forall^\vdash \supseteq T$
+		
+		\heading{$\Leftarrow$} Stets $T_\forall \subset T^\vdash$, also $T_\forall^\vdash \subseteq T^\vdash$.
+		
+		Zeige: $T^\vdash \subseteq T_\forall^\vdash$, d.h. $T_\forall \vdash T$
+		
+		Sei $\varphi \in T, \mathfrak{A} \subseteq \mathfrak{B} \models T$
+		
+		Nach Voraussetzung ist $\mathfrak{A} \models \varphi$, d.h. $\mathfrak{A} \not\models \{ \lnot \varphi \} \eqqcolon T'$.
+		
+		Satz $\Rightarrow$ ex. universelle $\psi$ mit $T \vdash \psi$ d.h. $\psi \in T_\forall$.
+		
+		$\{ \lnot \varphi \} = T' \vdash \lnot \psi (\Leftrightarrow \psi \vdash \varphi)$ insbesondere $T_\forall \vdash \varphi$.
+	\end{proof}
+
+	\heading{Dualisierung:}
+	
+	$\varphi$ existentiell modulo $T$ $\Leftrightarrow \forall \mathfrak{A}, \mathfrak{B} \models T, \mathfrak{A} \subseteq \mathfrak{B}, \mathfrak{A} \models \varphi(\overline{a}) \Rightarrow \mathfrak{B} \models \varphi(a)$
+	
+	$T$ ist existentiell, d.h. $T^\vdash = T_\exists^\vdash$ $\Leftrightarrow \mathfrak{A} \subseteq \mathfrak{B}, \mathfrak{A} \models T \Rightarrow \mathfrak{B} \models T$
+	
+	\begin{example}
+		Die $\mathcal{L}_{HGr}$-Theorie der Gruppen ist nicht universell
+		
+		\begin{equation*}
+			\underbrace{(\setN, +)}_\text{keine Gruppe} \subseteq \underbrace{(\setZ, +)}_\text{Gruppe}
+		\end{equation*}
+		
+		Axiom z.B. $\exists x \forall y (y \circ x = y \land x \circ y = y)$
+		
+		Aber die $\{ \circ, {}^{-1}, e \} \eqqcolon \mathcal{L}_{Gr}$-Theorie der Gruppen ist universell
+		
+		Axiom z.B. $\forall y (y \circ e = y \land e \circ y = y)$
+	\end{example}
+	
+	\heading{Einschub für die Allgemeinbildung}
+	
+	\textit{HSP-Theoriem von Birkhoff (aus der universellen Algebra)}
+	
+	Eine Klasse $\mathcal{K}$ von Algebren ($\mathcal{L}$-Strukturen ohne Relationen) ist eine Varietät, d.h. axiomatisiert durch Aussagen der Form $\forall \overline{x} \; \tau_1(\overline{x}) \doteq \tau_2(\overline{x})$
+	
+	$\Leftrightarrow$ $\mathcal{K}$ ist abgeschlossen unter:
+	\begin{itemize}
+		\item Homomorphen Bildern
+		\item Unterstrukturen
+		\item direkten Produkten
+	\end{itemize}
+
+	\textit{Elementare Strukturen}
+	
+	Eine Klasse von $\mathcal{L}$-Stukturen $\mathcal{K}$ ist elementar (d.h. axiomatisierbar: es gibt $\mathcal{L}$-Theorie $T$ mit $\mathcal{K} = \operatorname{Mod}(T)$)
+	
+	$\Leftrightarrow$ abgeschlossen unter $\equiv$ und Ultraprodukten
+	
+	$\Leftrightarrow$ abgeschlossen unter $\cong$, Ultraprodukten und elementaren Unterstrukturen
+	
+	$\Leftrightarrow$ abgeschlossen unter $\cong$, Ultraprodukten und Ultrawurzeln ($\mathfrak{A}^I/\mathcal{U} \in \mathcal{K} \Rightarrow \mathfrak{A} \in \mathcal{K}$)
+	
+	\textit{Satz ohne Beweis}
+	
+	Keisler mit GCH (generalized continuum hypothesis), Shela ohne
+	
+	$\mathfrak{A} \equiv \mathfrak{B}$ $\Leftrightarrow$ ex. Ultrafilter $\mathcal{U}, \mathcal{U}'$ mit $\mathfrak{A}^I/\mathcal{U} \cong \mathfrak{B}^I/\mathcal{U}'$
+	
+	\begin{lemma}
+		$\forall \exists$-Aussagen werden unter Vereinigungen von Ketten präserviert, d.h.
+		\begin{equation*}
+			\mathfrak{A}_0 \subseteq \mathfrak{A}_2 \subseteq \dots \subseteq \bigcup_{i \in \omega} \mathfrak{A}_i = \mathfrak{A}_\omega
+		\end{equation*}
+		und $\mathfrak{A}_i \models \varphi$, $\varphi$ $\forall \exists$-Aussage, dann $\mathfrak{A}_\omega \models \varphi$ für alle $i \in \omega$.
+	\end{lemma}
+
+	\begin{proof}
+		$\varphi = \forall \overline{x} \; \exists \overline{y} \; \psi(\overline{x}, \overline{y})$.
+		
+		Zu zeigen: für jedes $\overline{a} \in A_\omega$ gilt $\mathfrak{A}_\omega \models \exists \overline{y} \; \psi(\overline{a}, \overline{y})$
+		
+		Es gibt $n \in \omega$ mit $\overline{a} \in A_n$
+		
+		Nach Voraussetzung $\mathfrak{A}_n \models \varphi$, d.h. $\mathfrak{A}_n \models \exists \overline{y} \psi(\overline{a}, \overline{y})$ existentiell $\Rightarrow$ $\mathfrak{A}_\omega \models \exists \overline{y} \; \psi(\overline{a}, \overline{y})$
+	\end{proof}
+
+	\begin{theorem}
+		$T, T'$ $\mathcal{L}$-Theorien Äquivalent sind:
+		\begin{enumerate}
+			\item Es gibt $\varphi$ $\forall \exists$-Aussage mit $T \vdash \varphi, T' \vdash \lnot \varphi$
+			\item Falls $\mathfrak{A}_0 \subseteq \mathfrak{A}_1 \subseteq \dots$ Kette von Modellen von $T$, dann ist $\mathfrak{A}_\omega \not\models T'$
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{1) $\Rightarrow 2)$}: Da $\mathfrak{A}_i \models T$ gilt insbesondere $\mathfrak{A} \models \varphi$. Da $\varphi$ $\forall\exists$, gilt nach Lemma $\mathfrak{A}_\omega \models \varphi$, somit $\mathfrak{A}_\omega \not\models T$.
+		
+		\heading{$\lnot 1) \Rightarrow \lnot 2)$}:
+		
+		Trennungslemma: Es gibt $\mathfrak{A}_0 \models T, \mathfrak{B}_0 \models T'$, nicht $\forall \exists$-trennbar d.h. $\mathfrak{A}_0 \Rightarrow_{\forall\exists} \mathfrak{B}_0$. Somit $\mathfrak{B}_0 \Rightarrow_{\exists\forall} \mathfrak{A}_0$.
+		
+		Einbettungslemma: Es gibt $h: \mathfrak{B}_0 \to_{\exists\forall} \mathfrak{A}_1 \equiv \mathfrak{A}_0$
+		
+		Ohne Einschränkung: $\mathfrak{B}_0 \subseteq \mathfrak{A}_1$, $h$ präserviert $\exists\forall$-Formeln aus $\mathcal{L}_{B_0}$
+		
+		$\Rightarrow \mathfrak{A}_1 \Rightarrow_{\forall\exists} \mathfrak{B}_0$ in $\mathcal{L}_{B_0}$
+		
+		Abschwächung: $\mathfrak{A}_1 \Rightarrow_\exists \mathfrak{B}_0$ in $\mathcal{L}_{B_0}$.
+		
+		Lemma: $h': \mathfrak{A}_1 \to_\exists \mathfrak{B}_1 \equiv \mathfrak{B}_0$ in $\mathcal{L}_{B_0}$
+		
+		Ohne Einschränkung: $\mathfrak{B}_0 \subseteq \mathfrak{A}_1 \subseteq \mathfrak{B}_1$
+		
+		Und damit: $\mathfrak{B}_0 \preccurlyeq \mathfrak{B}_1$
+		
+		\begin{equation*}
+			\mathfrak{B}_0 \subseteq \mathfrak{A}_1 \subseteq \mathfrak{B}_1 \subseteq \mathfrak{A}_2 \subseteq \mathfrak{B}_2 \subseteq \dots
+		\end{equation*}
+		
+		Ersetze $\mathfrak{B}_0$ durch $\mathfrak{B}_1$ und konstruiere analog $\mathfrak{A}_2, \mathfrak{B}_3$
+		
+		\begin{equation*}
+			\mathfrak{A}_\omega = \bigcup_{i \in \omega} \mathfrak{A}_i = \bigcup_{i \in I} \mathfrak{B}_i = \mathfrak{B}_\omega \models T'
+		\end{equation*}
+	\end{proof}
+
+	\begin{corollary}
+		Äquivalent sind
+		\begin{enumerate}
+			\item $\varphi$ ist modulo $T$ äquivalent zu $\forall\exists$-Aussage $\psi$
+			\item $\varphi$ wird unter Vereinigungen von Ketten präserviert
+		\end{enumerate}
+	\end{corollary}
+
+	\begin{proof}
+		\heading{$1) \Rightarrow 2)$}
+		
+		Wenn $\mathfrak{A}_0 \subseteq \mathfrak{A}_1 \subseteq \dots$ und $\mathfrak{A}_i \models \varphi$
+		
+		dann $\mathfrak{A}_i \models \psi$ (da $T \vdash (\varphi \leftrightarrow \psi)$)
+		
+		dann $\mathfrak{A}_\omega \models \psi$ (da $\psi \; \forall\exists$)
+		
+		somit $\mathfrak{A}_\omega \models \varphi$
+		
+		\heading{$2) \Rightarrow 1)$}
+		\begin{align*}
+			T^+ &= T \cup \{ \varphi \} \\
+			T^- &= T \cup \{ \lnot \varphi \}
+		\end{align*}
+		
+		2) sagt: Vereinigungen von Ketten von Modellen von $T^\vdash$ sind nicht Modelle von $T^-$.
+		
+		Satz: Es gibt $\forall\exists$-Aussage $\psi$ mit $T^+ \vdash \psi, T^- \vdash \lnot \psi$. Wie im universellen Fall $T \vdash (\varphi \leftrightarrow \psi)$
+	\end{proof}
+
+	\begin{corollary}
+		$T$ ist induktiv d.h. unter Vereinigungen von Ketten abgeschlossen
+
+		$\Leftrightarrow$ $T$ ist $\forall\exists$-axiomatisierbar, d.h. $T^\vdash = T_{\forall\exists}^\vdash$
+	\end{corollary}
+
+	\begin{proof}
+		\heading{$\Leftarrow$}
+		
+		Wenn $\mathfrak{A}_0 \subseteq \mathfrak{A}_1 \subseteq \dots$ mit $\mathfrak{A}_i \models T$, dann $\mathfrak{A}_\omega \models T_{\forall\exists}$, also $\mathfrak{A}_\omega \models T$, da $T \subseteq T_{\forall\exists}^\vdash$
+		
+		\heading{$\Rightarrow$}
+		
+		Zeige $T_{\forall\exists} \vdash T$
+		
+		Sei $\varphi \in T$ und $\mathfrak{A}_0 \subseteq \mathfrak{A}_1 \subseteq \dots$ Kette von Modellen von $T$
+		
+		Nach Voraussetzung ist $\mathfrak{A}_\omega \models \varphi$, also $\mathfrak{A}_\omega \not\models \lnot \varphi$.
+		
+		Satz: Es gibt $\forall\exists$-Aussage $\psi$, die $T$ von $\{ \lnot \varphi \}$ trennt. $T \vdash \psi$, d.h. $\psi \in T_{\forall\exists}$
+		
+		$\lnot \varphi \vdash \psi$ d.h. $\psi \vdash \varphi$ insbesondere $T_{\forall\exists} \vdash \varphi$
+	\end{proof}
+
+	\begin{definition}
+		Eine $\mathcal{L}$-Theorie $T$ heißt modellvollständig, wenn jede $\mathcal{L}$-Formel modulo $T$ universell ist. (äquivalent: jede $\mathcal{L}$-Formel ist modulo $T$ existentiell)
+	\end{definition}
+
+	\begin{theorem}[Test von Robinson]
+		Äquivalent sind
+		\begin{enumerate}
+			\item $T$ ist modellvollständig
+			\item Wenn $\mathfrak{M}, \mathfrak{N} \models T, \mathfrak{M} \subseteq \mathfrak{N}$ dann $\mathfrak{M} \preccurlyeq \mathfrak{N}$
+			\item Wenn $\mathfrak{M}, \mathfrak{N} \models T, \mathfrak{M} \subseteq \mathfrak{N}$ und $\varphi$ $\mathcal{L}_M$-Existenzaussage (d.h. $\varphi = \exists \overline{x} \; \psi(\overline{x}, \overline{m})$, $\psi$ q.f.) dann $\mathfrak{N} \models \varphi \Rightarrow \mathfrak{M} \models \varphi$
+		\end{enumerate}
+	\end{theorem}
+	
 \end{document}
