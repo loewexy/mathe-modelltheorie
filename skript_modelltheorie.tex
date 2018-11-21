@@ -1386,7 +1386,7 @@
 	\end{itemize}
 
 	\begin{lemma}
-		Sei $T$ eine $\mathcal{L}$-Theorie, $\mathfrak{A}$ eine $\mathcal{L}$-Struktur. $\Delta$ abgeschlossen bezüglich $\hat{\exists}$ (Umbenennung von Variablen)
+		Sei $T$ eine $\mathcal{L}$-Theorie, $\mathfrak{A}$ eine $\mathcal{L}$-Struktur. $\Delta$ abgeschlossen bezüglich $\exists, \land$ und Umbenennung von Variablen.
 		
 		$(v_0 \doteq c) \nsim v_1 \doteq c$
 		
@@ -1702,5 +1702,169 @@
 			\item Wenn $\mathfrak{M}, \mathfrak{N} \models T, \mathfrak{M} \subseteq \mathfrak{N}$ und $\varphi$ $\mathcal{L}_M$-Existenzaussage (d.h. $\varphi = \exists \overline{x} \; \psi(\overline{x}, \overline{m})$, $\psi$ q.f.) dann $\mathfrak{N} \models \varphi \Rightarrow \mathfrak{M} \models \varphi$
 		\end{enumerate}
 	\end{theorem}
+	
+	\begin{definition}
+		Eigenschaft 3) heißt auch: $\mathfrak{M}$ ist existenziell abgeschlossen in $\mathfrak{N}$.
+		\begin{equation*}
+			\mathfrak{M} \preccurlyeq_1 \mathfrak{N}
+		\end{equation*}
+	\end{definition}
+
+	\begin{proof}
+		\heading{2) $\Rightarrow 3)$:} trivial
+		
+		\heading{1) $\Rightarrow 2)$:} angenommen $\mathfrak{N} \models \varphi(\overline{m})$ $\mathcal{L}_M$-Aussage.
+		
+		Es gibt universelles $\psi$ mit $T \vdash \forall \overline{x} (\varphi(\overline{x}) \leftrightarrow \psi(\overline{x})$
+		
+		Dann $\mathfrak{N} \models \psi(\overline{m})$
+		
+		Da $\psi$ universell $\Rightarrow$ $\mathfrak{M} \models \psi(\overline{m})$ d.h. $\mathfrak{M} \models \varphi(\overline{m})$
+		
+		\heading{3) $\Rightarrow 1)$:} Sei $\varphi(\overline{x})$ eine existentielle $\mathcal{L}$-Formel. Satz über universelle Präservation: Es gibt $\psi(\overline{x})$ universell mit $T \vdash \forall \overline{x}(\varphi(\overline{x}) \leftrightarrow \psi(\overline{x}))$.
+		
+		Sei $\chi(\overline{x})$ beliebige Formel, zeige $\chi \sim $ univ.
+		\begin{equation*}
+			\chi(\overline{x}) \sim \forall \dots \forall \exists \dots \exists \forall \dots \forall \underbrace{\exists \dots \exists \rho'(\overline{x})}_{\sim \text{univ.}}
+		\end{equation*}
+		Zeige induktiv von hinten nach vorne durch die Formel das am Ende eine universelle Formel übrig bleibt. Dabei immer letzten Teil mit Existenzquantoren durch äquivalente universelle Formel ersetzen. Danach negieren um Allquantoren wieder zu Existenzquantoren zu machen und dann wie eben.
+	\end{proof}
+
+	\begin{lemma}
+		Modellvollständige Theorien sind induktiv (d.h. $\forall\exists$-axiomatisierbar)
+	\end{lemma}
+
+	\begin{proof}
+		Sei $\mathfrak{M}_0 \subseteq \mathfrak{M}_1 \subseteq \dots \subseteq \mathfrak{M}_\omega$ mit $\mathfrak{M}_i \models T$
+		
+		Aus $\mathfrak{M}_0 \preccurlyeq \mathfrak{M}_1 \preccurlyeq \dots$ folgt $\mathfrak{M}_\omega \models T$
+	\end{proof}
+
+	\begin{lemma}
+		$T$ ist modellvollständig $\Leftrightarrow$ für jedes $\mathfrak{M}$ ist $T \cup \operatorname{Diag}(\mathfrak{M})$ eine vollständige $\mathcal{L}_M$-Theorie.
+	\end{lemma}
+
+	\begin{proof}
+		\heading{$\Rightarrow$:} Seien $\mathfrak{N}_1, \mathfrak{N}_2 \models T \cup \operatorname{Diag}(\mathfrak{M})$. Zu zeigen ist $\mathfrak{N}_1 \equiv \mathfrak{N}_2$ in $\mathcal{L}_M$.
+		
+		$\mathfrak{N}_i \models \operatorname{Diag}(\mathfrak{M}) \Leftrightarrow$ es gibt eine Einbettung $\mathfrak{M} \hookrightarrow \mathfrak{N}_i$ d.h. ohne Einschränkung $\mathfrak{M} \subseteq \mathfrak{N}_i$.
+		
+		\begin{equation*}
+			\mathfrak{N}_1 \models T \overset{\supseteq}{\succcurlyeq} \mathfrak{M} \models T \overset{\subseteq}{\preccurlyeq} \mathfrak{N}_2 \models T
+		\end{equation*}
+		
+		$T$ modellvollständig $\Rightarrow$ $\subseteq = \preccurlyeq$
+		
+		Sei $\varphi$ $\mathcal{L}_M$-Aussage
+		
+		Dann $\mathfrak{N}_1 \models \varphi \Leftrightarrow \mathfrak{M} \models \varphi \Leftrightarrow \mathfrak{N}_2 \models \varphi$.
+		
+		\heading{$\Leftarrow$:} Seien $\mathfrak{M}, \mathfrak{N} \models T$, $\mathfrak{M} \subseteq \mathfrak{N}$.
+		
+		Dann $\mathfrak{M}, \mathfrak{N} \models \underbrace{T \cup \operatorname{Diag(\mathfrak{M})}}_\text{vollständig}$
+		
+		Sei $\varphi$ $\mathcal{L}_M$-Aussage:
+		\begin{equation*}
+			\mathfrak{M} \models \varphi \Leftrightarrow T \cup \operatorname{Diag}(\mathfrak{M}) \vdash \varphi \Leftrightarrow \mathfrak{N} \models \varphi
+		\end{equation*}
+	\end{proof}
+
+	\begin{example}
+		\begin{itemize}
+			\item $\mathcal{L} = \emptyset$
+			
+			$T_\infty = \{ \exists^{\geq n} x \; x \doteq x \mid n \in \setN \}$ ist Modellvollständig
+			
+			$T = \emptyset$ ist nicht modellvollständig
+			
+			\item $\mathcal{L} = \{ < \}$ dichte offene lineare Ordnungen sind modellvollständig und haben Quantorenelimination
+			
+			\item $\mathcal{L} = \{ +, \cdot, - , 0, 1 \}$
+			
+			$ACF = $ Theorie der algebraisch abgeschlossenen Körper
+			
+			$ACF_p = $ Theorie der algebraisch abgeschlossenen Körper der Charakteristik $p$
+			
+			Beide Theorien sind modellvollständig und haben Quantorenelimination
+			
+			\item Formal reell abgeschlossene Körper $FRCF = \operatorname{Th}(\setR, +, \cdot, -, 0, 1)$ ist modellvollständig (ohne Quantorenelimination)
+			
+			z.B. $a,b,c \in \setR$ und $\exists x (ax^2 + bx + c \doteq 0)$ $\mathcal{L}_R$-Formel.
+			
+			\begin{equation*}
+				\left( \setR \models \exists x (ax^2 + bx + c \doteq 0) \Leftrightarrow b^2 - 4ac \geq 0 \right)
+			\end{equation*}
+			
+			\begin{equation*}
+				\exists x (ax^2 + bx + c \doteq 0) \sim_{FRCF} \forall y (b^2 - 4ac = 0 \lor y^2 \neq -(b^2 - 4ac))
+			\end{equation*}
+			
+			Reell abgeschlossene Körper $RCF = \operatorname{Th}(\setR, +, \cdot, -, 0, 1, \leq)$ hat Quantorenelimination
+			
+			\begin{equation*}
+				x \leq y \sim \exists z \; z^2 = y - x \sim \forall z \; (y - x \doteq 0 \lor z^2 \neq x - y)
+			\end{equation*}
+		\end{itemize}
+	\end{example}
+
+	\heading{Anwendung:} Hilberts Nullstellensatz
+	
+	Sei $K \models ACF$ und seien $f_1, \dots, f_m \in K[X_1, \dots, X_n]$
+	
+	$\langle f_1, \dots, f_m \rangle = \{ f_1 g_1 + \dots + f_m g_m \mid g_i \in K[\overline{X}] \}$ das von den $f_i$ erzeugte Ideal.
+	
+	Wenn $\overline{a} \in K$ so dass $f_1(\overline{a}) = \dots = f_m(\overline{a})  = 0$ dann auch $h(\overline{a}) = 0$ für jedes $h \in \langle f_1, \dots, f_m \rangle$
+	
+	Wenn $1 \in \langle f_1, \dots, f_m \rangle$, dann existiert keine gemeinsame Nullstelle der $f_i$.
+	
+	Nullstellensatz: Falls $\langle f_1, \dots, f_m \rangle$ echtes Ideal, existiert $\overline{a} \in K$ mit $f_1(\overline{a}) = \dots = f_m(\overline{a}) = 0$
+	
+	\begin{proof}
+		Sei $\mathfrak{M}$ ein maximales Ideal, das $\langle f_1, \dots, f_m \rangle$ enthält.
+		
+		$K \hookrightarrow \underbrace{K[\overline{X}]/\mathfrak{M}}_\text{Körper} \subseteq \underbrace{\tilde{K[\overline{X}]/\mathfrak{M}}}_\text{alg. Abschluss} = K_1$
+		
+		$\Rightarrow (x_1, \dots, x_n)$ ist gemeinsame Nullstelle von allen Polynomen in $\mathfrak{M}$.
+		
+		$K_1 \models \exists x_1 \dots \exists x_n (f(x_1, \dots, x_n) \doteq 0 \land \dots \land f_m(x_1, \dots, x_n) \doteq 0)$
+		
+		Da ACF Modellvollständig also $K \models \exists x_1 \dots \exists x_n (f(x_1, \dots, x_n) \doteq 0 \land \dots \land f_m(x_1, \dots, x_n) \doteq 0)$ da $K \preccurlyeq K_1$.
+	\end{proof}
+
+	\subsection{Quantorenelimination}
+	
+	\begin{definition}
+		$T$ hat Quantorenelimination (QE), falls jede $\mathcal{L}$-Formel $\varphi(x_1, \dots, x_n)$ zu einer quantorenfreien Formel $\psi(x_1, \dots, x_n)$ äquivalent modulo $T$ ist.
+		
+		Wichtig: $\psi$ darf nicht mehr freie Variablen als $\varphi$ haben.
+		
+		Insbesondere: Jede $\mathcal{L}$-Aussage ist zu einer quantorenfreien $\mathcal{L}$-Aussage äquivalent
+	\end{definition}
+
+	\begin{remark}
+		Falls $T$ QE hat und keine Konstanten in der Sprache sind, dann ist entweder $T$ inkonsistent oder $T$ ist vollständig. (Denn $\top, \bot$ sind die einzigen quantorenfreien Aussagen, $T$ konsistent, $\varphi$ $\mathcal{L}$-Aussage: $T \vdash \varphi \Leftrightarrow T \vdash (\varphi \leftrightarrow \top)$ und $T \not\vdash \varphi \Leftrightarrow (\varphi \leftrightarrow \bot)$)
+	\end{remark}
+
+	\begin{remark}
+		Wenn $T$ Quantorenelimination hat ist $T$ modellvollständig, denn jede quantorenfreie-Formel ist universell.
+	\end{remark}
+
+	\begin{example}
+		$\mathcal{L} = \{ p \}$ mit $p$ einstellige Relation
+		
+		$T = T_\infty \cup \{ \forall x p x \lor \forall x \lnot p x \}$
+		
+		$T$ hat keine QE
+		\begin{equation*}
+			T \vdash (\forall x px \leftrightarrow ?)
+		\end{equation*}
+		
+		$T$ hat 2 Vervollständigungen:
+		\begin{align*}
+			T^+ &\vdash T \cup \{ \forall x p x \} \\
+			T^- &\vdash T \cup \{ \forall x \lnot p x \}
+		\end{align*}
+		beide haben QE.
+	\end{example}
 	
 \end{document}
