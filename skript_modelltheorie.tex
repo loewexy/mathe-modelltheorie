@@ -536,7 +536,7 @@
 			\end{equation*}
 			\item Das elementare Diagramm von $\mathfrak{A}$ ist
 			\begin{equation*}
-				\operatorname{Diag}_\mathfrak{A}(a) = \operatorname{Th}(\mathfrak{A}_A) = \{ \varphi \; \mathcal{L}_A\text{-Aussage} \abs{\mathfrak{A}} = \varphi \}
+				\operatorname{Diag}_\mathfrak{A}(a) = \operatorname{Th}(\mathfrak{A}_A) = \{ \varphi \; \mathcal{L}_A\text{-Aussage} \mid \mathfrak{A} \models \varphi \}
 			\end{equation*}
 		\end{enumerate}
 	\end{definition}
@@ -1424,10 +1424,10 @@
 		Betrachte $\mathcal{L}$-Struktur $\mathfrak{B}$ und $T = \operatorname{Th}(\mathfrak{B})$.
 		
 		\begin{align*}
-			\text{Jedes $\varphi \in \operatorname{Th}_\Delta(\mathfrak{A})$}&\text{ ist konsistent mit $T$} &&\Leftrightarrow& \text{es gibt $\mathfrak{B}' \models T$ und}&\text{ $h: \mathfrak{A} \to_\Delta \mathfrak{B}$} \\
-			\Updownarrow& &&& \Updownarrow& \\
-			\operatorname{Th}_\Delta(\mathfrak{A}) &\subseteq \operatorname{Th}_\Delta(\mathfrak{B}) &&& \text{es gibt $\mathfrak{B}' \models T$ und}&\text{ $h: \mathfrak{A} \to_\Delta \mathfrak{B}$} \\
-			\Updownarrow& &&& \Updownarrow& \\
+			\text{Jedes $\varphi \in \operatorname{Th}_\Delta(\mathfrak{A})$}&\text{ ist konsistent mit $T$} &&\Leftrightarrow& \text{es gibt $\mathfrak{B}' \models T$ und}&\text{ $h: \mathfrak{A} \to_\Delta \mathfrak{B}'$} \\
+			\Updownarrow& &&& & \\
+			\operatorname{Th}_\Delta(\mathfrak{A}) &\subseteq \operatorname{Th}_\Delta(\mathfrak{B}) &&& \Updownarrow \\
+			\Updownarrow& &&& & \\
 			\mathfrak{A} \Rightarrow_\Delta& \mathfrak{B} &&& \text{es gibt $\mathfrak{B}' \equiv \mathfrak{B}$ }&\text{und $h: \mathfrak{A} \to_\Delta \mathfrak{B}'$}
 		\end{align*}
 	\end{corollary}
@@ -1866,5 +1866,214 @@
 		\end{align*}
 		beide haben QE.
 	\end{example}
+
+	\begin{remark}[Morleyisierung]
+		$T$ kann durch eine definitorische Erweiterung zu einer Theorie $T^*$ die Quantorenelimination hat gemacht werden.
+		
+		Sei $T$ $\mathcal{L}$-Theorie. Für jede $\mathcal{L}$-Formel $\varphi(x_1, \dots, x_n)$ wähle neues $n$-stelliges Relationszeichen $R_\varphi$ und setze
+		\begin{equation*}
+			\mathcal{L}^* \coloneqq \mathcal{L} \cup \{ R_\varphi \mid \varphi \text{ $\mathcal{L}$-Formel} \}
+		\end{equation*}
+		$T^*$ ist dann eine $\mathcal{L}^*$-Theorie
+		\begin{equation*}
+			T \cup \{ \forall x_1, \dots, \forall x_n (R_\varphi x_1 \dots x_n \leftrightarrow \varphi(x_1, \dots, x_n)) \}
+		\end{equation*}
+		$T^*$ hat Quantorenelimination.
+		Jedes Modell $\mathfrak{M}$ von $T$ wird auf eindeutige Weise zu Modell von $T^*$.
+	\end{remark}
+
+	\begin{proof}
+		Zweiter Teil: Damit $\mathfrak{M}$ zu Modell $\mathfrak{M}^*$ von $T^*$ wird, muss gelten $(m_1, \dots, m_n) \in R_\varphi^{\mathfrak{M}^*} \Leftrightarrow \mathfrak{M} \models \varphi(m_1, \dots, m_n)$.
+		
+		Erster Teil: Jede $\mathcal{L}$-Formel $\varphi$ ist modulo $T^*$ quantorenfrei, nämlich zu $R_\varphi$.
+		
+		Sei $\psi$ eine $\mathcal{L}^*$-Formel. Dann ist $\psi$ modulo äquivalent zu einer $\mathcal{L}$-Formel $\psi_*$, die aus $\psi$ entsteht, indem jedes $R_\varphi$ durch $\varphi$ ersetzt wird. Dann
+		\begin{equation*}
+			\psi \sim_{T^*} \psi_* \sim_{T^*} \underbrace{R_{\psi_*}}_\text{q.f. $\mathcal{L}^*$-Formel}
+		\end{equation*}
+	\end{proof}
+
+	Manche Eigenschaften bleiben beim Übergang $T \leadsto T^*$ erhalten manche nicht:
+	\begin{itemize}
+		\item Erhalten werden
+		\begin{itemize}
+			\item vollständig
+			\item $\kappa$-Kategorisch
+		\end{itemize}
+		\item Nicht erhalten werden
+		\begin{itemize}
+			\item Arten der Axiomatisierung
+			\item nicht modellvollständig
+			\item Substrukturen und Homomorphismen
+		\end{itemize}
+	\end{itemize}
+
+	\begin{example}
+		$\mathcal{L} = \emptyset, T_\infty = \{ \exists^{\geq n} x \; x \doteq x \mid n \in \setN \}$
+		
+		$\mathfrak{M} \models T_\infty$: $\mathfrak{M}$ ist unendliche Menge ohne Struktur
+		
+		$T_\infty$ hat Quantorenelimination.
+		
+		$X \subseteq M^n$ heißt definierbar, falls es eine $\mathcal{L}$-Formel $\varphi(x_1, \dots, x_n)$ gibt mit
+		\begin{equation*}
+			X = \{ (m_1, \dots, m_n) \mid \mathfrak{M} \models \varphi(m_1, \dots, m_n) \}
+		\end{equation*}
+		
+		Zwei Formeln $\varphi, \psi$ sind modulo $T$ äquivalent $\Leftrightarrow$ in allen Modellen definieren sie die gleiche Menge.
+		
+		\heading{Atomare Formeln:}
+		\begin{itemize}
+			\item $x \doteq x$ definiert $M$
+			\item $x \doteq y$ definiert die Diagonale in $M \times M$ $\Delta_M = \{ (m,m) \mid m \in M \}$
+		\end{itemize}
+	
+		\heading{Negation:} $\lnot \varphi$ definiert das Komplement der von $\varphi$ definierten Menge
+		
+		\heading{Konjunktion:} definiert Schnitt, falls gleiche Variablen bzw. das Produkt falls disjunkte Variablen
+		
+		z.B. $x_1 \doteq x_2 \land x_3 \doteq x_4$ definiert $\underbrace{\Delta_M \times \Delta_M}_{\{ (x_1, x_2, x_3, x_4) \mid x_1 = x_2, x_3 = x_4 \}} \subseteq M^4$
+		
+		$x_1 \doteq x_2 \land x_3 \doteq x_3 \land x_4 \doteq x_4$ definiert $\Delta_M \times M^2$
+		
+		\heading{$\Exists$:} Projektion: Wenn $\varphi(x,y)$ eine Fläche definiert definiert $\exists y \varphi(x,y)$ die Projektion der Fläche auf die $x$-Achse.
+		
+		Hier kann man sehen:
+		\begin{equation*}
+			\left\{ \left\{ (m_1, \dots, m_n) \middle| \substack{m_i = m_j \; (i,j) \in P \\ m_k \neq m_l \; (k,l) \in N} \right\} \middle| P,N \subseteq \{1,dots, n \}^2  \right\}
+		\end{equation*}
+		ist die Familie der in $\mathfrak{M}$ definierbaren Mengen. Beobachtung: Sind alle q.f.-definierbar.
+	\end{example}
+
+	\begin{example}
+		$K$ algebraisch abgeschlossener Körper
+		
+		$X \subseteq K^n$ ist definierbar $\Leftrightarrow$ $X$ ist Boolesche Kombination von Nullstellenmengen von Polynomen in $K[x_1, \dots, X_n]$.
+	\end{example}
+
+	\begin{example}
+		Ordnungen
+		\begin{itemize}
+			\item offene dichte lineare Ordnungen haben QE in $\mathcal{L} = \{ < \}$
+			\item dichte lineare Ordnungen mit Endpunkten hat keine QE in $\mathcal{L} = \{ < \}$
+			
+			$\forall y (x \doteq y \lor x < y)$ definiert das Minimum, und ist quantorenfrei nicht definierbar. Aber hat QE in $\mathcal{L}^+ = \{ <, c_\text{min}, c_\text{max} \}$
+			\item $\operatorname{Th}(\setZ, <)$
+			
+			Die definierbaren Teilmengen von $\setZ$ sind $\emptyset, \setZ$. Aber in $\setZ^2$ gibt es nicht q.f. definierbare Teilmengen z.B. $\{ (x_1, x_2) \mid \text{$x_2$ ist direkter Nachfolger von $x_1$} \}$ und wird definiert durch $x_1 < x_2 \land \lnot \exists y (x_1 < x \land x < x_2)$
+			
+			\item $(\setQ, <)$ hat EQ d.h. insbesondere die definierbaren Teilmengen von $\setQ^2$ sind
+			\begin{align*}
+				\Delta_\setQ &= \{ (q,q) \mid q \in \setQ \} \\
+				<_\setQ &= \{ (q,r) \mid q < r \} \\
+				>_\setQ &= \{ (q,r) \mid q > r \} \\
+				\emptyset \\
+				\Delta_\setQ \cup <_\setQ \\
+				\Delta_\setQ \cup >_\setQ \\
+				<_\setQ \cup >_\setQ &= \setQ^2 \setminus \Delta_\setQ \\
+				\setQ^2
+			\end{align*}
+			\item In $\mathcal{L} = \{ +, \cdot, -, 0, 1 \}$ haben QE: $ACF, ACF_0, ACF_p$
+			
+			$FRCF = \operatorname{Th}(\setR, +, \cdot, -, 0, 1)$ nicht
+		\end{itemize}
+	\end{example}
+
+	\begin{definition}
+		Eine primitive Existenzformel ist eine Formel von der Form
+		\begin{equation*}
+			\exists y \; \varphi(x_1, \dots, x_n, y)
+		\end{equation*}
+		Mit $\varphi$ ist Konjunktion von atomaren und negiert atomaren Formeln.
+	\end{definition}
+
+	\begin{lemma}
+		$T$ hat QE $\Leftrightarrow$ jede primitive Existenzformel ist modulo $T$ quantorenfrei.
+	\end{lemma}
+
+	\begin{proof}
+		\heading{$\Rightarrow$:} klar
+		
+		\heading{$\Leftarrow$:} Einfache Existenzformel
+		\begin{equation}
+			\exists y \psi(\overline{x}, y) \sim \exists y \bigvee_j \bigwedge_i (\lnot) \psi_{ij}(\overline{x}, y) \sim \bigvee \underbrace{\exists y \bigwedge_i (\lnot) \psi_{ij}(\overline{x}, y)}_\text{primitiv}
+ 		\end{equation}
+ 		nach Voraussetzung $\sim_T \bigvee_j q.f.$
+ 		
+ 		Einfache Allformel: $\varphi = \forall y \psi(\overline{x}, y)$ dann ist $\lnot \varphi \sim \exists
+ 		 y \lnot \psi(\overline{x}, y)$ einfache Existenzformel.
+ 		 
+ 		$\sim_T \chi$ q.f.
+ 		
+ 		$\Rightarrow \varphi \sim_T \lnot \chi$ quantorenfrei
+ 		
+ 		Beliebige Formel: Quantor für Quantor regeln Anwenden
+	\end{proof}
+
+	\begin{theorem}
+		Sei $T$ $\mathcal{L}$-Theorie. Äquivalent sind:
+		\begin{enumerate}
+			\item $T$ hat QE
+			\item Für alle Modelle $\mathfrak{M}, \mathfrak{N} \models T$ mit gemeinsamer Unterstruktur $\mathfrak{A}$ gilt $\mathfrak{M}_A \equiv \mathfrak{N}_A$, das heißt
+			\begin{equation*}
+				\mathfrak{M} \models \varphi(\overline{a}) \Leftrightarrow \mathfrak{N} \models \varphi(\overline{a})
+			\end{equation*}
+			für $\mathcal{L}$-Formeln $\varphi$ und $\overline{a} \in A$
+			
+			Mit anderen Worten $T \cup \operatorname{Diag}(\mathfrak{A})$ ist vollständig für Unterstrukturen $\mathfrak{A}$ von Modellen von $T$ ($T$ ist substrukturvollständig)
+			\item Für alle $\mathfrak{M}, \mathfrak{N} \models T$ und endlich erzeugte Unterstrukturen $\mathfrak{A} = \langle a_1, \dots, a_n \rangle$ und jede primitive Existenzformel $\varphi(\overline{x}) = \exists y \psi(\overline{x}, y)$ und $\overline{a} \in A$ gilt:
+			\begin{equation*}
+				\mathfrak{M} \models \varphi(\overline{a}) \Rightarrow \mathfrak{N} \models \varphi(\overline{a})
+			\end{equation*}
+			Falls $\mathcal{L}$ keine Konstanten enthält, ist in 2) und 3) auch die leere Struktur $\emptyset$ als Unterstruktur zugelassen.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$2) \Rightarrow 3)$:} klar
+		
+		\heading{$1) \Rightarrow 2)$:} Wegen EQ gilt: $T \models \forall \overline{x}(\varphi(\overline{x}) \leftrightarrow \chi(\overline{x})$ mit q.f. $\chi$.
+		
+		\begin{equation*}
+			\mathfrak{M} \models \varphi(\overline{a}) \Leftrightarrow \mathfrak{M} \models \chi(\overline{a}) \Leftrightarrow \mathfrak{A} \models \chi(\overline{a}) \Leftrightarrow \mathfrak{N} \models \varphi(\overline{a})
+		\end{equation*}
+		
+		\heading{$3) \Rightarrow 1)$:} Es reicht zu zeigen, dass primitive Existenzformeln modulo $T$ q.f. sind. Sei $\varphi(\overline{x})$ primitive Existenzformel und seien
+		\begin{equation*}
+			T^+ \coloneqq T \cup \{ \varphi(\overline{c}) \} \qquad T^- \coloneqq T \cup \{ \lnot \varphi(\overline{c}) \}
+		\end{equation*} $\mathcal{L}_C$-Theorien wobei $\mathcal{L}_C = \mathcal{L} \cup \{ \overline{c} \}$.
+		
+		Wie bei der universellen Präservation reicht es zu zeigen, dass $T^+$ quantorenfrei von $T^-$ getrennt werden kann.
+		
+		Trennungslemma: Es reicht zu zeigen: Wenn $\mathfrak{M}, \mathfrak{N} \models T, \mathfrak{M} \models T^+$ und $\mathfrak{N}$ nicht quantorenfrei trennbar von $\mathfrak{M}$, dann $\mathfrak{N} \models T^+$.
+		
+		$\mathfrak{A}^\mathfrak{M} = \langle c_1^\mathfrak{M}, \dots, c_n^\mathfrak{M} \rangle \subseteq \mathfrak{M}$
+		
+		$\mathfrak{A}^\mathfrak{N} = \langle c_1^\mathfrak{N}, \dots, c_n^\mathfrak{N} \rangle \subseteq \mathfrak{N}$
+		
+		Zeige $\mathfrak{A}^\mathfrak{M} \cong \mathfrak{A}^\mathfrak{N}$ (Dann fertig, weil ohne Einschränkung dann $\mathfrak{A}^\mathfrak{M}$ gemeinsame Unterstruktur $\mathfrak{M} \models \varphi(\overline{a})$ also $\mathfrak{N} \models \varphi(\overline{a})$)
+		
+		\begin{equation*}
+			\mathfrak{A}^\mathfrak{M} = \{ \tau^\mathfrak{M} \mid \text{$\tau$ geschlossene $\mathcal{L}_{\overline{C}}$-Terme} \} = \{ \tau^\mathfrak{M}(\overline{a}) \mid \text{$\tau$ $\mathcal{L}$-Terme mit $\leq n$ freien Variablen} \}
+		\end{equation*}
+		
+		\begin{equation*}
+			\mathfrak{A}^\mathfrak{N} = \{ \tau^\mathfrak{N} \mid \text{$\tau$ geschlossene $\mathcal{L}_{\overline{C}}$-Terme} \} = \{ \tau^\mathfrak{N}(\overline{b}) \mid \text{$\tau$ $\mathcal{L}$-Terme mit $\leq n$ freien Variablen} \}
+		\end{equation*}
+		
+		Idee: Definiere
+		\begin{align*}
+			\alpha: \mathfrak{A}^\mathfrak{M} &\to \mathfrak{A}^\mathfrak{N} \\
+			\tau^\mathfrak{M}(\overline{a}) &\mapsto \tau^\mathfrak{N}(\overline{b})
+		\end{align*}
+		
+		Zeige: Wohldefiniert, injektiv, surjektiv, starker Homomorphismus
+		\begin{itemize}
+			\item Wohldefiniert?
+			\begin{equation*}
+				\tau_1^\mathfrak{M}(\overline{a}) = \tau_2^\mathfrak{M}(\overline{a}) \Leftrightarrow \mathfrak{M} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{a}}{\overline{x}} \Rightarrow \mathfrak{N} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{b}}{\overline{x}} \Leftrightarrow \tau_1^\mathfrak{N}(\overline{B}) ? \tau_2^\mathfrak{N}(\overline{b})
+			\end{equation*}
+		\end{itemize}
+	\end{proof}
 	
 \end{document}
