@@ -2075,5 +2075,149 @@
 			\end{equation*}
 		\end{itemize}
 	\end{proof}
+
+	\begin{corollary}
+		Angenommen es gilt: Für alle $\mathfrak{M}_1, \mathfrak{M}_2 \models T$ mit $\langle a_1, \dots, a_n \rangle \subseteq \mathfrak{M}_1, \mathfrak{M}_2$ und $b \in M_1$ existiert ein $b' \in \mathfrak{M}_2^* \succcurlyeq \mathfrak{M}_2$ mit
+		\begin{equation*}
+			\mathfrak{M}_1 \supseteq \langle a_1, \dots, a_n, b \rangle \cong \langle a_1, \dots, a_n, b' \rangle \subseteq \mathfrak{M}_2^*
+		\end{equation*}
+		Dann hat $T$ Quantorenelimination.
+	\end{corollary}
+
+	\begin{proof}
+		Sei $\exists x \varphi(x,\overline{y})$ primitive Existenzformel und $\mathfrak{M} \models \varphi(b, \overline{a})$. Also $\mathfrak{M}_1 \supseteq \langle a_1, \dots, a_n, b \rangle \models \varphi(b, \overline{a})$.
+		
+		$\Rightarrow \mathfrak{M}_2^* \supseteq \langle a_1, \dots, a_n, b' \rangle \models \varphi(b', \overline{a})$
+		
+		$\Rightarrow \mathfrak{M}_2^* \models \varphi(b', \overline{a})$ d.h. $\mathfrak{M}_2^* \models \exists x \varphi(x, \overline{a})$.
+		
+		Und da $\mathfrak{M}_2 \preccurlyeq \mathfrak{M}_2^*$ gilt $\mathfrak{M}_2 \models \exists x \varphi(x, \overline{a})$.
+	\end{proof}
+
+	\begin{example}
+		\begin{itemize}
+			\item $DLO$ hat QE
+			\item $RCF = \operatorname{Th}(\setR, +, \cdot, -, 0, 1, <)$ hat QE (braucht etwas Algebra, siehe Buch von Prestel)
+			\item $ACF, ACF_0, ACF_p$ hat QE:
+			
+			Seien $\mathfrak{K}_1, \mathfrak{K}_2 \models ACF$ und $\mathfrak{A} = \langle a_1, \dots, a_n \rangle \subseteq \mathfrak{K}_1, \mathfrak{K}_2$.
+			
+			$\mathfrak{A}$ ist Unterstruktur, d.h. Unterring.
+			
+			Aus gemeinsamer Unterstruktur folgt das $\operatorname{char}(\mathfrak{K}_1) = \operatorname{char}(\mathfrak{K}_2)$.
+			
+			Sei $b \in \mathfrak{K}_1$ und $\mathfrak{Q}_1 = \operatorname{Quot}(\mathfrak{A})$ sowie $\mathfrak{Q}_2 = \operatorname{Quot}(\mathfrak{A})$ und $\tilde{\mathfrak{Q}_1}, \tilde{\mathfrak{Q}_2}$ der jeweilige Algebraische Abschluss von $\mathfrak{Q}_i$ in $\mathfrak{K}_i$.
+			
+			Da $\mathfrak{K}_1$ algebraisch abgeschlossen, ist auch $\tilde{\mathfrak{Q}_1}$ algebraisch abgeschlossen.
+			
+			\textit{Algebra:} Der Algebraische Abschluss ist bis auf Isomorphie eindeutig bestimmt also $\alpha: \tilde{\mathfrak{Q}_1} \cong \tilde{\mathfrak{Q}_2}$.
+			
+			\heading{1. Fall:} $b$ ist algebraisch über $\mathfrak{A}$. Dann finde $b' \in \mathfrak{K}_2$, nämlich $\alpha(b)$.
+			
+			\heading{2. Fall:} $b$ ist transzendent über $\mathfrak{A}$.
+			
+			\textit{Algebra:} Mit $\tilde{Q_1}(b)$ kleinster Unterkörper von $\mathfrak{K}_1$ der $\tilde{Q_1}$ und $b$ enthält und $\tilde{Q}(X)$ dem rationalen Funktionenkörper gilt $\tilde{Q_1}(b) \cong \tilde{Q_1}(X)$.
+			
+			Finde $b' \in \mathfrak{K}_2^* \succcurlyeq \mathfrak{K}_2$ transzendent über $\tilde{Q_2}$ (bzw. $\mathfrak{A}$). Dann fertig da
+			\begin{equation*}
+				\tilde{Q_2}(b') \cong \tilde{Q_2}(X) \cong \tilde{Q_1}(X) \cong \tilde{Q_1}(b)
+			\end{equation*}
+			$b'$ existiert mit Kompaktheit:
+			\begin{equation*}
+				T_c \coloneqq \operatorname{Th}({\mathfrak{K}_2}_{\mathfrak{K}_2}) \cup \{ \lnot P(c) \doteq 0 \mid P \in \tilde{Q_2}[X], P \neq 0 \}
+			\end{equation*}
+			ist eine $\mathcal{L}_{\mathfrak{K}_2 \cup \{ c \}}$-Theorie mit $c$ neuer Konstante.
+			
+			Zeige $T_c$ ist endlich erfüllbar und zwar in $\mathfrak{K}_2$: Für jedes Polynom $P$ ist $\{ x \mid P(x) = 0 \}$ endlich aber $\mathfrak{K}_2$ ist unendlich.
+		\end{itemize}
+	\end{example}
+
+	\begin{definition}
+		Sei $T$ $\mathcal{L}$-Theorie
+		\begin{enumerate}
+			\item Eine $\mathcal{L}$-Struktur $\mathfrak{A}$ heißt Primstruktur von $T$ wenn sie sich in jedes Modell von $T$ einbetten lässt.
+			\item Ein Modell von $T$ $\mathfrak{A}$ heißt algebraisches Primmodell von $T$, wenn sich $\mathfrak{A}$ in jedes Modell von $T$ einbetten lässt.
+			\item Ein Modell von $T$ $\mathfrak{A}$ heißt elementares Primmodell von $T$, wenn sich $\mathfrak{A}$ in jedes Modell von $T$ elementar einbetten lässt.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{theorem}""
+		\begin{enumerate}
+			\item Falls $T$ eine Primstruktur hat und QE hat, dann ist $T$ vollständig
+			\item Falls $T$ ein algebraisches Primmodell hat und modellvollständig ist, dann ist $T$ vollständig.
+			\item Falls $T$ ein elementares Primmodell hat, dann ist $T$ vollständig.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{3):} $\mathfrak{A} \preccurlyeq \mathfrak{M}_1, \mathfrak{M}_2$ und $\mathfrak{M_1}, \mathfrak{M_2} \models T$.
+		
+		$\Rightarrow \mathfrak{M_1} \equiv \mathfrak{A} \equiv \mathfrak{M_2}$
+		
+		\heading{2):} $\mathfrak{A} \subseteq \mathfrak{M}_1, \mathfrak{M}_2$ und $\mathfrak{M_1}, \mathfrak{M_2} \models T$.
+		
+		Da $T$ modellvollständig folgt $\mathfrak{A} \preccurlyeq \mathfrak{M}_1, \mathfrak{M}_2$ und damit wie bei 3)
+	\end{proof}
+
+	\begin{example}""
+		
+		\begin{tabular}{|c|c|c|c|}
+			\hline 
+			& existiert nicht & eindeutig & nicht eindeutig \\ 
+			\hline 
+			Primstrukturen & \shortstack{Theorie der Körper \\ \\ $\aleph_0$ unabh. Prädikate}  & \shortstack{Theorie der Körper \\ der Charakteristik \\ $p \neq 0$ \\ \\ Theorie der Ord. \\ \\ $\operatorname{Th}(\setN, +, \cdot, 0, 1)$} & \shortstack{Theorie der Körper \\ der Charakteristik $0$ \\ \\ DLO} \\ 
+			\hline 
+			alg. Primmodelle & \shortstack{Theorie der Körper \\ \\ $\aleph_0$ unabh. Prädikate} & DLO & \shortstack{Äquivalenzrelationen \\ mit unendlich vielen \\ unendlichen Klassen} \\ 
+			\hline 
+			elem. Primmodelle & \shortstack{Theorie der Körper \\ \\ $\aleph_0$ unabh. Prädikate} & DLO & ? \\ 
+			\hline 
+		\end{tabular}
+	
+		\heading{$\aleph_0$ unabhängige Prädikate}
+		
+		$\mathcal{L} = \{ P_i \mid i \in \omega \}$ $P_i$ einstellige Relationszeichen
+		
+		\begin{equation*}
+			T \coloneqq \left\{ \exists x \left( \bigwedge_{j=0}^n P_{i_j} x \land \bigwedge_l=0^m \lnot P_{k_l} x \right) \middle| n,m \in \setN, \{i_0, \dots, i_n \} \cap \{ k_0, \dots, k_m \} = \emptyset, i_j, k_l \in \setN  \right\}
+		\end{equation*}
+		
+		$m \in M$ definiert Funktion $\chi_m: \setN \to \{ 0,1 \}$ durch $\chi_m(i) = 1 \Leftrightarrow m \in P_i^M$. Löwenheim Skolem: es gibt abzählbare Modelle $\mathfrak{M} \subseteq \mathfrak{M}'$ mit $\mathfrak{M}, \mathfrak{M}' \models T$, dann muss für jedes $m \in M$ die Funktion $\chi_m$ in $\mathfrak{M}'$ realisiert sein.
+		
+		Wenn $m \in$ Primstruktur, müsste also $\chi_m$ in jedem Modell von $T$ realisiert sein.	
+	\end{example}
+
+	\begin{definition}
+		Sei $T$ $\mathcal{L}$-Theorie. Eine $\mathcal{L}$-Theorie $T^*$ heißt Modellbegleiter von $T$ falls
+		\begin{enumerate}
+			\item $T_\forall = T_\forall^*$, d.h. jedes Modell von $T$ lässt sich in ein Modell von $T^*$ einbetten und umgekehrt.
+			\item $T^*$ ist modellvollständig
+		\end{enumerate}
+	\end{definition}
+
+	\begin{theorem}[Robinson]
+		Bis auf Äquivalenz von Theorien ist der Modellbegleiter eindeutig bestimmt, sofern er existiert.
+	\end{theorem}
+
+	\begin{proof}
+		Seien $T^*, T^+$ Modellbegleiter von $T$. Sei $\mathcal{A}_0 \models T^*$.
+		
+		$\mathfrak{A}_0 \models T \subseteq \mathfrak{M}_0 \models T \mathfrak{B}_0 \models T^+ \subseteq \mathfrak{N}_0 \models T \subseteq \mathfrak{A}_1 \models T^* \subseteq \mathfrak{M}_1 \models T \subseteq \mathfrak{B}_1 \models T^+ \subseteq \dots$
+		
+		$\Rightarrow \mathbb{A}_0 \preccurlyeq \mathfrak{A}_1$ und $\mathfrak{B}_0 \preccurlyeq \mathfrak{B}_1$, da $T^*, T^+$ modellvollständig sind.
+		
+		$\mathfrak{A}_0 \preccurlyeq \bigcup_{i \in \omega} \mathfrak{A}_i = \bigcup_{i \in \omega} \mathfrak{B}_i \models T^+$, somit $\mathfrak{A}_0 \models T^+$ und Somit $\operatorname{Mod}(T^*) = \operatorname{Mod(T^+)}$.
+	\end{proof}
+
+	\begin{example}
+		\begin{itemize}
+			\item $ACF$ ist Modellbegleiter der Theorie der Körper
+			\item $FRCF = \operatorname{Th}(\setR, +, \cdot, - , 0, 1)$ ist Modellbegleiter der formal reellen Körper (= anordenbare Körper)
+			\item $RCF = \operatorname{Th}(\setR, +, \cdot, -, 0, 1, <)$ ist Modellbegleiter der Theorie der angeordneten Körper
+			\item $DLO$ ist Modellbegleiter der Theorie der Ordnungen
+			\item Theorie des Zufallsgraphen ist Modellbegleiter der Theorie der Graphen
+			\item Theorie der Gruppen in $\mathcal{L} = \{ \circ, {}^{-1}, e \}$ hat keinen Modellbegleiter
+			\item $DCF_0$ differentiell abgeschlossene Körper ist der Modellbegleiter der Theorie der differentiellen Körper
+		\end{itemize}
+	\end{example}
 	
 \end{document}
