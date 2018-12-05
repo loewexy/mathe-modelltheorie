@@ -16,6 +16,7 @@
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
 
 \usepackage{enumitem}
 \setenumerate{label=\arabic*)}
@@ -2219,5 +2220,255 @@
 			\item $DCF_0$ differentiell abgeschlossene Körper ist der Modellbegleiter der Theorie der differentiellen Körper
 		\end{itemize}
 	\end{example}
+
+	\begin{remark}
+		Falls $T$ modellvollständig, dann ist $T$ Modellbegleiter von $T_\forall$ (bzw. von jeder Theorie $T'$ mit $T_\forall \subseteq T' \subseteq T$).
+		
+		z.B. $ACF$ ist Modellbegleiter der Theorie der Integritätsbereiche (=Unterstrukturen der Körper in der Ringsprache)
+	\end{remark}
+
+	\begin{definition}
+		Eine $\mathcal{L}$-Struktur $\mathfrak{A}$ heißt $T$-existenziell abgeschlossen, falls
+		\begin{itemize}
+			\item $\mathfrak{A} \models T_\forall$ (d.h. es gibt $\mathfrak{M} \models T$ mit $\mathfrak{A} \subseteq \mathfrak{M}$)
+			\item $\mathfrak{A}$ ist existentiell abgeschlossen in jedem Modell von $T$, d.h. falls $\mathfrak{A} \subseteq \mathfrak{M} \models T$, dann $\mathfrak{A} \preccurlyeq_1  \mathfrak{M}$: Also falls $\mathfrak{M} \models \varphi(\overline{a})$, $\varphi(\overline{a})$ existentielle $\mathcal{L}_A$-Formel, dann $\mathfrak{A} \models \varphi(\overline{a})$
+		\end{itemize}
+	\end{definition}
+
+	\begin{theorem}
+		Sei $T_\forall^* = T_\forall$. Dann $T^*$ ist Modellbegleiter von $T$ $\Leftrightarrow$ alle Modelle von $T^*$ sind $T$-existentiell abgeschlossen.
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$\Rightarrow$:} Sei $\mathfrak{A} \subseteq \mathfrak{M} \models T$. Dann $\mathfrak{A} \subseteq \mathfrak{M} \hookrightarrow \mathfrak{B} \models T^*$.
+		
+		$\mathfrak{A} \preccurlyeq \mathfrak{B}$ da $T^*$ modellvollständig.
+		
+		Sei nun $\mathfrak{M} \models \varphi(\overline{a})$. Dann $\mathfrak{B} \models \varphi(\overline{a})$ also auch $\mathfrak{A} \models \varphi(\overline{a})$.
+		
+		\heading{$\Leftrightarrow$:} Sei $\mathfrak{A} \models T^*, \mathfrak{B} \models T^*, \mathfrak{A} \subseteq \mathfrak{B}$. Zeige $\mathfrak{A} \preccurlyeq \mathfrak{B}$.
+		
+		Dann $\mathfrak{A} \subseteq \mathfrak{B} \hookrightarrow \mathfrak{M} \models T$ mit $T^* \supseteq T_\forall$ und $\mathfrak{A} \preccurlyeq_1 \mathfrak{M}$ nach Voraussetzung.
+		
+		Sei $\mathfrak{B} \models \varphi(\overline{a})$, $\varphi$ existentiell. Also $\mathfrak{M} \models \varphi(\overline{a})$ und somit auch $\mathfrak{A} \models \varphi(\overline{a})$, da $\mathfrak{A} \preccurlyeq_1 \mathfrak{M}$. Robinsons Test!
+	\end{proof}
+
+ 	\begin{theorem}
+ 		Falls es eine $\mathcal{L}$-Theorie $T^*$ gibt, so dass $\operatorname{Mod}(T^*) = \{ \mathfrak{M} \models T_\forall \mid \mathfrak{M} \text{ $T$-existentiell abgeschlossen} \}$. Dann ist $T^*$ Modellbegleiter von $T$.
+ 	\end{theorem}
+ 
+ 	\begin{proof}[Beweisidee]
+ 		\begin{itemize}
+ 			\item $T_\forall \subseteq T^*$ nach Voraussetzung
+ 			\item Umkehrung: zeige, dass sich jedes Modell von $T_\forall$ zu einer $T$-existentiell abgeschlossenen Struktur erweitern lässt. (dann $T_\forall = T_\forall^*$)
+ 			\item Modellvollständigkeit folgt mit dem vorherigen Satz
+ 		\end{itemize}
+ 	\end{proof}
+ 
+ 	\begin{definition}
+ 		Theorie $T$ hat Amalgamierungseigenschaft (AP), falls jedes Diagramm
+ 		
+ 		\begin{center}
+ 			\begin{tikzpicture}
+	 			\node(R2) at (-2,0){$\mathfrak{M_1} \models T$};
+	 			\node(R3) at (2, 0){$\mathfrak{M_2} \models T$};
+	 			\node(R4) at (0, -2){$\mathfrak{M_0} \models T$};
+	 			
+	 			\draw[right hook->] (R4) -- (R2);
+	 			\draw[right hook->] (R4) -- (R3);
+ 			\end{tikzpicture}
+ 		\end{center}
+ 	
+		sich zu einem kommutativen Diagramm
+		
+		\begin{center}
+			\begin{tikzpicture}
+				\node(R1) at (0,2){$\mathfrak{M_3} \models T$};
+				\node(R2) at (-2,0){$\mathfrak{M_1} \models T$};
+				\node(R3) at (2, 0){$\mathfrak{M_2} \models T$};
+				\node(R4) at (0, -2){$\mathfrak{M_0} \models T$};
+				
+				\draw[right hook->] (R2) -- (R1) node[midway,above]{$g_1$};
+				\draw[right hook->] (R4) -- (R2) node[midway,left]{$f_1$};
+				\draw[right hook->] (R4) -- (R3) node[midway,below]{$f_2$};
+				\draw[right hook->] (R3) -- (R1) node[midway,right]{$g_2$};
+			\end{tikzpicture}
+		\end{center}
+	
+		vervollständigen lässt. Kommutativ heißt $g_1 \circ f_1 = g_2 \circ f_1$.
+ 	\end{definition}
+ 
+ 	\begin{theorem}
+ 		Falls $T$ universell ist und AP hat, und falls $T^*$ Modellbegleiter von $T$ dann hat $T^*$ QE. (In diesem Fall heißt $T^*$ auch Modellvervollständigung von $T$).
+ 	\end{theorem}
+ 
+ 	\begin{proof}""
+ 		\begin{center}
+ 			\begin{tikzpicture}
+	 			\node(R1) at (0,4){$\mathfrak{M} \models T^*$};
+	 			\node(R2) at (0,2){$\mathfrak{M}' \models T$};
+	 			\node(R3) at (-2, 0){$\mathfrak{M_1}' \models T$};
+	 			\node(R4) at (-2, -2){$\mathfrak{M_1} \models T^*$};
+	 			\node(R5) at (0,-4){$\mathfrak{A} \models T_\forall^* = T_\forall = T$};
+	 			\node(R6) at (2, -2){$\mathfrak{M_2} \models T^*$};
+	 			\node(R7) at (2, 0){$\mathfrak{M_2}' \models T$};
+	 			
+	 			\draw[right hook->] (R2) -- (R1);
+	 			\draw[right hook->] (R3) -- (R2);
+	 			\draw[right hook->] (R4) -- (R3);
+	 			\draw[right hook->] (R6) -- (R7);
+	 			\draw[right hook->] (R7) -- (R2);
+	 			\draw[right hook->] (R5) -- (R4) node[midway,right]{$\supseteq$};
+	 			\draw[right hook->] (R5) -- (R6) node[midway,right]{$\subseteq$};
+	 			\draw[] (R1) to [out=180,in=160] (R4);
+	 			\draw[] (R1) to [out=0,in=20] (R6);
+	 			
+	 			\node(S1) at (-4, 1.5){$\preccurlyeq$};
+	 			\node(S1) at (4, 1.5){$\succcurlyeq$};
+ 			\end{tikzpicture}
+ 		\end{center}
+ 	
+ 		TODO
+ 	
+ 		$\mathfrak{M}'$ existiert wegen Amalgamierungseigenschaft. Die Einbettungen von Modellen von $T^*$ in Modelle von $T$ funktioniert wegen der Modellbegleitereigenschaft.
+ 		
+ 		Also $\mathfrak{M}_i \equiv \mathfrak{M}$ in $\mathcal{L}_{M_i}$ insbesondere $\mathfrak{M}_i \equiv \mathfrak{M}$ in $\mathcal{L}_A$. Kriterium für QE!
+ 	\end{proof}
+ 
+ 	\begin{remark}
+ 		\begin{equation*}
+	 		T^* \text{ hat QE} \Leftrightarrow T^* \cup \operatorname{Diag}(\mathfrak{A}) \text{ ist vollständig für alle $\mathfrak{A} \models T_\forall^*$}
+ 		\end{equation*}
+ 		\begin{align*}
+ 			&T^* \text{ ist Modellvervollständigung von } T \\ \Leftrightarrow &T^* \cup \operatorname{Diag}(\mathfrak{A}) \text{ ist vollständig für alle $\mathfrak{A} \models T, \mathfrak{A} \models T^*$} \text{ und $T_\forall^* = T_\forall$}
+ 		\end{align*}
+ 		\begin{equation*}
+	 		T^* \text{ ist Modellbegleiter von $T$} \Leftrightarrow T^* \cup \operatorname{Diag}(\mathfrak{A}) \text{ ist vollständig für alle $\mathfrak{A} \models T^*$} \text{ und $T_\forall^* = T_\forall$}
+ 		\end{equation*}
+ 	\end{remark}
+ 
+ 	\section{Abzählbare Modelle}
+ 	
+ 	\subsection{Typen}
+ 	
+ 	\begin{definition}
+ 		$\mathfrak{M}$ sei $\mathcal{L}$-Struktur, $A \subseteq M$.
+ 		
+ 		\begin{itemize}
+ 			\item Eine Menge $\Sigma = \Sigma(x_1, \dots, x_n)$ von $\mathcal{L}_A$-Formeln $\varphi(x_1, \dots, x_m)$ heißt endlich erfüllbar in $\mathfrak{M}$, falls für alle $k \in \setN$ und $\varphi_1, \dots, \varphi_k \in \Sigma$
+ 			\begin{equation*}
+	 			\mathfrak{M} \models \exists x_1 \dots \exists x_n(\varphi_1(\overline{x}) \land \dots \land \varphi_n(\overline{x})
+	 		\end{equation*}
+ 			äquivalent: es gibt $m_1, \dots, m_n \in M$ mit $\mathfrak{M} \models \varphi_1(\overline{m}) \land \dots \land \varphi_k(\overline{m})$
+ 			\item $\mathfrak{M}$ realisert $\Sigma$ (oder $\mathfrak{M}$ erfüllt $\Sigma$), falls es $m_1, \dots, m_n \in M$ gibt mit $\mathfrak{M} \models \varphi(m_1, \dots, m_n)$ für alle $\varphi \in \Sigma$.
+ 			\item Sonst $\mathfrak{M}$ übergeht $\Sigma$ ($\mathfrak{M}$ lässt $\Sigma$ aus)
+ 		\end{itemize}
+ 	\end{definition}
+ 
+ 	\begin{lemma}
+ 		$\Sigma$ endlich erfüllbar in $\mathfrak{A}$ $\Leftrightarrow$ es gibt $\mathfrak{B} \succcurlyeq \mathfrak{A}$, $\mathfrak{B}$ realisiert $\Sigma$
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		\heading{$\Leftarrow$} klar
+ 		
+ 		\heading{$\Rightarrow$} zeige: $\operatorname{Th}(\mathfrak{A}_A) \cup \Sigma(\overline{c})$ ist endlich erfüllbar.
+ 	\end{proof}
+ 
+ 	\begin{definition}
+ 		\begin{itemize}
+ 			\item Eine Menge $p = p(x_1, \dots, x_n)$ von $\mathcal{L}_A$-Formeln heißt (vollständiger) $n$-Type über $A$ in $\mathfrak{M}$, falls $p$ maximale in $\mathfrak{M}$ endlich erfüllbare Menge von $\mathcal{L}_A$-Formeln $\varphi(x_1, \dots, x_n)$ ist.
+ 			
+ 			Äquivalent: Für jede $\mathcal{L}_A$-Formel $\varphi(x_1, \dots, x_n)$ ist $\varphi \in p$ oder $\lnot \varphi \in p$.
+ 			\item Wenn $m_1, \dots, m_n \in M$, dann ist
+ 			\begin{equation*}
+	 			\operatorname{tp}^\mathfrak{M}(m_1, \dots, m_n/A) = \{ \varphi(x_1, \dots, x_n) \mid \varphi \text{ $\mathcal{L}_A$-Formel} \; \mathfrak{M} \models \varphi(m_1, \dots, m_n) \}
+ 			\end{equation*}
+ 			ist der (vollständige) Typ von $(m_1, \dots, m_n)$ über $A$ in $\mathfrak{M}$.
+ 			\item Die Menge der $n$-Typen über $A$ in $\mathfrak{M}$ wird mit $S_n^\mathfrak{M}(A)$ bezeichnet.
+ 			
+ 			Wenn $\mathfrak{M}$ aus dem Kontext ersichtlich ist, schreibt man $\operatorname{tp}(\overline{m}/A), S_n(A), \dots$
+ 			
+ 			Häufig schreibt man $S^\mathfrak{M}(A)$ für $S_1^\mathfrak{M}(A)$
+ 		\end{itemize}
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		\begin{itemize}
+ 			\item $\operatorname{tp}^\mathfrak{M}(\overline{m}/A)$ ist ein vollständiger Typ
+ 			\item Jeder $n$-Typ über $A$ in $\mathfrak{M}$ ist in einer elementaren Erweiterung von $\mathfrak{M}$ realisiert.
+ 		\end{itemize}
+ 	\end{remark}
+ 
+ 	\begin{remark}
+ 		Wir betrachten $\mathcal{L}_A$-Formeln modulo Äquivalenz in $\mathfrak{M}$,
+ 		\begin{equation*}
+			\varphi(x_1, \dots, x_n) \sim_\mathfrak{M} \psi(x_1, \dots, x_n) :\Leftrightarrow \mathfrak{M} \models \forall \overline{x}(\varphi(\overline{x}) \leftrightarrow \psi(\overline{x}))
+ 		\end{equation*}
+ 		
+ 		Allgemein hängt es von $\mathfrak{M}$ ab, d.h. wenn $A \subseteq M, A \subseteq N$, dann kann sich $\sim_\mathfrak{M}$ von $\sim_\mathfrak{N}$ unterscheiden!
+ 		
+ 		Aber: Falls $\mathfrak{M}, \mathfrak{N} \models T$ und $T$ hat QE, und $\mathfrak{A} \subseteq \mathfrak{M}, \mathfrak{A} \subset \mathfrak{N}$, dann stimmt Äquivalenz für $\mathcal{L}_A$-Formeln in $\mathfrak{M}$ und $\mathfrak{N}$ überein!
+ 		
+ 		Boolesche Algebra $\mathcal{F}_n(\mathcal{L}_A)$: Formeln mit feien Variablen unter $v_0, \dots, v_{n-1}$ und Parametern (=neue Konstanten) für Elemente aus $A$.
+ 		
+ 		$\sim_\mathfrak{M}$ ist Kongruenzrelation auf $\mathcal{F}_n(\mathcal{L}_A)$, das heißt $\mathcal{F}_n(\mathcal{L}_A)/\sim_\mathfrak{M}$ ist Boolesche Algebra.
+ 		
+ 		$\mathcal{F}_n(\mathcal{L}_A) \to \mathcal{F}_n(\mathcal{L}_A)/\sim_\mathfrak{M}, \varphi \mapsto \text{Äquivalenzklasse von $\varphi$ bezüglich $\sim_\mathfrak{M}$}$ ist Homomorphismus boolescher Algebren.
+ 		
+ 		\textit{Unterbemerkung:} $h: \mathfrak{B} \to \mathfrak{B}'$ sei surjektiver Homomorphismus Boolescher Algebren.
+ 		
+ 		$b \sim_h c :\Leftrightarrow h(b) = h(c)$, dann ist $\sim_h$ Kongruenzrelation und $\mathfrak{B}' \cong \mathfrak{B}/\sim_h$.
+ 		
+ 		$h$ bzw. $\sim_h$ ist bestimmt durch
+ 		\begin{equation*}
+	 		\{ b \in B \mid h(b) = 0 \} = \ker(h)
+ 		\end{equation*}
+ 		bzw. durch
+ 		\begin{equation*}
+	 		\{ b \in B \mid h(b) = 1 = \ker^*(h) \}
+ 		\end{equation*}
+ 		
+ 		$S_n^\mathfrak{M}(A)$ ist der Stone-Raum von $\mathcal{F}_n(\mathcal{L}_A)/\sim_\mathfrak{M}$ (vollständiger $n$-Typ = Ultrafilter dieser Algebra).
+ 		
+ 		Insbesondere ist $S_n^\mathfrak{M}(A)$ ein kompakter (total unzusammenhängender) topologischer Raum.
+ 	\end{remark}
+ 
+ 	\begin{remark}
+ 		Wenn $p,q \in S_n^\mathfrak{M}(A)$, $p \neq q$ dann gibt es $\mathcal{L}_A$-Formel $\varphi(x_1, \dots, x_n)$ mit $\varphi \in p, \varphi \notin q$ und damit $\lnot \varphi \in q$.
+ 		
+ 		Also $p \in \langle \varphi \rangle = \{ r \in S_n^\mathfrak{M}(A) \mid \varphi \in r \}$
+ 		
+ 		$q \in \langle \lnot \varphi \rangle$
+ 		
+ 		$\langle \varphi \rangle, \langle \lnot \varphi \rangle$ disjunkte clopen Mengen, die $p$ und $q$ trennen (insb. Hausdorffsch).
+ 	\end{remark}
+ 
+ 	\begin{example}
+ 		\begin{itemize}
+ 			\item $n = 0$, $S_0^\mathfrak{M}(\emptyset)= \{ \operatorname{Th}(\mathfrak{M}) \}$ einelementig
+ 			\item $\mathfrak{Q} = (\setQ, <), n = 1$
+ 			
+ 			$A = \emptyset:$ $\{ \{ x \doteq x \}^\vdash \}$
+ 			
+ 			$A = \setZ:$ 
+ 			\begin{itemize}
+ 				\item $\{ x < n \mid n \in \setZ \}$ unendlich klein
+ 				\item $\{ n < x \mid n \in \setZ \}$ unendlich groß
+ 				\item $\{ x \doteq n \}, \{ n < x, x < n + 1 \}$ für jedes $n \in \setZ$
+ 			\end{itemize}
+ 			2-Punkt-Kompaktifizierung von $\frac12 \setZ$.
+ 			
+ 			$A = \setQ$, $S_1^\mathfrak{Q}(\setQ)$
+ 			\begin{itemize}
+ 				\item realisierte Typen $p_q = \{ x \doteq q \}^\vdash$ für jedes $q \in \setQ$
+ 				\item $p_{-\infty} = \{ x < q \mid q \in \setQ \}^\vdash$
+ 				\item $p_{+\infty} = \{ q < x \mid q \in \setQ \}^\vdash$
+ 				\item $p_r = \{ q < x, x < q' \mid q < r, r < q' \}$ für $r \in \setR \setminus \setQ$
+ 				\item $p_q^+ = \{ q < x, x < q' \mid q < q' \}$ für jedes $q \in \setQ$
+ 				\item $p_q^- = \{ q' < x, x < q \mid q' < q \}$ für jedes $q \in \setQ$
+ 			\end{itemize}
+ 		\end{itemize}
+ 	\end{example}
 	
 \end{document}
