@@ -2254,7 +2254,7 @@
 	\end{proof}
 
  	\begin{theorem}
- 		Falls es eine $\mathcal{L}$-Theorie $T^*$ gibt, so dass $\operatorname{Mod}(T^*) = \{ \mathfrak{M} \models T_\forall \mid \mathfrak{M} \text{ $T$-existentiell abgeschlossen} \}$. Dann ist $T^*$ Modellbegleiter von $T$.
+ 		Falls es eine $\mathcal{L}$-Theorie $T^*$ gibt, so dass $\operatorname{Mod}(T^*) = \{ \mathfrak{M} \models T_\forall \mid \mathfrak{M} \text{ $T$-ex. abgeschlossen} \}$. Dann ist $T^*$ Modellbegleiter von $T$.
  	\end{theorem}
  
  	\begin{proof}[Beweisidee]
@@ -2327,8 +2327,7 @@
 	 			\node(S1) at (4, 1.5){$\succcurlyeq$};
  			\end{tikzpicture}
  		\end{center}
- 	
- 		TODO
+ 
  	
  		$\mathfrak{M}'$ existiert wegen Amalgamierungseigenschaft. Die Einbettungen von Modellen von $T^*$ in Modelle von $T$ funktioniert wegen der Modellbegleitereigenschaft.
  		
@@ -2346,6 +2345,27 @@
 	 		T^* \text{ ist Modellbegleiter von $T$} \Leftrightarrow T^* \cup \operatorname{Diag}(\mathfrak{A}) \text{ ist vollständig für alle $\mathfrak{A} \models T^*$} \text{ und $T_\forall^* = T_\forall$}
  		\end{equation*}
  	\end{remark}
+ 
+ 	\begin{remark}
+ 		Wenn $T$ modellvollständig ist hat $T$ die Amalgamierungseigenschaft.
+ 	\end{remark}
+ 
+ 	\begin{proof}
+ 		\begin{equation*}
+	 		\mathfrak{M_1} \models T \supseteq \mathfrak{M_0} \models T \subseteq \mathfrak{M_2} \models T
+ 		\end{equation*}
+ 		
+ 		Zu zeigen $T \cup \operatorname{Diag}(\mathfrak{M_1}) \cup \operatorname{Diag}(\mathfrak{M_2})$ ist konsistent. Angenommen nicht dann ist $T \cup \{ \varphi(\overline{m}_1), \psi(\overline{m}_2) \}$ ist inkonsistent. d.h. $T \vdash (\varphi(\overline{m}_1) \rightarrow \lnot \psi(\overline{m}_2))$.
+ 		
+ 		Interpolationssatz: $T \vdash (\varphi(\overline{m}_1) \rightarrow \chi(\overline{m}_0)) \land (\chi(\overline{m}_0) \rightarrow \lnot \psi(\overline{m}_2))$ mit $\chi(\overline{m}_0)$ $\mathcal{L}_{\mathfrak{M_0}}$-Formel.
+ 		
+ 		Das heißt
+ 		\begin{align*}
+	 		\mathfrak{M_1} &\models \chi(\overline{m}_0) \\
+	 		\mathfrak{M_2} \models \lnot \chi(\overline{m}_0)
+ 		\end{align*}
+ 		$\lightning$ zu $T \cup \operatorname{Diag}(\mathfrak{M_0})$ ist vollständig.
+ 	\end{proof}
  
  	\section{Abzählbare Modelle}
  	
@@ -2470,5 +2490,80 @@
  			\end{itemize}
  		\end{itemize}
  	\end{example}
+ 
+ 	\begin{example}
+ 		\begin{itemize}
+ 			\item $\setC \models ACF$, sei $n = 1$ und $A$ ein Unterkörper
+ 	
+ 			Wie sieht $S_1^\setC(A)$ aus?
+ 			
+ 			Realisierte Typen: $p_a = \{ x \doteq a \}^\vdash$ für $a \in A$.
+ 			
+ 			Nicht realisierte algebraische Typen: $p_P = \{ P(x) \doteq 0 \}$ mit $P \in A[X]$ und $\deg P > 1$ und $P$ normiert und irreduzibel
+ 			
+ 			\textit{Bem:} Falls $\alpha \in \operatorname{Aut}_A(\mathfrak{M}) = \{ \alpha \in \operatorname{Aut}(\mathfrak{M}) \mid a_{\mid A} = id \}$ dann ist
+ 			\begin{equation*}
+	 			\operatorname{tp}^\mathfrak{M}(m_1, \dots, m_n / A) = \operatorname{tp}^\mathfrak{M}(\alpha(m_1), \dots, \alpha(m_n) / A)
+ 			\end{equation*}
+ 			
+ 			Transzendenter Typ: $p_\infty = \{ P(x) \neq 0 \mid P \in A[X], \text{$P$ nicht konstant} \}$ (in $\setC$ realisiert $\Leftrightarrow$ $\tilde{A} \neq \setC$)
+ 			
+ 			\item Sei $E$ eine Äquivalenzrelation mit unendlich vielen unendlichen Klassen und ohne endlich Klassen. Setze $n = 2, A = \emptyset$
+ 			
+ 			$p_= = \{ x \doteq y \}^\vdash$
+ 			
+ 			$p_E = \{ x \neq y, E x y \}^\vdash$
+ 			
+ 			$p_{\lnot E} = \{ \lnot E x y \}^\vdash$
+ 		\end{itemize}
+ 	\end{example}
+ 
+ 	\begin{theorem}
+ 		Gegeben $\mathfrak{M}$, $A \subseteq \mathfrak{M}$, $n \in \setN$. Dann existiert $\mathfrak{M}' \succcurlyeq \mathfrak{M}$, welches alle Typen aus $S_n^\mathfrak{M}(A)$ realisiert.
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Sei $\{ p_i \mid i \in \kappa \}$ Aufzählung von $S_n^\mathfrak{M}(A)$. Nehme neue Konstanten $c_{i_1}, \dots, c_{i_n}$ für alle $i < \kappa$ betrachte $\operatorname{Th}(\mathfrak{M}_M) \cup \{ p_i(c_{i_1}, \dots, c_{i_n}) \mid i < \kappa \}$.
+ 		
+ 		Zeige: ist endlich erfüllbar. Es reicht zu zeigen:
+ 		\begin{equation*}
+	 		\varphi_{j_1}(c_{j_{1_1}}, \dots, c_{j_{1_n}}) \land \dots \land \varphi_{j_k}(c_{j_{k_1}}, \dots, c_{j_{k_n}})
+ 		\end{equation*}
+ 		ist durch geeignete Interpretation der $c_j$ in $\mathfrak{M}$ erfüllbar.
+ 		
+ 		Das ist der Fall, da die Typen in $\mathfrak{M}$ endlich erfüllbar.
+ 	\end{proof}
+ 
+ 	\begin{definition}
+ 		Ein $n$-Typ $p \in S_n^\mathfrak{M}(A)$ heißt
+ 		\begin{itemize}
+ 			\item realisiert, falls eine Formel
+ 			\begin{equation*}
+	 			x_1 \doteq a_1 \land \dots \land x_n \doteq a_n \in p
+ 			\end{equation*}
+ 			\item isoliert, falls es eine Formel $\varphi$ gibt so dass $p$ der einzige Typ aus $S_n^\mathfrak{M}(A)$ ist, der $\varphi$ enthält.
+ 			\begin{equation*}
+	 			\left( \langle \varphi \rangle = \{ q \in S_n^\mathfrak{M}(A) \mid \varphi \in q \} \overset{!}{=} \{ p \} \right)
+ 			\end{equation*}
+ 			Äquivalent: $p$ ist isolierter Punkt im Stone-Raum, d.h. $\{ p \}$ ist offen.
+ 		\end{itemize}
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		\begin{itemize}
+ 			\item Die realisierten Typen sind durch die Formel $x_1 = a_1 \land \dots \land x_n \doteq a_n$ isoliert.
+ 			\item Ein isolierter Type ist in $\mathfrak{M}$ realisiert, denn $\mathfrak{M} \models \exists \overline{x} \varphi(\overline{x})$ das heißt es gibt $\overline{m} \in M$ mit $\mathfrak{M} \models \varphi(\overline{m})$. Also $\varphi \in \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$ somit $p = \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$
+ 		\end{itemize}
+ 	\end{remark}
+ 
+ 	\begin{remark}
+ 		Ein unendlicher kompakter Raum besitzt nicht isolierte Punkte.
+ 		
+ 		Angenommen $T = \{ p_i \mid i \in \kappa \}$ und alle $p_i$ sind isoliert.
+ 		\begin{equation*}
+	 		T = \bigcup_{i \in \kappa} \{ p_i \}
+ 		\end{equation*}
+ 		also eine offene Überdeckung. Da der Raum kompakt ist existiert eine endliche Teilüberdeckung. $\Rightarrow \kappa$ endlich
+ 	\end{remark}
 	
 \end{document}
