@@ -2566,4 +2566,203 @@
  		also eine offene Überdeckung. Da der Raum kompakt ist existiert eine endliche Teilüberdeckung. $\Rightarrow \kappa$ endlich
  	\end{remark}
 	
+	\subsection{Der Omitting-Types-Satz}
+	
+	\begin{example}
+		$\mathcal{L} = \{ c_i \mid i \in \omega \}$
+		
+		$T = \{ \lnot c_i \doteq c_j \mid i \neq j \}$
+		
+		vollständige Theorie (mit QE)
+		
+		$\mathfrak{M} \models T$
+		\begin{equation*}
+			M = \underbrace{\{ c_i^\mathfrak{M} \mid i \in \omega \}}_\text{abzählbar unendl.} \cup \text{evtl. weitere Elemente}
+		\end{equation*}
+		
+		$S_1^\mathfrak{M}(\emptyset)$
+		\begin{align*}
+			p_i &= \{ x \doteq c_i \}^\vdash \\
+			p_\infty &= \{ x \neq c_i \mid i \in \omega \}^\vdash
+		\end{align*}
+		
+		Die $p_i$ sind in allen Modellen realisiert. Der Typ $p_\infty$ dagegen kann übergangen werden nämlich im Primmodell $\mathfrak{M_0} = \{ c_i^\mathfrak{M_0} \mid i \in \omega \}$.		
+	\end{example}
+
+	\begin{definition}
+		Sei $T$ eine $\mathcal{L}$-Theorie.
+		
+		Sei $S_n^T$ die Menge der $n$-Typen in $T$, also maximale mit $T$ konsistente Menge von $\mathcal{L}$-Formeln $\varphi(v_0, \dots, v_{n-1})$.
+		
+		Sei $S_\omega^T$ die Menge der $\omega$-Typen in $T$, also maximale mit $T$ konsistente Mengen von $\mathcal{L}$-Formeln $\varphi(v_0, \dots, v_{n-1})$ mit $n$ variabel.
+		
+		$p$ $n$-Typ in $T$
+		
+		$\Leftrightarrow$ $T \cup p$ ist konsistent und für alle $\varphi(v_0, \dots, v_{n-1})$ ist $\varphi \in p$ oder $\lnot \varphi \in p$
+		
+		$\Leftrightarrow$ Es gibt Modell $\mathfrak{M} \models T$ und $m_0, \dots, m_{n-1} \in M$ mit $\operatorname{tp}^\mathfrak{M}(m_0, \dots, m_{n-1} / \emptyset) = p$
+		
+		$\Leftrightarrow$ $p$ entspricht Ultrafilter in $\mathcal{F}_n(\mathcal{L}) / \sim_T$
+		
+		$p$ $\omega$-Typ in $T$
+		
+		$\Leftrightarrow$ $T \cup p$ ist konsistent und für alle $n$ und für alle $\varphi(v_0, \dots, v_{n-1})$ ist $\varphi \in p$ oder $\lnot \varphi \in p$
+		
+		$\Leftrightarrow$ Es gibt Modell $\mathfrak{M} \models T$ und $m_i \in M, i \in \omega$ mit $\operatorname{tp}^\mathfrak{M}(m_0, \dots / \emptyset) = p$
+		
+		$\Leftrightarrow$ $p$ entspricht Ultrafilter in $\mathcal{F}_\infty(\mathcal{L}) / \sim_T$
+	\end{definition}
+
+	\begin{remark}
+		\begin{equation*}
+			S_n^T = \bigcup \{ S_n^{T'} \mid \text{$T'$ ist Vervollständigung von $T$} \}
+		\end{equation*}
+	\end{remark}
+
+	\begin{definition}
+		Sei $T$ eine $\mathcal{L}$-Theorie und $\Sigma(\overline{x})$ eine Menge von $\mathcal{L}$-Formeln $\varphi(\overline{x})$.
+		
+		\begin{itemize}
+			\item $\varphi(\overline{x})$ realisiert lokal $\Sigma(\overline{x})$, falls
+			\begin{itemize}
+				\item $T \cup \{ \varphi(\overline{x}) \}$ ist konsistent
+				\item $T \vdash \forall \overline{x} (\varphi(\overline{x}) \to \sigma(\overline{x}))$ für jedes $\sigma \in \Sigma$.
+			\end{itemize}
+			\item $T$ lässt $\Sigma(\overline{x})$ aus, falls es ein $\mathfrak{M} \models T$ gibt so dass für alle $\overline{m} \in M$
+			\begin{equation*}
+				\Sigma \nsubseteq \operatorname{tp}^\mathfrak{M}(\overline{m}/\emptyset)
+			\end{equation*}
+		\end{itemize}
+	\end{definition}
+
+	\begin{remark}
+		Falls $\varphi$ $\Sigma$ lokal realisiert und
+		\begin{enumerate}
+			\item $\mathfrak{M} \models \varphi(\overline{x})$, dann realisiert $\mathfrak{M}$ $\Sigma$.
+			\item $T \vdash \exists \overline{x} \varphi(\overline{x})$, dann lässt $T$ $\Sigma$ nicht aus.
+		\end{enumerate}
+	\end{remark}
+
+	\begin{theorem}[Omitting Types]
+		Sei $T$ eine $\mathcal{L}$-Theorie, und $\abs{\mathcal{L}} \leq \aleph_0$.
+		
+		Falls $\Sigma(\overline{x})$ nicht lokal realisiert ist, gibt es $\mathfrak{M} \models T$ welches $\Sigma$ auslässt.
+	\end{theorem}
+
+	\heading{Einschub: Etwas Topologie}
+	
+	\begin{definition}
+		Sei $X$ ein Topologischer Raum.
+		
+		$N  \subseteq X$ heißt nirgends dicht, falls es keine offene Menge $\mathcal{O} \neq \emptyset$ mit $\mathcal{O} \subseteq \overline{N}$ gibt. (jedes offene $\mathcal{O} \neq \emptyset$ schneidet $X \setminus N$)
+		
+		$M \subseteq X$ heißt mager, falls $M \subseteq \bigcup_{i \in \omega} N_i$ mit $N_i$ nirgends dicht.
+	\end{definition}
+
+	\begin{remark}
+		Die mageren Mengen bilden ein $\sigma$-Ideal, das heißt
+		\begin{itemize}
+			\item $A \subseteq M$ mager $\Rightarrow$ $A$ mager
+			\item $M_i$ mager $\Rightarrow$ $\bigcup_{i \in \omega} M_i$ mager
+		\end{itemize}
+	\end{remark}
+
+	\begin{theorem}[Satz von Baire]
+		Jeder lokal-kompakte Hausdorff-Raum ist nicht mager.
+		
+		Hausdorff: Für alle $x \neq y$ existieren disjunkte offene Mengen $x \in \mathcal{O}_x, y \in \mathcal{O}_y$
+		
+		Lokal-Kompakt: Für alle $x$ gibt es offene Menge $x \in \mathcal{O}_x$ so dass $\overline{\mathcal{O}_x}$ kompakt ist.
+	\end{theorem}
+
+	\begin{proof}
+		$S(\mathcal{F}_{n/\infty}(\mathcal{L})/\sim_T)$: Abgeschlossene Mengen in solch einem Stone-Raum?
+		
+		\begin{align*}
+			N \text{ abgeschlossen} \quad\Leftrightarrow\quad N &= \bigcap_{i \in I} \langle \varphi_i \rangle \\
+			&= \{ p \mid \varphi_i \in p, i \in I \} \\
+			&= \{ p \mid \Sigma \subseteq p \}
+		\end{align*}
+		mit $\Sigma = \{ p \mid \Sigma \subseteq p \}$.
+		
+		Abgeschlossene Mengen entsprechen Theorien/Formelmengen in $\mathcal{F}_{n/\infty}(\mathcal{L}) / \sim_T$.
+		
+		Wann ist $N$ nirgends dicht?
+		
+		$N$ nicht nirgends dicht
+		
+		$\Leftrightarrow$ Es gibt $\varphi$ mit $\langle \varphi \rangle \subseteq N$ $\varphi \nsim_T \bot$ d.h. $\varphi$ konsistent mit $T$
+		
+		$\Leftrightarrow$ (falls $N$ durch $\Sigma$ gegeben) jedes $p$ mit $\varphi \in p$ erfüllt $\Sigma \subseteq p$, das heißt $\varphi$ realisiert lokal $\Sigma$.
+		
+		Kontraposition: nirgends dicht entspricht nicht lokal realisiert
+		
+		\textit{Zeige also:} Nirgends dichte Formelmengen können übergangen werden.
+		
+		\textit{1. Schritt:} Wähle $\mathfrak{N} \models T$, das für alle $n$ alle $n$-Typen in $T$ realisiert. (Existenz ähnlich wie bei dem Satz über die elemenatare Erweiterung, die alle $p \in S_n^\mathfrak{M}(A)$ realisiert).
+		
+		Sei $A \subseteq N$ abzählbar $A = \{ a_i \mid i \in \omega \}$. Was muss $\operatorname{tp}((a_i)_{i \in \omega})$ erfüllen, damit $A$ Träger eine elementaren Unterstruktur ist?
+		
+		Gilt Tarskis Test? Betrachte Formel $\varphi(\overline{x}, y)$ (Erinnerung: Falls $\mathfrak{N} \models \exists y \varphi(\overline{a}, y)$ dann gibt es solch ein $y$ in $A$)
+		
+		Setze
+		\begin{equation*}
+			\mathcal{O}_\varphi \coloneqq \bigcup_{i \in \omega} \langle (\exists y \varphi(\overline{x}, y) \to \varphi(\overline{x}, x_i)) \rangle
+		\end{equation*}
+		
+		$\omega$-Typ $p(x_0, x_1, \dots) \in \mathcal{O}_\varphi$ $\Leftrightarrow$ Realisierung von $p$ erfüllt Tarskis Test für $\varphi$
+		
+		$p(x_0, x_1, \dots) \in \bigcap_\varphi \mathcal{O}_\varphi$ $\Leftrightarrow$ Realisierung ist Träger einer elementaren Unterstruktur
+		
+		\textit{2. Schritt:} Behauptung: $S_\omega^T \setminus \mathcal{O}_\varphi$ ist nirgends dicht. Also falls $\mathcal{O} \neq \emptyset$ offen, ist $\mathcal{O} \cap \mathcal{O}_\varphi \neq \emptyset$. Ohne Einschränkung $\mathcal{O} = \langle \psi(\overline{x}) \rangle$.
+		
+		Wähle $i$ so, dass $x_i$ weder in $\varphi(\overline{x}, y)$ noch in $\psi(\overline{x})$ vorkommt. Dann ist $T \cup \{ \exists y \varphi(\overline{x},y) \rightarrow \varphi(x, x_i), \psi(\overline{x}) \}$ konsistent.
+		
+		Folglich ist $S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi = \bigcup_\varphi S_\omega^T \setminus \mathcal{O}_\varphi$ mager. Da $\abs{\mathcal{L}} \leq \aleph_0$, gibt es hächstens abzählbar viele Formeln der Form $\exists y \varphi(\overline{x}, y)$.
+		
+		Mit Baire $S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi \neq \emptyset$.
+		
+		\textit{3. Schritt:} Entferne zusätzlich alles, was $\Sigma$ realisiert. Problem ist $\Sigma$ lebt in $S_n^T$ nicht in $S_\omega^T$.
+		\begin{enumerate}
+			\item Ein Tupel in $A$, welches $\Sigma$ realisiert, könnte beliebige Koordinaten haben.
+			\item Verschiedene Komponenten könnten gleich sein.
+		\end{enumerate}
+	
+		Betrachte also $\alpha: n \to \omega$.
+		
+		Idee: $\Sigma(v_0, \dots, v_{n-1}) \rightsquigarrow \Sigma(v_{\alpha(0)}, \dots, v_{\alpha(n-1)})$. $\alpha$ induziert Abbildung
+		\begin{align*}
+			\mathcal{F}_n(\mathcal{L})/ \sim_T &\longrightarrow \mathcal{F}_\infty(\mathcal{L}) / \sim_T \\
+			\varphi(v_0, \dots, v_{n-1}) &\longmapsto \varphi(v_{\alpha(0)}, \dots, v_{\alpha(n-1)})
+		\end{align*}
+		welche wiederum eine Abbildung:
+		\begin{align*}
+			\tilde{\alpha}:&& S_\omega^T &\longrightarrow S_n^T \\
+			&&p(x_0, x_1, \dots) &\longmapsto \text{Einschränkung auf die Variablen $x_{\alpha(0)}, \dots, x_{\alpha(n-1)}$ }
+		\end{align*}
+		induziert.
+		
+		Allgemein: $B \to B'$ Homomorphismus Boolescher Algebren induziert stetige Abbildung $S(B') \to S(B)$.
+		
+		Stetigkeit von $\tilde{\alpha}$: $\tilde{\alpha}^{-1}(\langle \varphi(v_0, \dots, v_{n-1})\rangle) = \langle \varphi(v_{\alpha(0)}, \dots, v_{\alpha(n-1)}) \rangle$.
+		
+		Hier: $\tilde{\alpha}$ ist sogar offen!
+		
+		\textit{Lemma aus der Topologie:} $\alpha: X \to Y$ offene Abbildung dann gilt: $N \subseteq Y$ nirgends dicht $\Rightarrow$ $\alpha^{-1}(M)$ nirgends dicht.
+		
+		\begin{equation*}
+			\left( S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi \right) \cup \bigcup_{\alpha: n \to \omega} \alpha^{-1}[\Sigma(\overline{x})]
+		\end{equation*}
+		ist mager, also $\neq S_\omega^T$.
+		
+		Sei $p \notin \left( S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi \right) \cup \bigcup_{\alpha: n \to \omega} \alpha^{-1}[\Sigma(\overline{x})]$ und $(a_i)_{i \in \omega} \models p$.
+		
+		Dann ist $A = \{ a_i \mid i \in \omega \}$ Träger einer elementaren Unterstruktur von $N$ die $\Sigma$ auslässt.
+	
+	\end{proof}
+
+	\begin{corollary}
+		Sei $X_n \subseteq S_n^T$ mager. Dann gibt es ein Modell $\mathfrak{M} \models T$, das alle $X_n$ übergeht.
+	\end{corollary}
+	
 \end{document}
