@@ -2295,7 +2295,7 @@
 			\end{tikzpicture}
 		\end{center}
 	
-		vervollständigen lässt. Kommutativ heißt $g_1 \circ f_1 = g_2 \circ f_1$.
+		vervollständigen lässt. Kommutativ heißt $g_1 \circ f_1 = g_2 \circ f_2$.
  	\end{definition}
  
  	\begin{theorem}
@@ -2758,11 +2758,189 @@
 		Sei $p \notin \left( S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi \right) \cup \bigcup_{\alpha: n \to \omega} \alpha^{-1}[\Sigma(\overline{x})]$ und $(a_i)_{i \in \omega} \models p$.
 		
 		Dann ist $A = \{ a_i \mid i \in \omega \}$ Träger einer elementaren Unterstruktur von $N$ die $\Sigma$ auslässt.
+		
+		Zeige noch $\tilde{\alpha}$ ist offene Abbildung, das heißt für offenes $\mathcal{O}$ ist $\tilde{\alpha}(\mathcal{O})$ offen.
+		
+		$\mathcal{O} = \bigcup_{i \in I} \langle \varphi_i \rangle$ Basis offen, dann ist
+		\begin{equation*}
+			\tilde{\alpha}(\bigcup \dots) = \bigcup \tilde{\alpha}(\dots)
+		\end{equation*}
+		
+		Ohne Einschränkung $\mathcal{O} = \langle \varphi \rangle$. Und ohne Einschränkung
+		\begin{equation*}
+			\varphi = \varphi(\underbrace{x_1, \dots, x_k}_{\in \operatorname{Bild}(\alpha)}, \underbrace{y_1, \dots, y_l}_{\notin \operatorname{Bild}(\alpha)}) \qquad\qquad x_i,y_j \in \{ v_0, \dots \}
+		\end{equation*}
+		
+		\begin{align*}
+			\tilde{\alpha}(\langle \varphi(\overline{x}, \overline{y} \rangle ) &= \tilde{\alpha}(\{ p \in S_\omega^T \mid \varphi \in p \}) \\
+			&= \tilde{\alpha}(\{ \operatorname{tp}((c_i)_{i \in \omega / \emptyset}) \mid c_i \in N, \mathfrak{N} \models \varphi(\overline{c}) \}) \\
+			\intertext{$\mathfrak{N}$ soll auch alle $\omega$-Typen $/\emptyset$ realisieren} \\
+			&= \{ \operatorname{tp}(c_{\alpha(0)}, \dots, c_{\alpha(n)}) \mid c_i \in N, \mathfrak{N} \models \varphi(\overline{c}) \} \\
+			\intertext{in Variablen $v_0, \dots, v_{n-1}$} \\
+			&= \left\{ q \in S_n^T \mid \exists \overline{y} \varphi\left( \frac{v_0, \dots, v_{n-1}}{\overline{x}} , \overline{y} \right) \in q, v_i = v_j \in q \text{für alle $0 \leq i < j < n$ mit $\alpha(i) = \alpha(j)$} \right\} \\
+			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \cap \bigcap_{\alpha(i) = \alpha(j)} \langle v_i \doteq v_j \rangle \\
+			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \land \bigwedge_{\alpha(i) = \alpha(j)} v_i \doteq v_j
+		\end{align*}
+		ist offen.
 	
 	\end{proof}
 
 	\begin{corollary}
 		Sei $X_n \subseteq S_n^T$ mager. Dann gibt es ein Modell $\mathfrak{M} \models T$, das alle $X_n$ übergeht.
 	\end{corollary}
+
+	\begin{corollary}
+		\begin{itemize}
+			\item Insbesondere: Wenn $T$ eine vollständige $\mathcal{L}$-Theorie ist und $\abs{\mathcal{L}} \leq \aleph_0$ und $p \in S_n^T$: $p$ kann übergangen werden $\Leftrightarrow$ $p$ ist nicht isoliert
+			\item Sei $\mathcal{L} \leq \aleph_0$ und $X_n$ magere Mengen von $n$-Typen. Dann können alle $X_n$ simultan übergangen werden.
+			
+			Insbesondere alle abzähbare Mengen von nicht isolierten Typen sind mager!
+		\end{itemize}
+	\end{corollary}
+
+	\begin{remark}
+		Sei $X$ ein topologischer Raum, $x_0 \in X$ dann gilt
+		\begin{equation*}
+			\{ x_0 \} \text{ mager} \Leftrightarrow \{ x_0 \} \text{ nirgends dicht} \Leftrightarrow \text{$x_0$ nicht isoliert}
+		\end{equation*}
+	\end{remark}
+
+	\begin{example}
+		$\mathcal{L} = \{ c \} \cup \{ c_i \mid i \in \aleph_1 \}$
+		
+		$T = \{ c_i \neq c_j \mid i < j < \aleph_1 \}$
+		
+		$\Sigma(x) = \{ x \neq c \} \cup \{ x \neq c_i \mid i \in \aleph_0 \}$
+		
+		$\Sigma$ ist stets realisiert, da jedes $\mathfrak{M} \models T$ überabzählbar ist.
+		
+		$\Sigma$ ist nicht lokal realisiert ($T$ hat QE, also wäre eine lokal realisierende Formel von der Form $x = x_\alpha$ für ein $\alpha < \aleph_1$ oder $x = c$ oder die Verneinungen davon)
+	\end{example}
+
+	\begin{definition}
+		Seien $\mathfrak{M}, \mathfrak{N}$ $\mathcal{L}$-Strukturen $A \subseteq M, B \subseteq N$.wenn
+		
+		$h: A \to B$ heißt elementare Abbildung falls $h$ die Gültigkeit von $\mathcal{L}_A$-Formeln erhält, d.h. $\mathfrak{M} \models \varphi(\overline{h}) \Leftrightarrow \mathfrak{N} \models \varphi(h(\overline{h}))$.
+		
+		$h: A \to B$ heißt partieller Isomorphismus, falls $h$ elementar und bijektiv ist.
+	\end{definition}
+
+	\begin{remark}
+		\begin{itemize}
+			\item Elementare Abbildungen sind stets injektiv!
+			\item $h$ elementar $\Leftrightarrow$ $\forall \overline{a}: \operatorname{tp}^\mathfrak{M}(\overline{a} / \emptyset) = \operatorname{tp}^\mathfrak{N}(h(\overline{a}) / \emptyset)$
+			\item Spezialfall: $A = B = \emptyset$ (es existiert genau eine Abbildung $\emptyset \to \emptyset$ die leere Abbildung)
+			
+			$h: \emptyset \to \emptyset$ ist elementar $\Leftrightarrow$ $\mathfrak{M} \equiv \mathfrak{N}$
+			\item Falls $h: A \to B$ partieller Isomorphismus.
+			
+			Induziert $\mathcal{F}_\infty(\mathcal{L}_A) / \sim_\mathfrak{M} \to \mathcal{F}_\infty(\mathcal{L}_B) / \sim_\mathfrak{N}$
+			
+			Induziert $\tilde{h}: S_n^\mathfrak{N}(B) \to S_n^\mathfrak{M}(A)$ einen Homöomorphismus
+			
+			\begin{equation*}
+				\{ \varphi(\overline{x}, \overline{a}) \mid \varphi \in p \} = p \in S_n(A) \overset{\tilde{h}^{-1}}{\longrightarrow} \{ \varphi(\overline{x}, h(\overline{a})) \mid \varphi \in p \} = q \in S_n(B)
+			\end{equation*}
+		\end{itemize}
+	\end{remark}
+
+	\begin{remark}(ohne Beweis)
+		
+		Sei $h: A \to B$ partieller Isomorphismus. Dann gibt es $\mathfrak{M}' \succcurlyeq \mathfrak{M}, \mathfrak{N}' \succcurlyeq \mathfrak{N}$ und $h': \mathfrak{M}' \overset{\cong}{\to} \mathfrak{N}'$ mit $h'_{\mid A} = h$.
+	\end{remark}
+
+	\begin{remark}
+		$\operatorname{tp}(a_1, a_2 / B) = \{ \varphi(x_1, x_2, \overline{b}) \mid \mathfrak{M} \models \varphi(a_1, a_2, \overline{b}) \}$ ist bestimmt durch $\operatorname{tp}^\mathfrak{M}(a_2 /B) = \{ \varphi(x, \overline{b}) \mid \mathfrak{M} \models \varphi(a_2, \overline{b}) \}$ und $\operatorname{tp}^\mathfrak{M}(a_1 / B, a_2) = \{ \mathfrak{M} \models \varphi(a_1, a_2, \overline{b}) \}$
+	\end{remark}
+
+	Sei nun $T$ eine vollständige abzählbare (d.h. $\abs{\mathcal{L}} \leq \aleph_0$) Theorie.
+	
+	\begin{definition}
+		$\mathfrak{M} \models T$ heißt atomar, falls für alle $n$ und alle $m_1, \dots, m_n \in M$ $\operatorname{tp}^\mathfrak{M}(m_1, \dots, m_n / \emptyset )$ isoliert ist.
+	\end{definition}
+
+	\begin{remark}
+		Wenn $p \in S_n^\mathfrak{M}(\emptyset)$ isoliert ist und zwar durch $\varphi(\overline{x})$ das heißt $\emptyset \neq \langle \varphi(\overline{x}) \rangle = \{ p \}$, dann gilt für jede Formel $\psi(\overline{x})$ mit $\mathfrak{M} \models \exists
+		 \overline{x} \psi(\overline{x})$
+		 \begin{align*}
+			 \text{entweder:}& \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \psi(\overline{x}) \\
+			 \text{oder:} & \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \lnot \psi(\overline{x})
+		 \end{align*}
+		 Das heißt $\Phi \coloneqq \{ \overline{m} \in M \mid \mathfrak{M} \models \varphi(\overline{m}) \}$ kann nicht definierbar aufgeteilt werden, also definierbare Teilmengen von $M^n$ enthält entweder $\Phi$ oder ist disjunkt zu $\Phi$.
+		 
+		 In $\mathcal{F}_n(\mathcal{L}) / \sim_\mathfrak{M}$ ist $\varphi$ ein Atom, das heißt ein minimales Elemente oberhalb von $\bot$.
+		 
+		 Wenn $\mathfrak{M}$ atomar ist, sind alle $\mathcal{F}_n(\mathcal{L})/ \sim_\mathfrak{M}$ ist atomare Boolesche Algebra.
+	\end{remark}
+
+	\begin{theorem}
+		$\mathfrak{M}$ ist genau dann elementares Primmodell von $T$, wenn $\mathfrak{M}$ atomar und höchstens abzählbar ist.
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$\Rightarrow$:} Angenommen $p = \operatorname{tp}(m_1, \dots, m_n / \emptyset)$ ist nicht isoliert.
+		
+		Ommiting Types: Es existiert $\mathfrak{N} \models T$, welches $p$ übergeht. $\mathfrak{M} \hookrightarrow \mathfrak{N}$ da $\mathfrak{M}$ elementares Primmodell. Dann realisiert $\mathfrak{M}$ höchstens so viele Typen wie $\mathfrak{N}$. $\lightning$
+		
+		Da $\abs{\mathcal{L}} \leq \aleph_0$ gibt es überhaupt abzählbare Modelle, dann muss ein Primmodell auch abzählbar sein.
+		
+		\heading{$\Leftarrow$:} Sei $M = \{ m_i \mid i \in \omega \}$, $\mathfrak{M}$ atomar. Sei $\mathfrak{N} \models T$, konstruiere indukti Einbettung $h: \mathfrak{M} \hookrightarrow \mathfrak{N}$ das heißt wir konstruieren elementare Abbildungen $h_n: \{ m_0, \dots, m_{n-1} \} \to N$ mit $h_n \subseteq h_{n+1}$
+		
+		$h_0: \emptyset \to \emptyset$ ist elementar, da $\mathfrak{M} \equiv \mathfrak{N}$.
+		
+		$n \to n+1:$
+		
+		$h_n: \{ m_0, \dots, m_{n-1} \} \to N$ sei konstruiert
+		
+		Behauptung: $\operatorname{tp}(m_n / m_0, \dots, m_{n-1})$ ist isoliert
+		
+		$\operatorname{tp}(m_n / m_0, \dots, m_{n-1}, m_n)$ ist isoliert durch $\varphi(x_0, \dots, x_n)$, also ist $\operatorname{tp}(m_n / m_0, \dots, m_{n-1})$ isoliert (in $S_1^\mathfrak{M}(m_0, \dots, m_{n-1})$) durch $\varphi(m_0, \dots, m_{n-1}, x)$
+		
+		$h_n: \{ m_0, \dots, m_{n-1} \} \to \{ h(m_0), \dots, h(m_{n-1}) \}$ ist partieller Isomorphismus, also ist
+		\begin{equation*}
+			\tilde{h}_n^{-1}(\operatorname{tp}(m_n / m_0, \dots, m_{n-1})) \in S_1^\mathfrak{N}(h_n(m_0), \dots, h_n(m_{n-1}))
+		\end{equation*}
+		isoliert.
+		
+		Da $\mathfrak{M} \models \exists x \varphi(m_0, \dots, m_{n-1}, x)$ gilt $\mathfrak{N} \models \exists x \varphi(h(m_0), \dots, h(m_{n-1}), x)$
+		
+		Wähle $h_{n+1}(m_n)$ so dass es in $\mathfrak{N}$ $\varphi(h(m_0), \dots, h(m_{n-1}, x)$ erfüllt.
+		
+		$h = \bigcup_{n \in \omega} h_n: M \to N$ ist elementar d.h. $h: \mathfrak{M} \to \mathfrak{N}$ ist elementare Einbettung.	
+	\end{proof}
+
+	\begin{corollary}
+		Wenn $\mathfrak{M}$ und $\mathfrak{N}$ elementare Primstrukturen sind, dann $\mathfrak{M} \cong \mathfrak{N}$. ($\abs{\mathcal{L}} \leq \aleph_0$ ist wichtig hier!)
+	\end{corollary}
+
+	\begin{example}
+		\begin{itemize}
+			\item $ACF_0$ hat $\tilde{\setQ}$ als elementares Primmodell. Das realisiert nur algebraische Typen, transzendenter Typ wird übergangen.
+			\item $(\setQ, <)$ ist $\aleph_0$-Kategorisch also ist $(\setQ, <)$ elementares Primodell
+			\item $\omega$ unabhängige Prädikate. Es gibt keien isolierten Typen! $(S_1^T)$ ist perfekte Menge
+		\end{itemize}
+	\end{example}
+
+	\begin{theorem}
+		$T$ (abzählbar und vollständig) besitzt genau dann ein elementares Primmodell, wenn für alle $n$ die isolierten Typen dicht in $S_n^T$ liegen.
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$\Rightarrow$} $\mathfrak{M}$ sei elementares Primmodell $\emptyset \neq \langle \varphi(\overline{x}) \rangle$ nicht leere offene Menge in $S_n^T$.
+		
+		Da nicht leer ist $\varphi(\overline{x})$ konsistent mit $T$, das heißt $\mathfrak{M} \models \exists \overline{x} \varphi(\overline{x})$.
+		
+		Falls $\overline{m} \in M$ so, dass $\mathfrak{M} \models \varphi(\overline{m})$ dann ist $\operatorname{tp}^m(\overline{m} / \emptyset) \in \langle \varphi(\overline{x}) \rangle$ isoliert, da $\mathfrak{M}$ atomar.
+		
+		\heading{$\Leftarrow$:} $I_n = \{ p \in S_n^T \mid p \text{ isoliert} \}$
+		
+		$I_n$ ist offen. $p \in I_n$ wir isoliert durch $\varphi_p$ also $I_n = \bigcup_{p \in I_n} \langle \varphi_p \rangle$
+		
+		$S_n^T \setminus I_n$ ist abgeschlossen. Für nirgends dicht zeige falls $\mathcal{O}$ offen und $\mathcal{O} \subseteq S_n^T \setminus I_n$, dann $\mathcal{O} = \emptyset$.
+		
+		$I_n$ dicht $\Rightarrow$ $I_n \cap \mathcal{O}\neq \emptyset$ für jedes offene $\mathcal{O} \neq \emptyset$.
+		
+		Omitting Types: Es gibt Modell, das alle $S_n^T \setminus I_n$ simultan übergeht, also nur isolierte Typen realisiert (also atomar). Ohne Einschränkung ist das Modell abzählbar also elementares Primmodell.
+	\end{proof}
 	
 \end{document}
