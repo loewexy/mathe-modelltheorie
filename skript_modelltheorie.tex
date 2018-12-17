@@ -2942,5 +2942,159 @@
 		
 		Omitting Types: Es gibt Modell, das alle $S_n^T \setminus I_n$ simultan übergeht, also nur isolierte Typen realisiert (also atomar). Ohne Einschränkung ist das Modell abzählbar also elementares Primmodell.
 	\end{proof}
+
+	\subsection{\texorpdfstring{$\aleph_0$}{Aleph 0}-kategorische Theorien}
 	
+	Löwenheim-Skolem-Tarski: Für jede unendliche Kardinalzahl $\kappa$ existiert ein Modell der Mächtigkeit $\kappa$.
+	
+	\begin{definition}
+		\begin{enumerate}
+			\item $\mathfrak{M} \models T$ heißt $\kappa$-universell, falls jedes $\mathfrak{N} \models T$ mit $\abs{N} \leq \kappa$ sich elementar in $\mathfrak{M}$ einbetten lässt.
+			\item $\mathfrak{M} \models T$ heißt $\kappa$-saturiert, falls für alle $A \subseteq M$ mit $\abs{A} < \kappa$ alle $p \in S_1^\mathfrak{M}(A)$ in $\mathfrak{M}$ realisiert sind. $\mathfrak{M}$ heißt saturiert, falls $\mathfrak{M}$ $\abs{M}$-saturiert ist.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		\begin{enumerate}
+			\item $\mathfrak{M}$ kann nie $\abs{M}^+$-saturiert sein. $M = \{ m_i \mid i < \kappa \}$.
+		
+			Existiert $p \in S_1(M)$ mit $\{ x \neq \mid i \in \kappa \} \subseteq p$ kann in $\mathfrak{M}$ nicht realisiert sein!
+			
+			\item Falls $\mathfrak{M}$ $\kappa$-saturiert ist, dann realisiert $\mathfrak{M}$ auch alle $p \in S_n^\mathfrak{M}(A)$ mit $\abs{A} < \kappa$.
+			
+			$p = p(x_1, \dots, x_n) \in S_n(A)$
+			
+			$p \upharpoonright x_1 = \{ \varphi(x_1) \mid \varphi \in p(x_1, \dots, x_n) \} \in S_1(A)$.
+			
+			Realisiere $p \upharpoonright x_1$ in $\mathfrak{M}$ durch $m_1$.
+			
+			$p(m_1, x_2, \dots, x_n) \in S_{n-1}(A \cup \{ m_1 \})$
+			
+			$p(m_1, \overline{x}) \upharpoonright x_2 \in S_1(A \cup \{ m_1 \})$, realisiert in $\mathfrak{M}$ durch $m_2$.
+			
+			Etc. $(m_1, \dots, m_n)$ realisiert $p$.
+		\end{enumerate}
+	\end{remark}
+
+	\begin{theorem}
+		Sei $T$ vollständig und abzählbar sowie $\mathfrak{M} \models T$ abzählbar und saturiert
+		\begin{enumerate}
+			\item $\mathfrak{M}$ ist $\aleph_0$-universell
+			\item Falls $\mathfrak{N} \models T$ abzählbar und saturiert ist, dann $\mathfrak{N} \cong \mathfrak{M}$.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{1)} Sei $\mathfrak{N} \models T$ abzählbar, $N = \{ n_i \mid i \in \omega \}$
+		
+		Konstruiere induktiv elementare Abbildungen $h_i: \{ n_0, \dots, n_{i-1} \} \to M$
+		
+		$h_0 = \emptyset: \emptyset \to M$ elementar, da $T$ vollständig.
+		
+		$i \to i+1$ Idee: realisiere $\operatorname{tp}(n_i/ n_0, \dots, n_{i-1})$ im Bild das heißt $\tilde{h}^{-1}_i(\operatorname{tp}^\mathfrak{N}(n_i / n_0, \dots, n_{i-1})) \in S_1^\mathfrak{M}(h_i(n_0), \dots, h_i(n_{i-1}))$.
+		
+		Da $\mathfrak{M}$ $\aleph_0$-saturiert, gibt es $m_i \coloneqq h_{i+1}(n_i)$ mit
+		\begin{equation*}
+			\operatorname{tp}(m_i / m_0, \dots, m_i-1) = \tilde{h}_i^{-1}(\operatorname{tp}^\mathfrak{N}(n_i / n_0, \dots, n_i-1))
+		\end{equation*}
+		und $h = \bigcup_{i \in \omega} h_i: N \to M$ ist elementar
+		
+		\heading{2)} Back and Forth
+	\end{proof}
+	
+	\begin{example}""
+		
+		\begin{enumerate}
+			\item $\mathcal{L} = \emptyset$, $T$ unendliche Menge
+			
+			$T$ ist $\aleph_0$-kategorisch, jede abzählbare Menge ist elementares Primmodell, $\aleph_0$-saturiert und damit $\aleph_0$-universell. Aber es gibt viele Einbettungen (= Injektionen) zwischen zwei abzählbaren Modellen, die nicht bijektiv sind.
+			
+			\item $T = ACF_0$ elementares Primmodell: $\tilde{\setQ}$ jede Einbettung $\tilde{\setQ} \hookrightarrow \tilde{\setQ}$ ist bijektiv.
+			
+			abzählbar, $\aleph_0$-saturiert: $\overline{\setQ(X_0, X_1, \dots )}$ hat viele nicht surjektive Selbsteinbettungen.
+			
+			\item $\mathcal{L} = \{ P_i \mid i \in \omega \}$
+			
+			$T$ die $P_i$ sind unabhängige Prädikate
+			
+			$\abs{S_1^T} = 2^{\aleph_0}$
+			
+			Kein abzählbares Modell kann alle Typen aus $S_1^T$ realisieren, also auch $\aleph_0$-saturiert sein.
+		\end{enumerate}
+	\end{example}
+
+	\begin{theorem}
+		Sei $T$ vollständig und abzählbar:
+		
+		$T$ besitzt ein abzählbares saturiertes Modell $\Leftrightarrow$ für alle $n$ ist $\abs{S_n^T} \leq \aleph_0$.
+	\end{theorem}
+
+	\begin{theorem}[Engeler, Ryll-Nardzewski, Svenonius]
+		Sei $T$ vollständig und abzählbar. Dann sind äquivalent:
+		\begin{enumerate}
+			\item $T$ ist $\aleph_0$-Kategorisch
+			\item alle abzählbaren Modelle von $T$ sind atomar
+			\item alle abzählbaren Modelle von $T$ sind elementare Primmodelle
+			\item alle Modelle von $T$ sind $\aleph_0$-saturiert
+			\item für alle $n$ ist $\mathcal{F}_n(\mathcal{L}/ \sim_T)$ endlich d.h. es gibt nur endlich viele Formeln $\varphi(x_1, \dots, x_n)$ bis auf $\sim_T$.
+			\item für alle $n$ ist $S_n^T$ endlich
+			\item für alle $n$ sind alle Typen in $S_n^T$ isoliert
+			\item für alle Modelle $\mathfrak{M} \models T$ und endliche $A \subseteq M$ sind alle Typen in $S_1^\mathfrak{M}(A)$ isoliert.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\textit{Fall 1:} $T$ hat eindeutig bestimmtes endliches Modell. Dann gibt es nur endlich viele Typen, da jeder Typ irgendwo realisiert sein muss. Vieles ist trivialerweise klar, anderes folgt wie im 2. Fall.
+		
+		\textit{Fall 2:} Es gibt abzählbare Modelle (Löwenheim!)
+		
+		\heading{$1) \Rightarrow 2),3)$} Löwenheim: Jedes Modell von $T$ hat abzählbare elementare Unterstruktur, die das bis auf Isomorphie, eindeutige abzählbare Modell ist. Dieses ist elementare Primstruktur, somit atomar.
+		
+		\heading{$2) \Leftrightarrow 3)$} Satz von letzter Woche: Charakterisierung elementarer Primmodelle
+		
+		\heading{$3) \Rightarrow 1)$} Elementare Primmodelle sind eindeutig bis auf $\cong$.
+		
+		\heading{$4) \Rightarrow 1)$} Satz von eben: abzählbare $\aleph_0$-saturierte Modelle sind eindeutig bis auf $\cong$.
+		
+		\heading{$5) \Rightarrow 6)$} $S_n^T$ ist Menge der Ultrafilter von $\mathcal{F}_n(\mathcal{L})/\sim_T$, und da $\mathcal{F}_n(\mathcal{L})/\sim_T$ endlich ist auch $S_n^T$ endlich.
+		
+		\heading{$6) \Rightarrow 5)$} Falls $\varphi(x_1, \dots, x_n) \nsim_T \psi(x_1, \dots, x_n)$, dann gibt es $p \in S_n^T$ mit $\varphi \in p, \psi \notin p$ oder umgekehrt: Eine von $\varphi \land \lnot \psi, \lnot \varphi \land \psi$ ist konsistent. Vervollständige $\{ \varphi, \lnot \psi \}$ bzw. $\{ \lnot \varphi, \psi \}$ zu einem Typ.
+		
+		\heading{$6) \Rightarrow 7)$} $S_n^T = \{ p_1, \dots, p_k \}$. Dann existieren Formeln $\varphi_{ij}$ für $i \neq j$ mit $\varphi_{ij} \in p_i \setminus p_j$.
+		
+		$p_i$ wird isoliert durch $\bigwedge_{j \neq i} \varphi_{ij}$.
+		
+		\heading{$7) \Rightarrow 6)$} Alle Typen $p \in S_n^T$ sind isoliert durch $\varphi_p$-
+		\begin{equation*}
+			S_n^T = \bigcup_{p \in S} \langle \varphi_p \rangle
+		\end{equation*}
+		ist eine offene Überdeckung mit Singletons. Wegen Kompaktheit existiert eine endliche Teilüberdeckung. D.h. $S_n^T$ ist endlich.
+		
+		\heading{$8) \Rightarrow 4)$} Isolierte Typen sind stets realisiert.
+		
+		\heading{$\lnot 7) \Rightarrow \lnot 1)$} Angenommen $p \in S_n^T$ ist nicht isoliert. Ommiting Types: es gibt ein abzählbares Modell, das $p$ übergeht.
+		
+		Es gibt aber auch $\mathfrak{M} \models T$ das $p$ realisiert durch $\overline{m}$. Löwenheim: Es gibt abzählbare elementare Unterstruktur, die $\overline{m}$ enthält, also auch $p$ realisiert.
+		
+		\heading{$7) \Rightarrow 8)$} Sei $p \in S_1^\mathfrak{M}(a_1, \dots, a_k)$. $p$ wird in $\mathfrak{M}^* \succcurlyeq \mathfrak{M}$ realisiert durch $b \in M^*$. $\operatorname{tp}(b/a_1, \dots, a_k) = p$
+		\begin{equation*}
+			\operatorname{tp}(b, a_1, \dots, a_k) \in S_{n+1}^\mathfrak{M}(\emptyset) = S_{n+1}^T
+		\end{equation*}
+		ist also isoliert durch $\varphi(x_0, x_1, \dots, x_k)$.
+		
+		\textit{Behauptung:} $\varphi(x_0, a_1, \dots, a_k)$ isoliert $p \in S_1^\mathfrak{M}(a_1, \dots, a_k)$.
+		
+		Sei $\mathfrak{M}^{**} \succcurlyeq \mathfrak{M}, b' \in M^{**}$ mit $\mathfrak{M}^{**} \models \varphi(b', a_1, \dots, a_k)$. Ohne Einschränkung $\mathfrak{M}^{**} \succcurlyeq \mathfrak{M}^*$ (denn $T$ hat AP)
+		
+		Da $\varphi$ $\operatorname{tp}(b, a_1, \dots, a_k)$ isoliert, gilt
+		\begin{equation*}
+			\operatorname{tp}^{\mathfrak{M}^{**}}(b, a_1, \dots, a_k) = \operatorname{tp}^{\mathfrak{M}^{**}}(b', a_1, \dots, a_k)
+		\end{equation*}
+		Daraus folgt
+		\begin{equation*}
+			\operatorname{tp}^{\mathfrak{M}^{**}}(b / a_1, \dots, a_k) = \operatorname{tp}^{\mathfrak{M}^{**}}(b'/ a_1, \dots, a_k) = p
+		\end{equation*}
+		
+	\end{proof}
+
 \end{document}
