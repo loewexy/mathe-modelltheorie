@@ -1256,7 +1256,7 @@
 	\section{Quantorenelimination}
 	
 	\begin{example}
-		$\mathfrak{R} = (\setR, +, \cdot, -, 0, 1)$ hat keine Quantorenelimination: $\exists y \; y \cdot y = 0$ ist in $\mathfrak{R}$ nicht äquivalent zu einer Formel ohne Quantoren.
+		$\mathfrak{R} = (\setR, +, \cdot, -, 0, 1)$ hat keine Quantorenelimination: $\exists y \; y \cdot y = x$ ist in $\mathfrak{R}$ nicht äquivalent zu einer Formel ohne Quantoren.
 		
 		$\mathfrak{R}' = (\setR, +, \cdot, -, 0, 1, \leq)$ hat Quantorenelimination hier gilt dann:
 		\begin{equation*}
@@ -3233,5 +3233,113 @@
 	Welche Werte sind möglich? $1,3,4,5, \dots, \aleph_0, 2^{\aleph_0}$
 	
 	Nicht möglich: $2$
+	
+	\subsubsection{Der Satz von Fra\"\i s\'{e}}
+	
+	Sowohl $(\setQ, <)$ als auch der Zufallsgraph haben Quantorenelimination und sind $\aleph_0$-kategorisch.
+	
+	Endliche Substrukturen von $(\setQ, <)$ sind alle endlichen Ordnungen, vom Zufallsgraph sind es alle endlichen Graphen.
+	
+	\begin{definition}
+		Eine $\mathcal{L}$-Struktur heißt schwach homogen, falls gilt: Wenn $A, B, A'$ endlich erzeugte Unterstrukturen von $\mathfrak{M}$ sind, $A \subseteq A'$ und $\beta: A \to B$ ein Isomorphismus, dann existiert $B' \supseteq B$ und ein Isomorphismus $\beta': A' \to B'$ der $\beta$ fortsetzt.
+		
+		$\mathfrak{M}$ heißt stark homogen, falls gilt: Wenn $A, B$ endliche erzeugte Unterstrukturen und $\beta: A \to B$ ein Isomorphismus, dann setzt sich $\beta$ zu einem Automorphismus von $\mathfrak{M}$ fort.
+	\end{definition}
+
+	\begin{theorem}[Fra\"\i s\'{e}]
+		Sei $\mathcal{L}$ endliche, relationale Sprache. Sei $\mathcal{K}$ eine Klasse endlicher $\mathcal{L}$-Strukturen mit
+		\begin{itemize}
+			\item $\emptyset \in \mathcal{K}$ (ausnahmsweise wird $\emptyset$ als $\mathcal{L}$-Struktur betrachtet!)
+			\item $\mathcal{K}$ ist abgeschlossen bezüglich Isomorphie und Substruktur
+			\item $\mathcal{K}$ hat die Amalgamierungseigenschaft
+		\end{itemize}
+		Dann existiert eine (bis auf $\cong$) eindeutige abzählbare $\mathcal{L}$-Stuktur $\mathfrak{M}$ mit:
+		\begin{itemize}
+			\item $\mathfrak{M}$ ist schwach homogen
+			\item $\mathcal{K} = \operatorname{Skelett}(\mathfrak{M}) \coloneqq \{ \mathfrak{A} \text{ endl. $\mathcal{L}$-Struktur} \mid \text{ es gibt } \mathfrak{A}' \subseteq \mathfrak{M}: \mathfrak{A} \cong \mathfrak{A}' \}$
+		\end{itemize}
+		Außerdem gilt
+		\begin{itemize}
+			\item $\mathfrak{M}$ ist stark homogen
+			\item $\mathfrak{M}$ ist $\aleph_0$-kategorisch
+			\item $\mathfrak{M}$ hat Quantorenelimination
+		\end{itemize}
+	\end{theorem}
+
+	\begin{proof}
+		\begin{enumerate}
+			\item Konstruktion
+			
+			Sei $\{ h_i: A_i \to B_i \mid i \in \omega \}$ eine Aufzählung aller Isomorphietypen von Einbettungen zwischen $\mathcal{K}$-Stukturen, wobei jeder Isomorphietyp unendlich oft vorkomme.
+			
+			\begin{center}
+				\begin{tikzpicture}
+					\node(R1) at (0,0){$h: A$};
+					\node(ri) at (3,0){$B$};
+					\node(R2) at (0, -2){$h: A'$};
+					\node(s) at (3, -2){$B$};
+					
+					\draw[->] (R1) -- (ri);
+					\draw[->] (R1) -- (R2) node[midway,left]{$\alpha$};
+					\draw[->] (R2) -- (s);
+					\draw[->] (ri) -- (s) node[midway,right]{$\beta$};
+				\end{tikzpicture}
+			\end{center}
+		
+			$h, h'$ sind isomorph, falls es Isomorphismen $\alpha: A \to A', \beta: B \to B'$ gibt mit $\beta \circ h = h' \circ \alpha$.
+			
+			Für jede endliche Menge $A$ gibt es nur endlich viele mögliche $\mathcal{L}$-Stukturen auf $A$ da $\mathcal{L}$ endlich. Insgesamt gibt es abzählbar viele Isomorphietypen.
+			
+			Konstruiere induktiv $\mathfrak{M}_n \in \mathcal{K}$:
+			
+			\heading{$n=0$} $\mathfrak{M}_0 = \emptyset$
+			
+			\heading{$n \to n + 1$} Wähle minimales $i \geq n$ mit $A_i \hookrightarrow \mathfrak{M}_n$. Seien $A_i^0, \dots, A_i^{k_i}$ die Bilder der möglichen Einbettungen von $A_i$ in $\mathfrak{M}_n$. Amalgamire
+			
+			$\mathfrak{M}_n$ mit $B_i$ über $A_i^0$ zu $\mathfrak{M}_n^1 \in \mathcal{K}$
+			
+			$\mathfrak{M}_n^1$ mit $B_i$ über $A_i^1$ zu $\mathfrak{M}_n^2 \in \mathcal{K}$
+			
+			$\vdots$
+			
+			$\mathfrak{M}_n^k$ mit $B_i$ über $A_i^k$ zu $\mathfrak{M}_{n+1} \in \mathcal{K}$
+			
+			Setze $\mathfrak{M} = \bigcup_{n \in \omega} \mathfrak{M}_n$.
+			
+			\item Zeige $\mathcal{K}$ ist Skelett von $\mathfrak{M}$.
+			
+			\heading{$\operatorname{Skelett}(\mathfrak{M}) \subseteq \mathcal{K}$:} Sei $A \subseteq \mathfrak{M}$ endlich. Dann gibt es $n$ mit $A \subseteq \mathfrak{M}_n \in \mathcal{K}$.
+			
+			Also $A \in \mathcal{K}$, da $\mathcal{K}$ abgeschlossen bezüglich $\subseteq$.
+			
+			$A' \in \operatorname{Skelett}(\mathfrak{M}) \Rightarrow A' \cong A \subseteq \mathfrak{M}$
+			
+			$\Rightarrow A' \in \mathcal{K}$
+			
+			\heading{$K \subseteq \operatorname{Skelett}(\mathfrak{M})$:} Sei $B \in \mathcal{K}$. Dann gibt es $B' \cong B$ so dass $\emptyset \hookrightarrow B'$ in der Aufzählung der Isomorphietypen vorkommt.
+			
+			Sei $i_0$ der erste Index des Vorkommens. Da $\emptyset \hookrightarrow \mathfrak{M}_{i_0}$ wird im Konstruktionsschritt $i_0 \to i_0 + 1$ die Einbettung $\emptyset \hookrightarrow B'$ zu $\mathfrak{M}_{i_0}$ amalgamiert. Also $B'$ bis auf Isomorphie $\subseteq \mathfrak{M}_{i_0 + 1} \subseteq \mathfrak{M}$ das heißt $B \in \operatorname{Skelett(\mathfrak{M})}$.
+			
+			\item $\mathfrak{M}$ ist schwach homogen
+			
+			Es gibt $n$ mit $B \subseteq \mathfrak{M}_n$.
+			
+			Der Isomorphietyp der Erweiterung $A \subseteq A'$ taucht in der liste unendlich oft auf. Sei $i_0$ der kleinste Index $\geq n$ eines Vorkommens dieses Isomorphietyps. Im Konstruktionsschritt $i_0 \to i_0 + 1$ wird ein zu $A'$ isomorphes $B'$ über $B$ hinzuamalgamiert.
+			
+			\item Seien $\mathfrak{M}, \mathfrak{N}$ schwach homogen mit Skelett $\mathcal{K}$, $A$ gemeinsame Unterstruktur. Zeige mit back-and-forth $\mathfrak{M} \cong_A \mathfrak{N}$. Daraus folgt: mit $A = \emptyset$ die Eindeutigkeit und die $\aleph_0$-Kategorizität.
+			
+		
+		\end{enumerate}
+	\end{proof}
+
+	\begin{example}""
+		\begin{enumerate}
+			\item endliche Ordnungen $\rightsquigarrow$ $\mathfrak{M} = (\setQ, <)$
+			\item endliche Graphen $\rightsquigarrow$ $\mathfrak{M} = $ Zufallsgraph
+			\item endliche Turniere = gerichteter Graph, zwischen je $2$ Punkten gibt es genau eine gerichtete Kante
+			\item endliche partielle Ordnungen
+			\item endliche geordnete Graphen $\rightsquigarrow$ $\mathfrak{M} = (\setQ, <, E)$ ein wie $\setQ$ geordneter Zufallsgraph
+		\end{enumerate}
+	\end{example}
 
 \end{document}
