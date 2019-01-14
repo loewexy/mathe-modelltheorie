@@ -88,7 +88,7 @@
 	
 	\heading{Formalisierung der Hopf-Eigenschaft}
 	\begin{equation*}
-		\forall y \forall z (P(y = P(z) \rightarrow y = z)
+		\forall y \forall z (P(y) = P(z) \rightarrow y = z)
 	\end{equation*}
 	\begin{equation*}
 		\forall w \exists v P(v) = w
@@ -100,7 +100,7 @@
 	\end{equation*}
 	Logik
 	\begin{equation*}
-		\underset{\text{log. äquivalent}}{\sim} \forall x_0, \dots \forall x_n \forall w \exists v \exists y \exists z \left( \sum_{i=0}^{n} x_i y^i = \sum_{i=0}^n x_i z^i \right) \rightarrow \sum_{i=0}^n x_i v^i = w
+		\underset{\text{log. äquivalent}}{\sim} \forall x_0, \dots \forall x_n \forall w \exists v \exists y \exists z \left( \left( \sum_{i=0}^{n} x_i y^i = \sum_{i=0}^n x_i z^i \rightarrow y = z \right) \rightarrow \sum_{i=0}^n x_i v^i = w \right)
 	\end{equation*}
 	
 	
@@ -162,7 +162,7 @@
 			\item $\mathcal{L} = \{ R \}$, $R$ 2-stelliges Relationssymbol
 			\begin{align*}
 				\mathfrak{Q}_1 = (\setQ, <), &\qquad\text{d.h.}\quad R^{\mathfrak{Q}_1} = \{ (q_1, q_2) \in \setQ^2 \mid q_1 < q_2 \} \\
-				\mathfrak{Q}_2 = (\setQ, <), &\qquad\text{d.h.}\quad R^{\mathfrak{Q}_2} = \{ (q_1, q_2) \in \setQ^2 \mid q_1 < q_2 \}
+				\mathfrak{Q}_2 = (\setQ, \leq), &\qquad\text{d.h.}\quad R^{\mathfrak{Q}_2} = \{ (q_1, q_2) \in \setQ^2 \mid q_1 \leq q_2 \}
 			\end{align*}
 			sind zwei verschiedene $\mathcal{L}$-Strukturen auf $\setQ$.
 			\item $\mathcal{L}_{HGr} = \{ \circ \}$ und $\mathcal{L}_Gr = \{ \circ, {}^{-1}, e \}$
@@ -277,6 +277,11 @@
 			\item $\bot \quad \top$
 			\item $\tau_1 \doteq \tau_2$ für $\mathcal{L}$-Terme $\tau_1, \tau_2$
 			\item $R \tau_1 \dots \tau_n$ für $\mathcal{L}$-Terme $\tau_1, \dots, \tau_n$ und $n$-stelliges $R \in \mathcal{L}$
+			
+			\item Wenn $\varphi, \varphi_1, \varphi_2$ $\mathcal{L}$-Formeln sind, dann auch
+			\begin{equation*}
+				\lnot \varphi, (\varphi_1 \land \varphi_2), (\varphi_1 \lor \varphi_2), (\varphi_1 \rightarrow \varphi_2), (\varphi_1 \leftrightarrow \varphi_2), \exists v_i \varphi, \forall v_i \varphi
+			\end{equation*}
 		\end{itemize}
 	\end{definition}
 
@@ -287,7 +292,7 @@
 			\item nie gilt $\mathfrak{A} \models \bot[\beta]$
 			\item $\mathfrak{A} \models \corners{\tau_1 \doteq \tau_2}[\beta] \Leftrightarrow \tau_1^\mathfrak{A}[\beta] = \tau_2^\mathfrak{A}[\beta]$
 			\item $\mathfrak{A} \models R \tau_1 \dots \tau_n [\beta] \Leftrightarrow (\tau_1^\mathfrak{A}[\beta], \dots, \tau_n^\mathfrak{A}[\beta]) \in R^\mathfrak{A}$
-			\item Wenn $\varphi, \varphi_1, \varphi_2$ $\mathcal{L}$-Formeln sind, dann auch
+			\item Für die zusammengesetzten Formeln gilt:
 			\begin{align*}
 				&\lnot \varphi && \mathfrak{A} \models \lnot \varphi[\beta] \Leftrightarrow \mathfrak{A} \not\models \varphi[\beta] \\
 				&(\varphi_1 \land \varphi_2) && \mathfrak{A} \models (\varphi_1 \land \varphi_2) [\beta] \Leftrightarrow \mathfrak{A} \models \varphi_1[\beta] \text{ und } \mathfrak{A} \models \varphi_2[\beta] \\
@@ -403,7 +408,7 @@
 		\begin{itemize}
 			\item $T \subseteq T^\vdash = {T^\vdash}^\vdash$
 			\item $\mathfrak{A} \models T \Rightarrow \mathfrak{A} \models T^\vdash$ beziehungsweise $\operatorname{Mod}(T) = \operatorname{Mod}(T^\vdash)$
-			\item $T^\vdash$ ist die maximale Theorie $T' \supseteq T$ mit der Eigenschaft $\operatorname{Mod}(T) = \operatorname{Mod}(T^\vdash)$
+			\item $T^\vdash$ ist die maximale Theorie $T' \supseteq T$ mit der Eigenschaft $\operatorname{Mod}(T) = \operatorname{Mod}(T')$
 		\end{itemize}
 	\end{remark}
 
@@ -483,7 +488,7 @@
 		\begin{itemize}
 			\item Wenn $0 \neq b \in B$, dann ist
 			\begin{equation*}
-				\langle b \rangle \coloneqq \{ b^i \in B \mid b \subseteq b' \}
+				\langle b \rangle \coloneqq \{ b' \in B \mid b \subseteq b' \}
 			\end{equation*}
 			ein Filter, der von $b$ erzeugt Hauptfilter.
 			\item $\mathfrak{P}(\setN) = \operatorname{Pot}(\setN)$ der Frechet-Filter ist
@@ -601,7 +606,7 @@
 		
 		Aber
 		\begin{equation*}
-			\mathfrak{A} \preccurlyeq \mathfrak{B} \Leftrightarrow (\mathfrak{A} \subseteq \mathfrak{B} \text{ und } \mathfrak{A} \equiv \mathfrak{B})
+			\mathfrak{A} \preccurlyeq \mathfrak{B} \Leftrightarrow (\mathfrak{A} \subseteq \mathfrak{B} \text{ und } \mathfrak{A} \equiv \mathfrak{B} \text{ in } \mathcal{L}_A)
 		\end{equation*}
 	\end{remark}
 
@@ -631,7 +636,7 @@
 	\end{example}
 
 	\begin{theorem}[Tarskis Test]
-		Sei $\mathcal{L}$ eine Sprache, und $\mathfrak{B}$ eine $\mathcal{L}$-Struktur, und $A \subseteq B$. Dann ist $A$ genau dann Träger einer elementaren Unterstruktur von $\mathfrak{B}$, wenn für alle $\mathcal{L}_A$-Formeln $\varphi(v_0) \in \mathcal{F}_0(\mathcal{L}_A)$, die in $\mathfrak{B}$ erfüllt sind, gilt dass sie mit einem $a \in A$ erfüllt sind.
+		Sei $\mathcal{L}$ eine Sprache, und $\mathfrak{B}$ eine $\mathcal{L}$-Struktur, und $A \subseteq B$. Dann ist $A$ genau dann Träger einer elementaren Unterstruktur von $\mathfrak{B}$, wenn für alle $\mathcal{L}_A$-Formeln $\varphi(v_0) \in \mathcal{F}_1(\mathcal{L}_A)$, die in $\mathfrak{B}$ erfüllt sind, gilt dass sie mit einem $a \in A$ erfüllt sind.
 		
 		Das heißt wenn $\mathfrak{B} \models \exists v_0 \varphi(v_0)$, dann existiert $x \in A$ mit $\mathfrak{B} \models \varphi(a)$.
 	\end{theorem}
@@ -654,7 +659,7 @@
 			\textit{Bedingung:} es existiert $a \in A$ mit $\mathfrak{B} \models f a_1 \dots a_n \doteq a$.
 			
 			Also $f^\mathfrak{B}(a_1, \dots, a_n) \in A$, das heißt $A$ ist Träger einer Unterstruktur.
-			\item Zeige per Induktion übe den Aufbau der $\mathcal{L}_A$-Formeln
+			\item Zeige per Induktion über den Aufbau der $\mathcal{L}_A$-Formeln
 			\begin{equation*}
 				\mathfrak{A} \models \varphi \Leftrightarrow \mathfrak{B} \models \varphi
 			\end{equation*}
@@ -662,7 +667,7 @@
 				\item Induktionsanfang: $\varphi$ Atomar
 				\begin{align*}
 					\mathfrak{A} \subseteq \mathfrak{B} &\Leftrightarrow id_A: A \to B \text{$\mathcal{L}_A$-Einbettung} \\
-					&\Leftrightarrow \mathcal{L}_h \models \operatorname{Diag}(\mathfrak{A}_A) = \operatorname{Diag(\mathfrak{A})} \\
+					&\Leftrightarrow \mathfrak{B}_h \models \operatorname{Diag}(\mathfrak{A}_A) = \operatorname{Diag(\mathfrak{A})} \\
 					&\Leftrightarrow \text{für alle atomaren Formeln $\varphi \in \mathcal{F}_0(\mathcal{L}_A)$ gilt: } (\mathfrak{A} \models \varphi \Leftrightarrow \mathfrak{B} \models \varphi)
 				\end{align*}
 				\item Induktionsschritte
@@ -759,7 +764,7 @@
 		
 		Also gilt $\mathfrak{A}_n \models \varphi(a)$ und somit
 		\begin{equation*}
-			\mathfrak{A}_i \preccurlyeq \mathfrak{A}_n \models \exists x \varphi(x) \Rightarrow \mathfrak{A}_i \models \exists x \varphi()x
+			\mathfrak{A}_i \preccurlyeq \mathfrak{A}_n \models \exists x \varphi(x) \Rightarrow \mathfrak{A}_i \models \exists x \varphi(x)
 		\end{equation*}
 	\end{proof}
 
@@ -789,9 +794,9 @@
 		
 		$\mathfrak{A}$ wird Modell von $T_0$, indem man die endlich vielen Konstanten in $T_0$ durch beliebige, paarweise verschiedene Elemente von $A$ interpretiert.
 		
-		Sei $\mathcal{L}' \models T^c$.
+		Sei $\mathfrak{B}' \models T^c$.
 		
-		Dann ist $\underbrace{\mathcal{L}' \upharpoonright_\mathcal{L}}_\text{Redukt auf $\mathcal{L}$} \succcurlyeq \mathfrak{A}$ und $\abs{B'} \geq \kappa$.
+		Dann ist $\underbrace{\mathfrak{B}' \upharpoonright_\mathcal{L}}_\text{Redukt auf $\mathcal{L}$} \succcurlyeq \mathfrak{A}$ und $\abs{B'} \geq \kappa$.
 		
 		Wähle Teilmenge $S \subseteq B$, die $A$ enthält und so, dass $\abs{S} = \kappa$. Wende Folgerung \ref{cor:elUnterstruktExistiert} auf $\mathfrak{B}'_A$ an.
 		
@@ -821,7 +826,7 @@
 	Definiere $\mathcal{L}$-Struktur $\prod_{i \in I} \mathfrak{A}_i$ auf $\prod_{i \in I} A_i$.
 	
 	\begin{align*}
-		f^\mathfrak{A}(p_1, \dots, p_n) = p \quad&\Leftrightarrow\quad \text{für alle $i \in I$ } p(i) =  f^{\mathfrak{A}_i}(p_1(i), \dots, p_n(i) \\
+		f^\mathfrak{A}(p_1, \dots, p_n) = p \quad&\Leftrightarrow\quad \text{für alle $i \in I$ } p(i) =  f^{\mathfrak{A}_i}(p_1(i), \dots, p_n(i)) \\
 		(p_1, \dots, p_n) \in R^\mathfrak{A} \quad&\Leftrightarrow\quad \text{für alle $i \in I$ } (p_1(i), \dots, p_n(i)) \in R^{\mathfrak{A}_i}
 	\end{align*}
 	
@@ -909,7 +914,7 @@
 		Insbesondere 
 		\begin{itemize}
 			\item falls $\mathfrak{A}_i \models T$ für alle $i$, dann $\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models T$
-			\item falls $\mathfrak{A}_i \equiv \mathfrak{A}_j$ für alle $i \in I$, dann $\prod \mathfrak{A}_i / \mathcal{U} \equiv \mathfrak{A}_i$
+			\item falls $\mathfrak{A}_i \equiv \mathfrak{A}_j$ für alle $i \in I$, dann $\prod \mathfrak{A}_i / \mathcal{U} \equiv \mathfrak{A}_j$
 		\end{itemize}
 	\end{theorem}
 
@@ -945,7 +950,7 @@
 				&\prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \models \lnot \varphi \\
 				\Leftrightarrow& \prod_{i \in I} \mathfrak{A}_i / \mathcal{U} \not\models \varphi \\
 				\Leftrightarrow& I_\varphi = \{ i \mid \mathfrak{A}_i \models \varphi \} \notin \mathcal{U} \\
-				\overset{\text{Ultra}}{\Leftrightarrow}&  I \setminus I_\varphi \{ i \mid \mathfrak{A}_i \models \lnot \varphi \} \in \mathcal{U}
+				\overset{\text{Ultra}}{\Leftrightarrow}&  I \setminus I_\varphi = \{ i \mid \mathfrak{A}_i \models \lnot \varphi \} \in \mathcal{U}
 			\end{align*}
 			
 			Für Existenz
@@ -1034,7 +1039,7 @@
 		
 		$\mathcal{F}$ ist Filter auf $I$:
 		\begin{itemize}
-			\item $\emptyset \in \mathcal{F}$
+			\item $\emptyset \notin \mathcal{F}$
 			\item Monotonie: per Definition
 			\item $\mathcal{X}_1, \mathcal{X}_2 \in \mathcal{F}$, dann existiert $T_i \subseteq_\text{endl} T$ mit $\langle T_i \rangle \subseteq \mathcal{X}_i$. Dann gilt
 			\begin{equation*}
@@ -1042,12 +1047,12 @@
 			\end{equation*}
 		\end{itemize}
 	
-		Sei $\mathcal{U}$ ein Ultrafilter, der $\mathcal{F}$ erweitert. Wähle für jedes $T_0 \in I$ ein Modell $\mathfrak{M}_{T_0} \models T_0$ und setze $\mathfrak{M} \coloneq \prod_{T_0 \in I} \mathfrak{M}_{T_0} / \mathcal{U}$.
+		Sei $\mathcal{U}$ ein Ultrafilter, der $\mathcal{F}$ erweitert. Wähle für jedes $T_0 \in I$ ein Modell $\mathfrak{M}_{T_0} \models T_0$ und setze $\mathfrak{M} \coloneqq \prod_{T_0 \in I} \mathfrak{M}_{T_0} / \mathcal{U}$.
 		
 		Mit Satz von \L os: prüfe, dass $\varphi \in T \Rightarrow \mathfrak{M} \models \varphi$.
 		
 		\begin{equation*}
-			\{ T_1 \in I \mid \mathfrak{M}_{T_1} \models \varphi \} \supseteq \{ T1 \in I \mid \varphi \in T_1 \} = \langle \{ \varphi \} \rangle \in \mathcal{F} \subseteq \mathcal{U}
+			\{ T_1 \in I \mid \mathfrak{M}_{T_1} \models \varphi \} \supseteq \{ T_1 \in I \mid \varphi \in T_1 \} = \langle \{ \varphi \} \rangle \in \mathcal{F} \subseteq \mathcal{U}
 		\end{equation*}
 	\end{proof}
 
@@ -1142,7 +1147,7 @@
 		\end{equation*}
 		und nach Kompaktheitssatz sagt es gibt endliches $T_0 \subseteq T$ so dass $T_0$ inkonsistent ist.
 		
-		Und mit der Kompaktheit von $S(\mathcal{F}_0(\mathcal{L}))$ existieren $\varphi_0, \dots, \varphi_n \in T$ mit $[\varphi_0[]] \cap \dots \cap [[\varphi_n]] = \emptyset$.
+		Und mit der Kompaktheit von $S(\mathcal{F}_0(\mathcal{L}))$ existieren $\varphi_0, \dots, \varphi_n \in T$ mit $[[\varphi_0]] \cap \dots \cap [[\varphi_n]] = \emptyset$.
 		
 		Wir können im ersten Fall $T_0 = \{ \varphi_0, \dots, \varphi_n \}$ mit $\varphi_i$ aus dem zweiten Teil wählen.
 	\end{remark}
@@ -1212,7 +1217,7 @@
 				
 				\heading{Gerade Induktionsschritte:} Idee: Stelle sicher, dass $\beta$ totale Funktion ist.
 				
-				Sei $j$ der kleinste Index, so dass $\beta(a_j)$ noch nicht definiert ist. Wähle $b_{i_{n+1}}$ so, dass $a_{i_{n+1}} \coloneqq a_{i_{n+1}} \coloneqq a_j \mapsto b_{i_{n+1}}$ ordnungserhaltende Fortsetzung ist.
+				Sei $j$ der kleinste Index, so dass $\beta(a_j)$ noch nicht definiert ist. Wähle $b_{i_{n+1}}$ so, dass $a_{i_{n+1}} \coloneqq a_j \mapsto b_{i_{n+1}}$ ordnungserhaltende Fortsetzung ist.
 			\end{proof}
 		
 			Folgerung: $T_{DLO}$ ist vollständig.
@@ -1386,6 +1391,11 @@
 		\item $\Delta$ alles $h: \mathfrak{A} \to_\Delta \mathfrak{B}$ $\Leftrightarrow$ $h$ elementar
 	\end{itemize}
 
+	\begin{align*}
+		\mathfrak{A} \Rightarrow_\Delta \mathfrak{B} :&\Leftrightarrow \text{jede $\Delta$-Aussage, die in $\mathfrak{A}$ gilt, gilt auch in $\mathfrak{B}$} \\
+		&\Leftrightarrow \operatorname{Th}_\Delta(\mathfrak{A}) = \{ \delta \mid \mathfrak{A} \models \delta, \delta \in \Delta \} \subseteq \operatorname{Th}_\Delta(\mathfrak{B})
+	\end{align*}
+
 	\begin{lemma}
 		Sei $T$ eine $\mathcal{L}$-Theorie, $\mathfrak{A}$ eine $\mathcal{L}$-Struktur. $\Delta$ abgeschlossen bezüglich $\exists, \land$ und Umbenennung von Variablen.
 		
@@ -1484,14 +1494,14 @@
 		
 		Mit dem Satz folgt: Es gibt eine universelle $\mathcal{L}_c$ Aussage $\psi^{(c)}$ die $T^+$ von $T^-$ trennt, das heißt
 		\begin{equation*}
-			T^+ \vdash \psi(\overline{c}), T \vdash \lnot \psi(\overline{c})
+			T^+ \vdash \psi(\overline{c}), T^- \vdash \lnot \psi(\overline{c})
 		\end{equation*}
 		Es folgt
 		\begin{align*}
-			T \cup \{ \varphi(\overline{c}) &\vdash \psi(\overline{c}) \} & T &\vdash \varphi(\overline{c}) \rightarrow \psi(\overline{c}) \\
-			T \cup \{ \varphi(\overline{c}) \} &\vdash \psi(\overline{c}) & T &\vdash \lnot \varphi(\overline{c}) \rightarrow \lnot \psi(\overline{c})
+			T \cup \{ \varphi(\overline{c})\} &\vdash \psi(\overline{c}) & T &\vdash \varphi(\overline{c}) \rightarrow \psi(\overline{c}) \\
+			T \cup \{ \lnot \varphi(\overline{c}) \} &\vdash \lnot \psi(\overline{c}) & T &\vdash \lnot \varphi(\overline{c}) \rightarrow \lnot \psi(\overline{c})
 		\end{align*}
-		$\overline{c}$ kommt in $T$ vor, also:
+		$\overline{c}$ kommt nicht in $T$ vor, also:
 		\begin{align*}
 			T &\vdash \forall x (\varphi(x) \rightarrow \psi(x)) \\
 			T &\vdash \forall x (\lnot \varphi(x) \rightarrow \lnot \psi(x))
@@ -1502,7 +1512,7 @@
 	\end{proof}
 
 	\begin{definition}
-		$T_\forall \coloneqq = \{ \varphi \text{universelle $\mathcal{L}$-Aussage} \mid T \vdash \varphi \}$
+		$T_\forall \coloneqq \{ \varphi \text{universelle $\mathcal{L}$-Aussage} \mid T \vdash \varphi \}$
 		
 		(Falls $T = T^\vdash$ dann $T_\forall = T \cap \forall$)
 		
@@ -1510,7 +1520,7 @@
 	\end{definition}
 
 	\begin{corollary}
-		$T$ ist universell, d.h. $T_\forall^\vdash = T^\vdash$. (äquivalent $T$ ist $\forall$-Axiomatisierbar, d.h. es bit $\varphi_i$ universell mit $\{ \varphi_i \mid i \in I \}^\vdash = T^\vdash$)
+		$T$ ist universell, d.h. $T_\forall^\vdash = T^\vdash$. (äquivalent $T$ ist $\forall$-Axiomatisierbar, d.h. es gibt $\varphi_i$ universell mit $\{ \varphi_i \mid i \in I \}^\vdash = T^\vdash$)
 		
 		$\Leftrightarrow$ wenn $\mathfrak{A} \subseteq \mathfrak{B}$ und $\mathfrak{B} \models T$, dann $\mathfrak{A} \models T$
 	\end{corollary}
@@ -1584,7 +1594,7 @@
 		\begin{equation*}
 			\mathfrak{A}_0 \subseteq \mathfrak{A}_2 \subseteq \dots \subseteq \bigcup_{i \in \omega} \mathfrak{A}_i = \mathfrak{A}_\omega
 		\end{equation*}
-		und $\mathfrak{A}_i \models \varphi$, $\varphi$ $\forall \exists$-Aussage, dann $\mathfrak{A}_\omega \models \varphi$ für alle $i \in \omega$.
+		und $\mathfrak{A}_i \models \varphi$ für alle $i \in \omega$, $\varphi$ $\forall \exists$-Aussage, dann $\mathfrak{A}_\omega \models \varphi$.
 	\end{lemma}
 
 	\begin{proof}
@@ -1606,7 +1616,7 @@
 	\end{theorem}
 
 	\begin{proof}
-		\heading{1) $\Rightarrow 2)$}: Da $\mathfrak{A}_i \models T$ gilt insbesondere $\mathfrak{A} \models \varphi$. Da $\varphi$ $\forall\exists$, gilt nach Lemma $\mathfrak{A}_\omega \models \varphi$, somit $\mathfrak{A}_\omega \not\models T$.
+		\heading{1) $\Rightarrow 2)$}: Da $\mathfrak{A}_i \models T$ gilt insbesondere $\mathfrak{A} \models \varphi$. Da $\varphi$ $\forall\exists$, gilt nach Lemma $\mathfrak{A}_\omega \models \varphi$, somit $\mathfrak{A}_\omega \not\models T'$.
 		
 		\heading{$\lnot 1) \Rightarrow \lnot 2)$}:
 		
@@ -1688,7 +1698,7 @@
 		
 		Satz: Es gibt $\forall\exists$-Aussage $\psi$, die $T$ von $\{ \lnot \varphi \}$ trennt. $T \vdash \psi$, d.h. $\psi \in T_{\forall\exists}$
 		
-		$\lnot \varphi \vdash \psi$ d.h. $\psi \vdash \varphi$ insbesondere $T_{\forall\exists} \vdash \varphi$
+		$\lnot \varphi \vdash \lnot \psi$ d.h. $\psi \vdash \varphi$ insbesondere $T_{\forall\exists} \vdash \varphi$
 	\end{proof}
 
 	\begin{definition}
@@ -1888,7 +1898,7 @@
 		
 		Erster Teil: Jede $\mathcal{L}$-Formel $\varphi$ ist modulo $T^*$ quantorenfrei, nämlich zu $R_\varphi$.
 		
-		Sei $\psi$ eine $\mathcal{L}^*$-Formel. Dann ist $\psi$ modulo äquivalent zu einer $\mathcal{L}$-Formel $\psi_*$, die aus $\psi$ entsteht, indem jedes $R_\varphi$ durch $\varphi$ ersetzt wird. Dann
+		Sei $\psi$ eine $\mathcal{L}^*$-Formel. Dann ist $\psi$ modulo $T^*$ äquivalent zu einer $\mathcal{L}$-Formel $\psi_*$, die aus $\psi$ entsteht, indem jedes $R_\varphi$ durch $\varphi$ ersetzt wird. Dann
 		\begin{equation*}
 			\psi \sim_{T^*} \psi_* \sim_{T^*} \underbrace{R_{\psi_*}}_\text{q.f. $\mathcal{L}^*$-Formel}
 		\end{equation*}
@@ -1941,7 +1951,7 @@
 		
 		Hier kann man sehen:
 		\begin{equation*}
-			\left\{ \left\{ (m_1, \dots, m_n) \middle| \substack{m_i = m_j \; (i,j) \in P \\ m_k \neq m_l \; (k,l) \in N} \right\} \middle| P,N \subseteq \{1,dots, n \}^2  \right\}
+			\left\{ \left\{ (m_1, \dots, m_n) \middle| \substack{m_i = m_j \; (i,j) \in P \\ m_k \neq m_l \; (k,l) \in N} \right\} \middle| P,N \subseteq \{1, \dots, n \}^2  \right\}
 		\end{equation*}
 		ist die Familie der in $\mathfrak{M}$ definierbaren Mengen. Beobachtung: Sind alle q.f.-definierbar.
 	\end{example}
@@ -1963,7 +1973,7 @@
 			
 			Die definierbaren Teilmengen von $\setZ$ sind $\emptyset, \setZ$. Aber in $\setZ^2$ gibt es nicht q.f. definierbare Teilmengen z.B. $\{ (x_1, x_2) \mid \text{$x_2$ ist direkter Nachfolger von $x_1$} \}$ und wird definiert durch $x_1 < x_2 \land \lnot \exists y (x_1 < x \land x < x_2)$
 			
-			\item $(\setQ, <)$ hat EQ d.h. insbesondere die definierbaren Teilmengen von $\setQ^2$ sind
+			\item $(\setQ, <)$ hat QE d.h. insbesondere die definierbaren Teilmengen von $\setQ^2$ sind
 			\begin{align*}
 				\Delta_\setQ &= \{ (q,q) \mid q \in \setQ \} \\
 				<_\setQ &= \{ (q,r) \mid q < r \} \\
@@ -2033,7 +2043,7 @@
 	\begin{proof}
 		\heading{$2) \Rightarrow 3)$:} klar
 		
-		\heading{$1) \Rightarrow 2)$:} Wegen EQ gilt: $T \models \forall \overline{x}(\varphi(\overline{x}) \leftrightarrow \chi(\overline{x})$ mit q.f. $\chi$.
+		\heading{$1) \Rightarrow 2)$:} Wegen QE gilt: $T \models \forall \overline{x}(\varphi(\overline{x}) \leftrightarrow \chi(\overline{x})$ mit q.f. $\chi$.
 		
 		\begin{equation*}
 			\mathfrak{M} \models \varphi(\overline{a}) \Leftrightarrow \mathfrak{M} \models \chi(\overline{a}) \Leftrightarrow \mathfrak{A} \models \chi(\overline{a}) \Leftrightarrow \mathfrak{N} \models \varphi(\overline{a})
@@ -2072,7 +2082,7 @@
 		\begin{itemize}
 			\item Wohldefiniert?
 			\begin{equation*}
-				\tau_1^\mathfrak{M}(\overline{a}) = \tau_2^\mathfrak{M}(\overline{a}) \Leftrightarrow \mathfrak{M} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{a}}{\overline{x}} \Rightarrow \mathfrak{N} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{b}}{\overline{x}} \Leftrightarrow \tau_1^\mathfrak{N}(\overline{B}) ? \tau_2^\mathfrak{N}(\overline{b})
+				\tau_1^\mathfrak{M}(\overline{a}) = \tau_2^\mathfrak{M}(\overline{a}) \Leftrightarrow \mathfrak{M} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{a}}{\overline{x}} \Rightarrow \mathfrak{N} \models (\tau_1(\overline{x}) = \tau_2(\overline{x}))\frac{\overline{b}}{\overline{x}} \Leftrightarrow \tau_1^\mathfrak{N}(\overline{b}) = \tau_2^\mathfrak{N}(\overline{b})
 			\end{equation*}
 		\end{itemize}
 	\end{proof}
@@ -2179,7 +2189,7 @@
 		$\mathcal{L} = \{ P_i \mid i \in \omega \}$ $P_i$ einstellige Relationszeichen
 		
 		\begin{equation*}
-			T \coloneqq \left\{ \exists x \left( \bigwedge_{j=0}^n P_{i_j} x \land \bigwedge_l=0^m \lnot P_{k_l} x \right) \middle| n,m \in \setN, \{i_0, \dots, i_n \} \cap \{ k_0, \dots, k_m \} = \emptyset, i_j, k_l \in \setN  \right\}
+			T \coloneqq \left\{ \exists x \left( \bigwedge_{j=0}^n P_{i_j} x \land \bigwedge_{l=0}^m \lnot P_{k_l} x \right) \middle| n,m \in \setN, \{i_0, \dots, i_n \} \cap \{ k_0, \dots, k_m \} = \emptyset, i_j, k_l \in \setN  \right\}
 		\end{equation*}
 		
 		$m \in M$ definiert Funktion $\chi_m: \setN \to \{ 0,1 \}$ durch $\chi_m(i) = 1 \Leftrightarrow m \in P_i^M$. Löwenheim Skolem: es gibt abzählbare Modelle $\mathfrak{M} \subseteq \mathfrak{M}'$ mit $\mathfrak{M}, \mathfrak{M}' \models T$, dann muss für jedes $m \in M$ die Funktion $\chi_m$ in $\mathfrak{M}'$ realisiert sein.
@@ -2202,9 +2212,9 @@
 	\begin{proof}
 		Seien $T^*, T^+$ Modellbegleiter von $T$. Sei $\mathcal{A}_0 \models T^*$.
 		
-		$\mathfrak{A}_0 \models T \subseteq \mathfrak{M}_0 \models T \mathfrak{B}_0 \models T^+ \subseteq \mathfrak{N}_0 \models T \subseteq \mathfrak{A}_1 \models T^* \subseteq \mathfrak{M}_1 \models T \subseteq \mathfrak{B}_1 \models T^+ \subseteq \dots$
+		$\mathfrak{A}_0 \models T^* \subseteq \mathfrak{M}_0 \models T \subseteq \mathfrak{B}_0 \models T^+ \subseteq \mathfrak{N}_0 \models T \subseteq \mathfrak{A}_1 \models T^* \subseteq \mathfrak{M}_1 \models T \subseteq \mathfrak{B}_1 \models T^+ \subseteq \dots$
 		
-		$\Rightarrow \mathbb{A}_0 \preccurlyeq \mathfrak{A}_1$ und $\mathfrak{B}_0 \preccurlyeq \mathfrak{B}_1$, da $T^*, T^+$ modellvollständig sind.
+		$\Rightarrow \mathfrak{A}_0 \preccurlyeq \mathfrak{A}_1$ und $\mathfrak{B}_0 \preccurlyeq \mathfrak{B}_1$, da $T^*, T^+$ modellvollständig sind.
 		
 		$\mathfrak{A}_0 \preccurlyeq \bigcup_{i \in \omega} \mathfrak{A}_i = \bigcup_{i \in \omega} \mathfrak{B}_i \models T^+$, somit $\mathfrak{A}_0 \models T^+$ und Somit $\operatorname{Mod}(T^*) = \operatorname{Mod(T^+)}$.
 	\end{proof}
@@ -2246,7 +2256,7 @@
 		
 		Sei nun $\mathfrak{M} \models \varphi(\overline{a})$. Dann $\mathfrak{B} \models \varphi(\overline{a})$ also auch $\mathfrak{A} \models \varphi(\overline{a})$.
 		
-		\heading{$\Leftrightarrow$:} Sei $\mathfrak{A} \models T^*, \mathfrak{B} \models T^*, \mathfrak{A} \subseteq \mathfrak{B}$. Zeige $\mathfrak{A} \preccurlyeq \mathfrak{B}$.
+		\heading{$\Leftarrow$:} Sei $\mathfrak{A} \models T^*, \mathfrak{B} \models T^*, \mathfrak{A} \subseteq \mathfrak{B}$. Zeige $\mathfrak{A} \preccurlyeq \mathfrak{B}$.
 		
 		Dann $\mathfrak{A} \subseteq \mathfrak{B} \hookrightarrow \mathfrak{M} \models T$ mit $T^* \supseteq T_\forall$ und $\mathfrak{A} \preccurlyeq_1 \mathfrak{M}$ nach Voraussetzung.
 		
@@ -2397,14 +2407,14 @@
  
  	\begin{definition}
  		\begin{itemize}
- 			\item Eine Menge $p = p(x_1, \dots, x_n)$ von $\mathcal{L}_A$-Formeln heißt (vollständiger) $n$-Type über $A$ in $\mathfrak{M}$, falls $p$ maximale in $\mathfrak{M}$ endlich erfüllbare Menge von $\mathcal{L}_A$-Formeln $\varphi(x_1, \dots, x_n)$ ist.
+ 			\item Eine Menge $p = p(x_1, \dots, x_n)$ von $\mathcal{L}_A$-Formeln heißt (vollständiger) $n$-Typ über $A$ in $\mathfrak{M}$, falls $p$ maximale in $\mathfrak{M}$ endlich erfüllbare Menge von $\mathcal{L}_A$-Formeln $\varphi(x_1, \dots, x_n)$ ist.
  			
  			Äquivalent: Für jede $\mathcal{L}_A$-Formel $\varphi(x_1, \dots, x_n)$ ist $\varphi \in p$ oder $\lnot \varphi \in p$.
  			\item Wenn $m_1, \dots, m_n \in M$, dann ist
  			\begin{equation*}
 	 			\operatorname{tp}^\mathfrak{M}(m_1, \dots, m_n/A) = \{ \varphi(x_1, \dots, x_n) \mid \varphi \text{ $\mathcal{L}_A$-Formel} \; \mathfrak{M} \models \varphi(m_1, \dots, m_n) \}
  			\end{equation*}
- 			ist der (vollständige) Typ von $(m_1, \dots, m_n)$ über $A$ in $\mathfrak{M}$.
+ 			der (vollständige) Typ von $(m_1, \dots, m_n)$ über $A$ in $\mathfrak{M}$.
  			\item Die Menge der $n$-Typen über $A$ in $\mathfrak{M}$ wird mit $S_n^\mathfrak{M}(A)$ bezeichnet.
  			
  			Wenn $\mathfrak{M}$ aus dem Kontext ersichtlich ist, schreibt man $\operatorname{tp}(\overline{m}/A), S_n(A), \dots$
@@ -2541,7 +2551,7 @@
  			\begin{equation*}
 	 			x_1 \doteq a_1 \land \dots \land x_n \doteq a_n \in p
  			\end{equation*}
- 			\item isoliert, falls es eine Formel $\varphi$ gibt so dass $p$ der einzige Typ aus $S_n^\mathfrak{M}(A)$ ist, der $\varphi$ enthält.
+ 			\item isoliert, falls es eine Formel $\varphi$ gibt, so dass $p$ der einzige Typ aus $S_n^\mathfrak{M}(A)$ ist, der $\varphi$ enthält.
  			\begin{equation*}
 	 			\left( \langle \varphi \rangle = \{ q \in S_n^\mathfrak{M}(A) \mid \varphi \in q \} \overset{!}{=} \{ p \} \right)
  			\end{equation*}
@@ -2552,7 +2562,7 @@
  	\begin{remark}
  		\begin{itemize}
  			\item Die realisierten Typen sind durch die Formel $x_1 = a_1 \land \dots \land x_n \doteq a_n$ isoliert.
- 			\item Ein isolierter Type ist in $\mathfrak{M}$ realisiert, denn $\mathfrak{M} \models \exists \overline{x} \varphi(\overline{x})$ das heißt es gibt $\overline{m} \in M$ mit $\mathfrak{M} \models \varphi(\overline{m})$. Also $\varphi \in \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$ somit $p = \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$
+ 			\item Ein isolierter Typ ist in $\mathfrak{M}$ realisiert, denn $\mathfrak{M} \models \exists \overline{x} \varphi(\overline{x})$ das heißt es gibt $\overline{m} \in M$ mit $\mathfrak{M} \models \varphi(\overline{m})$. Also $\varphi \in \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$ somit $p = \operatorname{tp}^\mathfrak{M}(\overline{m} / A)$
  		\end{itemize}
  	\end{remark}
  
@@ -2683,7 +2693,7 @@
 			&= \{ p \mid \varphi_i \in p, i \in I \} \\
 			&= \{ p \mid \Sigma \subseteq p \}
 		\end{align*}
-		mit $\Sigma = \{ p \mid \Sigma \subseteq p \}$.
+		mit $\Sigma = \{ \varphi_i \mid i \in I \}$.
 		
 		Abgeschlossene Mengen entsprechen Theorien/Formelmengen in $\mathcal{F}_{n/\infty}(\mathcal{L}) / \sim_T$.
 		
@@ -2716,7 +2726,7 @@
 		
 		\textit{2. Schritt:} Behauptung: $S_\omega^T \setminus \mathcal{O}_\varphi$ ist nirgends dicht. Also falls $\mathcal{O} \neq \emptyset$ offen, ist $\mathcal{O} \cap \mathcal{O}_\varphi \neq \emptyset$. Ohne Einschränkung $\mathcal{O} = \langle \psi(\overline{x}) \rangle$.
 		
-		Wähle $i$ so, dass $x_i$ weder in $\varphi(\overline{x}, y)$ noch in $\psi(\overline{x})$ vorkommt. Dann ist $T \cup \{ \exists y \varphi(\overline{x},y) \rightarrow \varphi(x, x_i), \psi(\overline{x}) \}$ konsistent.
+		Wähle $i$ so, dass $x_i$ weder in $\varphi(\overline{x}, y)$ noch in $\psi(\overline{x})$ vorkommt. Dann ist $T \cup \{ \exists y \varphi(\overline{x},y) \rightarrow \varphi(\overline{x}, x_i), \psi(\overline{x}) \}$ konsistent.
 		
 		Folglich ist $S_\omega^T \setminus \bigcap_\varphi \mathcal{O}_\varphi = \bigcup_\varphi S_\omega^T \setminus \mathcal{O}_\varphi$ mager. Da $\abs{\mathcal{L}} \leq \aleph_0$, gibt es hächstens abzählbar viele Formeln der Form $\exists y \varphi(\overline{x}, y)$.
 		
@@ -2778,8 +2788,8 @@
 			&= \{ \operatorname{tp}(c_{\alpha(0)}, \dots, c_{\alpha(n)}) \mid c_i \in N, \mathfrak{N} \models \varphi(\overline{c}) \} \\
 			\intertext{in Variablen $v_0, \dots, v_{n-1}$} \\
 			&= \left\{ q \in S_n^T \mid \exists \overline{y} \varphi\left( \frac{v_0, \dots, v_{n-1}}{\overline{x}} , \overline{y} \right) \in q, v_i = v_j \in q \text{für alle $0 \leq i < j < n$ mit $\alpha(i) = \alpha(j)$} \right\} \\
-			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \cap \bigcap_{\alpha(i) = \alpha(j)} \langle v_i \doteq v_j \rangle \\
-			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \land \bigwedge_{\alpha(i) = \alpha(j)} v_i \doteq v_j
+			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \rangle \cap \bigcap_{\alpha(i) = \alpha(j)} \langle v_i \doteq v_j \rangle \\
+			&= \langle \exists \overline{y} \varphi(\frac{\overline{v}}{\overline{x}}, \overline{y}) \land \bigwedge_{\alpha(i) = \alpha(j)} v_i \doteq v_j \rangle
 		\end{align*}
 		ist offen.
 	
@@ -2820,7 +2830,7 @@
 	\begin{definition}
 		Seien $\mathfrak{M}, \mathfrak{N}$ $\mathcal{L}$-Strukturen $A \subseteq M, B \subseteq N$.wenn
 		
-		$h: A \to B$ heißt elementare Abbildung falls $h$ die Gültigkeit von $\mathcal{L}_A$-Formeln erhält, d.h. $\mathfrak{M} \models \varphi(\overline{h}) \Leftrightarrow \mathfrak{N} \models \varphi(h(\overline{h}))$.
+		$h: A \to B$ heißt elementare Abbildung falls $h$ die Gültigkeit von $\mathcal{L}_A$-Formeln erhält, d.h. $\mathfrak{M} \models \varphi(\overline{a}) \Leftrightarrow \mathfrak{N} \models \varphi(h(\overline{a}))$.
 		
 		$h: A \to B$ heißt partieller Isomorphismus, falls $h$ elementar und bijektiv ist.
 	\end{definition}
@@ -2863,14 +2873,14 @@
 		Wenn $p \in S_n^\mathfrak{M}(\emptyset)$ isoliert ist und zwar durch $\varphi(\overline{x})$ das heißt $\emptyset \neq \langle \varphi(\overline{x}) \rangle = \{ p \}$, dann gilt für jede Formel $\psi(\overline{x})$ mit $\mathfrak{M} \models \exists
 		 \overline{x} \psi(\overline{x})$
 		 \begin{align*}
-			 \text{entweder:}& \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \psi(\overline{x}) \\
-			 \text{oder:} & \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \lnot \psi(\overline{x})
+			 \text{entweder:}& \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \psi(\overline{x})) \\
+			 \text{oder:} & \operatorname{Th}(\mathfrak{M}) \vdash \forall \overline{x} ( \varphi(\overline{x}) \to \lnot \psi(\overline{x}))
 		 \end{align*}
 		 Das heißt $\Phi \coloneqq \{ \overline{m} \in M \mid \mathfrak{M} \models \varphi(\overline{m}) \}$ kann nicht definierbar aufgeteilt werden, also definierbare Teilmengen von $M^n$ enthält entweder $\Phi$ oder ist disjunkt zu $\Phi$.
 		 
 		 In $\mathcal{F}_n(\mathcal{L}) / \sim_\mathfrak{M}$ ist $\varphi$ ein Atom, das heißt ein minimales Elemente oberhalb von $\bot$.
 		 
-		 Wenn $\mathfrak{M}$ atomar ist, sind alle $\mathcal{F}_n(\mathcal{L})/ \sim_\mathfrak{M}$ ist atomare Boolesche Algebra.
+		 Wenn $\mathfrak{M}$ atomar ist, sind alle $\mathcal{F}_n(\mathcal{L})/ \sim_\mathfrak{M}$ atomare Boolesche Algebren.
 	\end{remark}
 
 	\begin{theorem}
@@ -2894,7 +2904,7 @@
 		
 		Behauptung: $\operatorname{tp}(m_n / m_0, \dots, m_{n-1})$ ist isoliert
 		
-		$\operatorname{tp}(m_n / m_0, \dots, m_{n-1}, m_n)$ ist isoliert durch $\varphi(x_0, \dots, x_n)$, also ist $\operatorname{tp}(m_n / m_0, \dots, m_{n-1})$ isoliert (in $S_1^\mathfrak{M}(m_0, \dots, m_{n-1})$) durch $\varphi(m_0, \dots, m_{n-1}, x)$
+		$\operatorname{tp}(m_0, \dots, m_{n-1}, m_n / \emptyset)$ ist isoliert durch $\varphi(x_0, \dots, x_n)$, also ist $\operatorname{tp}(m_n / m_0, \dots, m_{n-1})$ isoliert (in $S_1^\mathfrak{M}(m_0, \dots, m_{n-1})$) durch $\varphi(m_0, \dots, m_{n-1}, x)$
 		
 		$h_n: \{ m_0, \dots, m_{n-1} \} \to \{ h(m_0), \dots, h(m_{n-1}) \}$ ist partieller Isomorphismus, also ist
 		\begin{equation*}
@@ -2917,7 +2927,7 @@
 		\begin{itemize}
 			\item $ACF_0$ hat $\tilde{\setQ}$ als elementares Primmodell. Das realisiert nur algebraische Typen, transzendenter Typ wird übergangen.
 			\item $(\setQ, <)$ ist $\aleph_0$-Kategorisch also ist $(\setQ, <)$ elementares Primodell
-			\item $\omega$ unabhängige Prädikate. Es gibt keien isolierten Typen! $(S_1^T)$ ist perfekte Menge
+			\item $\omega$ unabhängige Prädikate. Es gibt keine isolierten Typen! $(S_1^T)$ ist perfekte Menge
 		\end{itemize}
 	\end{example}
 
@@ -2958,7 +2968,7 @@
 		\begin{enumerate}
 			\item $\mathfrak{M}$ kann nie $\abs{M}^+$-saturiert sein. $M = \{ m_i \mid i < \kappa \}$.
 		
-			Existiert $p \in S_1(M)$ mit $\{ x \neq \mid i \in \kappa \} \subseteq p$ kann in $\mathfrak{M}$ nicht realisiert sein!
+			Existiert $p \in S_1(M)$ mit $\{ x \neq m_i \mid i \in \kappa \} \subseteq p$ kann in $\mathfrak{M}$ nicht realisiert sein!
 			
 			\item Falls $\mathfrak{M}$ $\kappa$-saturiert ist, dann realisiert $\mathfrak{M}$ auch alle $p \in S_n^\mathfrak{M}(A)$ mit $\abs{A} < \kappa$.
 			
@@ -3114,14 +3124,14 @@
 		Sei $\mathcal{L}' \subseteq \mathcal{L}$, $\mathfrak{A}$ eine $\mathcal{L}$-Struktur und $a_1, \dots, a_k \in A$
 		\begin{enumerate}
 			\item $\operatorname{Th}(\mathfrak{A})$ $\aleph_0$-kategorisch $\Rightarrow$ $\operatorname{Th}(\mathfrak{A} \upharpoonright \mathcal{L}')$ $\aleph_0$-kategorisch
-			\item $\operatorname{Th}(\mathcal{A})$ $\aleph_0$-kategorisch $\Leftrightarrow$ $\operatorname{Th}/\mathfrak{A}, a_1, \dots, a_k$ $\aleph_0$-kategorisch
+			\item $\operatorname{Th}(\mathcal{A})$ $\aleph_0$-kategorisch $\Leftrightarrow$ $\operatorname{Th}(\mathfrak{A}, a_1, \dots, a_k)$ $\aleph_0$-kategorisch
 		\end{enumerate}
 	\end{corollary}
 
 	\begin{proof}
 		\heading{1)} Seien $\varphi(x_1, \dots, x_n), \psi(x_1, \dots, x_n)$ $\mathcal{L}'$-Formeln und
 		\begin{equation*}
-			\operatorname{Th}(\mathfrak{A}) \vdash \forall \overline{x} (\varphi(\overline{x} \leftrightarrow \overline{x}))
+			\operatorname{Th}(\mathfrak{A}) \vdash \forall \overline{x} (\varphi(\overline{x}) \leftrightarrow \psi(\overline{x}))
 		\end{equation*}
 		das heißt $\varphi \sim_{\operatorname{Th}(\mathfrak{A})} \psi$
 		mit dem Interpolationssatz folgt
@@ -3203,7 +3213,7 @@
 	\end{theorem}
 
 	\begin{proof}
-		\heading{1. Fall:} $T$ nicht schmal, das heißt es gibt $n_0 \in \setN$ mit $\abs{S_{n_0}^T} > \aleph_0$. Jeder $n_0$-Type ist aber in einem abzählbaren Modell realisiert, das heißt es gibt überabzählbar viele abzählbare Modelle.
+		\heading{1. Fall:} $T$ nicht schmal, das heißt es gibt $n_0 \in \setN$ mit $\abs{S_{n_0}^T} > \aleph_0$. Jeder $n_0$-Typ ist aber in einem abzählbaren Modell realisiert, das heißt es gibt überabzählbar viele abzählbare Modelle.
 		
 		\heading{2. Fall:} $T$ schmal, nicht $\aleph_0$-kategorisch: Das heißt es gibt $n$ und einen nicht-isolierten Typ $p \in S_n^T$.
 		
@@ -3276,8 +3286,8 @@
 				\begin{tikzpicture}
 					\node(R1) at (0,0){$h: A$};
 					\node(ri) at (3,0){$B$};
-					\node(R2) at (0, -2){$h: A'$};
-					\node(s) at (3, -2){$B$};
+					\node(R2) at (0, -2){$h': A'$};
+					\node(s) at (3, -2){$B'$};
 					
 					\draw[->] (R1) -- (ri);
 					\draw[->] (R1) -- (R2) node[midway,left]{$\alpha$};
@@ -3324,13 +3334,39 @@
 			
 			Es gibt $n$ mit $B \subseteq \mathfrak{M}_n$.
 			
-			Der Isomorphietyp der Erweiterung $A \subseteq A'$ taucht in der liste unendlich oft auf. Sei $i_0$ der kleinste Index $\geq n$ eines Vorkommens dieses Isomorphietyps. Im Konstruktionsschritt $i_0 \to i_0 + 1$ wird ein zu $A'$ isomorphes $B'$ über $B$ hinzuamalgamiert.
+			Der Isomorphietyp der Erweiterung $A \subseteq A'$ taucht in der Liste unendlich oft auf. Sei $i_0$ der kleinste Index $\geq n$ eines Vorkommens dieses Isomorphietyps. Im Konstruktionsschritt $i_0 \to i_0 + 1$ wird ein zu $A'$ isomorphes $B'$ über $B$ hinzuamalgamiert.
 			
 			\item Seien $\mathfrak{M}, \mathfrak{N}$ schwach homogen mit Skelett $\mathcal{K}$, $A$ gemeinsame Unterstruktur. Zeige mit back-and-forth $\mathfrak{M} \cong_A \mathfrak{N}$. Daraus folgt: mit $A = \emptyset$ die Eindeutigkeit und die $\aleph_0$-Kategorizität.
 			
+			\item Wenn $A$ endliche $\mathcal{L}$-Struktur ist, $\abs{A} = n$, dann gibt es eine $\mathcal{L}$-Formel $\varphi(x_1, \dots, x_n)$, die den Isomorphietyp beschreibt, d.h. wenn $\mathfrak{M} \models \varphi(a_1, \dots, a_n)$ dann ist $\{ a_1, \dots, a_n \} \cong A$.
+			
+			Wenn $\mathcal{L} = \{ R_1, \dots, R_k \}$ mit $R_i$ $n_i$-stellig.
+			\begin{equation*}
+				\varphi_A(x_1, \dots, x_n) = \bigwedge_{R_i} \bigwedge_{\{ y_1, \dots, y_{n_i}\} \subseteq \{ x_1, \dots, x_n  \}} (\lnot) R_i y_1 \dots, y_{n_i}
+			\end{equation*}
+			
+			In $\operatorname{Th}(\mathfrak{M})$ ist beschrieben:
+			\begin{itemize}
+				\item $\operatorname{Skellet}(\mathfrak{M}) = \mathcal{K}$
+				\item $\mathfrak{M}$ ist schwach homogen
+			\end{itemize}
 		
+			Falls $A_1, \dots, A_{k_n}$ sämtliche Isomorphietypen von $n$-elementigen $\mathcal{L}$-Strukturen in $\mathcal{K}$ abdeckt, dann:
+			\begin{equation*}
+				\mathfrak{M} \models \exists \overline{x} \varphi_{A_1}(\overline{x}) \land \dots \land \exists \overline{x} \varphi_{A_{k_n}}(\overline{x}) \land \forall \overline{x}( \bigwedge_{i < j}^n x_i \neq x_j \rightarrow (\bigvee_{i=1}^{k_n} \varphi_{A_i} (\overline{x}) ) )
+			\end{equation*}
+			
+			Schwache Homogenität:
+			\begin{equation*}
+				\mathfrak{M} \models \forall \overline{x} \forall \overline{x}' \left( (\varphi_A(\overline{x}) \land \varphi_A(\overline{x}') \land \exists \overline{y} \varphi_{A'}(\overline{x}, \overline{y}) \rightarrow \exists \overline{y}'  \varphi_{A'}(\overline{x}', \overline{y}') \right)
+			\end{equation*}
+			für alle $n$ und alle Isomorphietypen $A$ und $A'$. Aus diesem und 4) folgt die $\aleph_0$-Kategorizität von $\operatorname{Th}(\mathfrak{M})$. Denn wenn $\mathfrak{N} \equiv \mathfrak{M}$ und abzählbar, dann ist $\mathfrak{N}$ ebenfalls schwach homogen und hat $\operatorname{Skellet}(\mathcal{K})$, also $\mathfrak{M} \cong \mathfrak{N}$ und es folgt die Quantorenelimination.
 		\end{enumerate}
 	\end{proof}
+
+	\begin{remark}
+		Es folgt, dass $\operatorname{Th}(\mathfrak{M})$ durch die Aussagen in 5) axiomatisiert wird.
+	\end{remark}
 
 	\begin{example}""
 		\begin{enumerate}
@@ -3341,5 +3377,116 @@
 			\item endliche geordnete Graphen $\rightsquigarrow$ $\mathfrak{M} = (\setQ, <, E)$ ein wie $\setQ$ geordneter Zufallsgraph
 		\end{enumerate}
 	\end{example}
+	
+	\section{$\aleph_1$-kategorische Theorien und der Satz von Morley}
+	
+	Sei $T$ eine vollständige abzählbare Theorie.
+	
+	\begin{theorem}[Michael Morley]
+		Falls $T$ $\kappa$-kategorisch für ein $\kappa > \aleph_0$. Dann ist $T$ $\kappa$-kategorisch für alle $\kappa > \aleph_0$.
+		
+		(Falls $\abs{\mathcal{L}} > \aleph_0$ gilt der Satz für $> \abs{\mathcal{L}}$)
+		
+		Für das Kategorizitätsspektrum einer Theorie $\{ \kappa \mid T \; \kappa\text{-kategorisch}, \kappa \geq \aleph_0 \}$ gibt es 4 Möglichkeiten.
+		\begin{itemize}
+			\item $\emptyset$ z.B. $\operatorname{Th}(\setN, +, \cdot)$, ZFC
+			\item $\aleph_0$ z.B. $\operatorname{Th}(\setQ, <)$
+			\item $\{ \kappa \mid \kappa > \aleph_0 \}$ z.B. $\operatorname{ACF}_0, \operatorname{ACF}_p$
+			\item $\{ \kappa \mid k \geq \aleph_0 \}$ z.B. unendliche Menge
+		\end{itemize}
+	\end{theorem}
+	
+	\subsection{$\aleph_0$-stabile Theorien}
+	
+	$T$ vollständig und abzählbar ohne endliche Modelle.
+	
+	Grundidee: wenige Typen $\hat{=}$ wenige Modelle
+	
+	\begin{definition}
+		Sei $\kappa \geq \aleph_0$ eine unendliche Kardinalzahl. $T$ heißt $\kappa$-stabil, falls für alle $\mathfrak{M} \models T$, alle $A \subseteq M$ mit $\abs{A} \leq \kappa$ gilt $\abs{S_1^\mathfrak{M}(A)} \leq \kappa$.
+	\end{definition}
+
+	\begin{remark}
+		Falls $T$ $\kappa$-stabil, dann gilt für $\abs{A} \leq \kappa$ auch $\abs{S_n^\mathfrak{M}(A)} \leq \kappa$.
+	\end{remark}
+
+	\begin{example}
+		\begin{itemize}
+			\item $ACF_p, ACF_0$ sind $\kappa$-stabil für jedes $\kappa$.
+			
+			$K \models ACF, A \subseteq K, \abs{A} \leq \kappa$ ohne Einschränkung ist $A$ ein Unterkörper (der von $A$ erzeugte Unterkörper hat Mächtigkeit $\max \{ \abs{A}, \aleph_0 \}$)
+			
+			$S_1(A)$:
+			\begin{itemize}
+				\item algebraische Typen: $\{ P(X) \doteq 0 \}^\vdash$ für $P \in A[X]$ irreduzibel
+				\item transzendenter Typ: $\{ P(X) \neq 0 \mid P \in A[X], P \neq 0 \}$
+			\end{itemize}
+		
+			$\abs{S_1(A)} \leq \abs{A[X]} + 1 \leq \kappa$
+			
+			\item $\operatorname{Th}(\setQ, <)$ ist nicht $\aleph_0$ stabil und für kein $\kappa$ $\kappa$-stabil.
+			
+			$\abs{S_1^\setR(\setQ)} = 2^{\aleph_0} \geq \abs{\setR} + 2$
+			
+			für jedes $r \in \setR$ gibt es den Typ $\operatorname{tp}(r/\setQ)$.
+		\end{itemize}
+	\end{example}
+
+	\begin{definition}
+		\begin{enumerate}
+			\item Ein binärer Baum von Formeln in $T$ ist:
+			\begin{itemize}
+				\item ein Modell $\mathfrak{M} \models T$
+				\item für jede endliche $\{ 0,1 \}$-Folge $s$ eine mit $\operatorname{Th}(\mathfrak{M})$ konsistente $\mathcal{L}_M$-Formel $\varphi_s$ ($s \{ 0, \dots, n-1 \} \to \{ 0,1 \}$ für ein $n \in \setN$)
+				\item $\operatorname{Th}(\mathfrak{M}) \vdash \forall x (\varphi_{s \circ i}(x) \to \varphi_s(x))$ für alle $s$ und $i \in \{0,1\}$.
+				\item $\varphi_{s \circ 0}$ und $\varphi_{s \circ 1}$ sind miteinander inkonsistent
+				\begin{equation*}
+					\operatorname{Th}(\mathfrak{M}) \vdash \lnot \exists x(\varphi_{s \circ 0}(x) \land \varphi_{s \circ 1}(x) )
+				\end{equation*}
+			\end{itemize}
+			\item $T$ heißt total transzendent, falls für kein $\mathfrak{M} \models T$ eine perfekte Menge in $S_1^\mathfrak{M}(M)$ gibt.
+			
+			Sei $X$ ein topologischer Raum: $P \subseteq X$ heißt perfekt in $X$, falls $P \neq \emptyset$, $P$ abgeschlossen und $P$ enthält keine isolierten Punkte in der induzierten Topologie, das heißt falls $\mathcal{O}$ eine offene Menge von $X$ und $P \cap \mathcal{O} \neq \emptyset$, dann $\abs{P \cap \mathcal{O}} \geq 2$. $X$ heißt perfekt, falls $X$ nicht perfekt in $X$ ist.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		$\emptyset \neq P \subseteq X$ ohne isolierte Punkte in der induzierten Topologie $\Rightarrow \overline{P}$ perfekt.
+	\end{remark}
+
+	\begin{theorem}
+		Äquivalent sind für $T$
+		\begin{enumerate}
+			\item Es gibt Modell $\mathfrak{M} \models T, A \subseteq M$ und perfekte Teilmenge in $S_1(A)$
+			\item Es gibt ein abzählbares Modell $\mathfrak{M} \models T, A \subseteq M$ mit $\abs{S_1(A)} \geq 2^{\aleph_0}$
+			\item Es gibt ein Modell $\mathfrak{M}$ von $T$, abzählbares $A \subseteq M$ mit $\abs{S_1(A)} \geq 2^{\aleph_0}$
+			\item Es gibt binären Baum von Formeln in $T$
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		\heading{$2) \Rightarrow 1)$} Cantor-Bendixson-Analyse. Sei $A$ abzählbar, $\abs{S_1(A)} \geq 2^{\aleph_0}$
+		
+		Definiere induktiv
+		\begin{align*}
+			X_0 &\coloneqq S_1(A) \\
+			X_{\alpha + 1} &\coloneqq X_\alpha \setminus \text{isolierte Punkte von $X_\alpha$ in der auf $X_\alpha$ induzierten Topologie} \\
+			X_\lambda &\coloneqq \bigcap_{\alpha < \lambda} X_\alpha \quad \text{$\lambda$-Limes-Ordinalzahl}
+		\end{align*}
+		Jeder Punkt in $X_\alpha \setminus A_{\alpha + 1}$ wird durch eine verschiedene $\mathcal{L}_A$-Formel isoliert.
+		
+		\begin{equation*}
+			X_\infty = \bigcap_{\alpha \in \text{Ord}} X_\alpha = \begin{cases}
+				\emptyset \\
+				\text{perfekte Menge}
+			\end{cases}
+		\end{equation*}
+		
+		$\abs{X_0 \setminus x_\infty} \leq \abs{\mathcal{L}_A} = \aleph_0 \text{ da } \abs{A} = \aleph_0$
+		
+		Da $\abs{X_0} \geq 2^{\aleph_0}$, folgt $\abs{X_\infty} \geq 2^\aleph_0$
+		
+		\heading{$3) \Rightarrow 2)$} Wähle mit Löwenheim-Skolem eine abzählbare elementare Unterstruktur von $\mathfrak{M}$ die $A$ enthält.
+ 	\end{proof}
 
 \end{document}
