@@ -3458,7 +3458,7 @@
 		Äquivalent sind für $T$
 		\begin{enumerate}
 			\item Es gibt Modell $\mathfrak{M} \models T, A \subseteq M$ und perfekte Teilmenge in $S_1(A)$
-			\item Es gibt ein abzählbares Modell $\mathfrak{M} \models T, A \subseteq M$ mit $\abs{S_1(A)} \geq 2^{\aleph_0}$
+			\item Es gibt $\mathfrak{M} \models T$, abzählbares $A \subseteq M$ mit $\abs{S_1^\mathfrak{M}(A)} > \aleph_0$
 			\item Es gibt ein Modell $\mathfrak{M}$ von $T$, abzählbares $A \subseteq M$ mit $\abs{S_1(A)} \geq 2^{\aleph_0}$
 			\item Es gibt binären Baum von Formeln in $T$
 		\end{enumerate}
@@ -3486,7 +3486,128 @@
 		
 		Da $\abs{X_0} \geq 2^{\aleph_0}$, folgt $\abs{X_\infty} \geq 2^\aleph_0$
 		
-		\heading{$3) \Rightarrow 2)$} Wähle mit Löwenheim-Skolem eine abzählbare elementare Unterstruktur von $\mathfrak{M}$ die $A$ enthält.
+		\heading{$3) \Rightarrow 2)$} Klar
+		
+		\heading{$4) \Rightarrow 3)$}
+		
+		Mengentheoretische Notation: $2^{<\omega} = \bigcup_{n < \omega} = \{ f: n \to 2 \mid n < \omega \}$
+		
+		Sei $(\varphi_s)_{s \in 2^{<\omega}}$ binärer Baum konsistenter $\mathcal{L}_M$-Formeln. Sei $A$ die Menge aller in den $\varphi_s$ vorkommenden Parameter. Dann $\abs{A} \leq \aleph_0$. Jeder der $2^{\aleph_0}$ vielen Zweige $\{ \varphi_{f \upharpoonright n} \mid n \in \omega \}$ für $f: \omega \to 2$ ist konsistent und setzt sich daher zu einem vollständigen Typen in $S_1^\mathfrak{M}(A)$ fort. 
+		Diese sind paarweise verschieden. Denn: wenn $f \neq g$, dann gibt es kleinstes $n_0$ mit $f(n_0) \neq g(n_0)$. und es gilt $\varphi_{f \upharpoonright n_0} = \varphi_{g \upharpoonright n_0}$ und beide sind inkonsistent.
+		
+		\heading{$1) \Rightarrow 4)$}  Sei $P \subseteq S_1^\mathfrak{M}(A)$ perfekt. Nenne in diesem Beweis eine $\mathcal{L}_A$-Formel $\varphi$ groß, falls $\langle \varphi \rangle \cap P = \{ p \in S_1^\mathfrak{M}(A) \mid \varphi \in p \} \cap P \neq \emptyset$.
+		
+		Zeige: Jede große Formel lässt sich in $2$ große Formeln $\varphi \land \psi, \varphi \land \lnot \psi$ aufspalten. Erhalte induktiv einen binären Baum.
+		
+		Sei $\varphi$ groß d.h. $\langle \varphi \rangle \cap P \neq \emptyset$. Da $P$ perfekt ist, kann $\langle \varphi \rangle \cap P$ kein isolierter Punkt sein, das heißt $\abs{\langle \varphi \rangle \cap P} \geq 2$.
+		
+		Seien $p_1 \neq p_2 \in \langle \varphi \rangle \cap P$ und $\psi \in p_1 \setminus p_2$.
+		
+		Dann $p_1 \in \langle \varphi \land \psi \rangle \cap P$ d.h. $\varphi \land \psi, \varphi \land \lnot \psi$ ist groß.
  	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Sei $\mathcal{L}$ abzählbar, dann gilt:
+ 		\begin{equation*}
+	 		\text{$T$ $\aleph_0$-stabil} \Leftrightarrow \text{$T$ total transzendent}
+ 		\end{equation*}
+ 	\end{corollary}
+ 
+ 	\begin{theorem}
+ 		Falls es in $T$ keinen binären Baum gibt, dann liegen für alle $\mathfrak{M} \models T$ und $A \subseteq M$ die isolierten Typen in $S_1^\mathfrak{M}(A)$ dicht. (d.h. für jede $\mathcal{L}_A$-Formel $\varphi$ gibt es einen isolierten Typen $p$ mit $\varphi \in p$)
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M$ die isolierten Typen liegen nicht dicht in $S_1^\mathfrak{M}(A)$. Nenne $\mathcal{L}_A$-Formel $\varphi$ groß, falls $\langle \varphi \rangle \neq \emptyset$ und $\langle \varphi \rangle$ enthält keine isolierten Punkte.
+ 		
+ 		Nach Voraussetzung gibt es große Formeln, nämlich $\varphi$ mit $\langle \varphi \rangle \cap \overline{\text{isol. Typen}} = \emptyset$.
+ 		
+ 		Zeige wieder: jede große Formel spaltet sich in zwei große Formeln auf.
+ 		
+ 		Sei $\varphi_\emptyset$ groß. Dann $\abs{\langle \varphi_\emptyset \rangle} \geq 2$ sonst wäre das eindeutige Element isoliert.
+ 		
+ 		Seien $p_1, p_2 \in \langle \varphi_\emptyset \rangle$ und $\psi \in p_1 \setminus p_2$.
+ 		
+ 		Dann sind $\varphi_0 \coloneqq \varphi_\emptyset \land \psi$ und $\varphi_1 = \varphi_\emptyset \land \lnot \psi$ beide groß:
+ 		
+ 		Also $p_1 \in \langle \varphi_0 \rangle \neq \emptyset$ und $p_2 \in \langle \varphi_1 \rangle \neq \emptyset$
+ 		
+ 		und damit $\langle \varphi_0 \rangle \subseteq \langle \varphi_\emptyset \rangle$ und $\langle \varphi_1 \rangle \subseteq \langle \varphi_\emptyset \rangle$
+ 		
+ 		Also keine isolierten Punkte.
+ 	\end{proof}
+ 
+ 	\begin{theorem}
+ 		\begin{equation*}
+	 		\text{$T$ $\aleph_0$-stabil} \Rightarrow \text{$T$ $\kappa$-stabil für alle $\kappa \geq \aleph_0$}
+ 		\end{equation*}
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		$T$ ist total transzendent nach Folgerung. Angenommen $T$ sei nicht $\kappa$-stabil für ein $\kappa > \aleph_0$. Dann gibt es $\mathfrak{M} \models T, A \subseteq M$ mit $\abs{A} \leq \kappa$ und $\abs{S_1^\mathfrak{M}(A)} > \kappa$. Es gibt große Formeln z.B. $x \doteq x$. Sei $\varphi$ groß, zerlege $\varphi$ in zwei große Formeln (dann gibt es binären Baum).
+ 		
+ 		Angenommen das geht nicht, dann ist für jede $\mathcal{L}_A$-Formel $\psi$ entweder $\abs{\langle \varphi \land \psi \rangle} \leq \kappa$ oder $\abs{\langle \varphi \land \lnot \psi \rangle } \leq \kappa$.
+ 		
+ 		Dann ist $\{ \psi \mid \abs{ \langle \varphi \land \psi \rangle } > \kappa \}$ vollständiger Typ über $A$! (da endlich konsistent und für jede Formel $\psi$ ist $\psi$ oder $\lnot \psi$ in der Menge)
+ 		
+ 		Dann gilt aber: $\abs{\langle \varphi \rangle} = \kappa \cdot \kappa + 1$
+ 	\end{proof}
+ 
+ 	\begin{remark}
+ 		Vollständige, abzählbare Theorie $T$
+ 		
+ 		Das Stabilitätsspektrum ist $\{ \kappa \geq \aleph_0 \mid $T$ \text{ $\kappa$-stabil} \}$
+ 		
+ 		Es gibt $4$ Möglichkeiten:
+ 		\begin{itemize}
+ 			\item $\emptyset$ heißt $T$ instabil z.B. $\operatorname{Th}(\setQ, <), ZFC, \operatorname{Th}(\setN, +, \cdot)$
+ 			\item $\{ \kappa \mid \kappa^{\aleph_0} = \kappa \}$ heißt $T$ stabil
+ 			\item $\{ \kappa \mid 2^{\aleph_0} \leq \kappa \}$ heißt $T$ superstabil
+ 			\item $\{ \kappa \mid \kappa \geq \aleph_0 \}$ heißt $T$ $\aleph_0$-stabil
+ 		\end{itemize}
+ 	\end{remark}
+ 
+ 	\begin{theorem}
+ 		Falls $\mathfrak{M}, \mathfrak{N} \models T, \abs{M} = \abs{N} = \kappa \geq \kappa_0$ und $\mathfrak{M}, \mathfrak{N}$ sind saturiert, dann ist $\mathfrak{M} \cong \mathfrak{N}$.
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Transfinites back-and-forth
+ 		
+ 		Sei $M = \{ m_i \mid i < \kappa \}$ und $N = \{ n_i \mid i < \kappa \}$.
+ 		
+ 		Definiere induktiv partielle Isomorphismen $\alpha_i: A_i \to B_i$ mit $A_i \subseteq M, B_i \subseteq N$ und $\bigcup_{i < \kappa} A_i = M, \bigcup_{i < \kappa} B_i = N$.
+ 		
+ 		Dann ist $\alpha = \bigcup_{i < \kappa} \alpha_i: \mathfrak{M} \overset{\cong}{\to} \mathfrak{N}$.
+ 		
+ 		\textit{Start:} $\alpha_\emptyset: \emptyset \to \emptyset$ ist partieller Isomorphismus da $\mathfrak{M} \equiv \mathfrak{N}$.
+ 		
+ 		\textit{Induktion:} Limesschritte mit $\lambda$ Limesordinalzahl $A_\lambda = \bigcup_{i < \lambda} A_i, B_\lambda = \bigcup_{i < \lambda} B_i$ und $\alpha_\lambda = \bigcup_{i < \lambda} \alpha_i$.
+ 		
+ 		\textit{Gerade Schritte:} $\alpha_i: A_i \to B_i$ konstruiert, betrachte minimales $j$ mit $m_j \notin A_i$. Realisiere $\tilde{\alpha}_i^{-1}\left( \operatorname{tp}(m_j / A:i) \right) = \{ \varphi(x, \alpha_i(\overline{a})) \mid \varphi(x, \overline{a}) \in \operatorname{tp}(m_j/A_i)) \}$ in $\mathfrak{N}$ durch $n'$.
+ 		
+ 		Setze $A_{i+1} = A_i \cup \{ m_j \}$ und $B_{i+1} = B_i \cup \{ n' \}$ und $\alpha_{i+1} = \alpha_i \cup \{ (m_j, n') \}$
+ 		
+ 		\textit{Ungerade Schritte:} entsprechend
+ 	\end{proof}
+ 
+ 	\begin{theorem}
+ 		Falls $T$ $\kappa$-stabil, dann gibt es ein saturiertes Modell $\mathfrak{M} \models T$ mit $\abs{M} = \kappa$.
+ 	\end{theorem}
+ 
+ 	\begin{definition}
+ 		Eine unendliche Kardinalzahl $\kappa$ heißt regulär, falls gilt:
+ 		Wenn $\abs{M_i} < \kappa$ für $i \in I$ und $\abs{I} < \kappa$, dann $\abs{\bigcup_{i \in I} M_i} < \kappa$.
+ 		
+ 		Andernfalls heißt $\kappa$ singulär.
+ 	\end{definition}
+ 
+ 	\begin{example}
+ 		\begin{itemize}
+ 			\item $\aleph_0$ ist regulär
+ 			\item Jede Nachfolgerkardinalzahl $\kappa^+$ ist regulär
+ 			\item $\aleph_\omega$ ist singulär: $\aleph_\omega = \bigcup_{n < \omega} \aleph_n$
+ 		\end{itemize}
+ 	\end{example}
 
 \end{document}
