@@ -3609,5 +3609,138 @@
  			\item $\aleph_\omega$ ist singulär: $\aleph_\omega = \bigcup_{n < \omega} \aleph_n$
  		\end{itemize}
  	\end{example}
+ 
+ 	\begin{lemma}
+ 		Sei $T$ $\kappa$-stabil, und $\lambda \leq \kappa$ regulär. Dann gibt es ein $\mathfrak{M} \models T, \abs{M} = \kappa$ mit $\mathfrak{M}$ $\lambda$-saturiert.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Wähle $\mathfrak{M}_0 \models T, \abs{M_0} = \kappa$. Da $T$ $\kappa$-stabil ist $\abs{S_1^{\mathfrak{M}_0} (M_0)} \leq \kappa$.
+ 		
+ 		Realisiere alle diese Typen in $\mathfrak{M}_1 \succcurlyeq \mathfrak{M}_0$.
+ 		
+ 		Konstruiere induktiv Kette
+ 		\begin{equation*}
+	 		\mathfrak{M}_0 \preccurlyeq \mathfrak{M}_2 \preccurlyeq \mathfrak{M}_3 \preccurlyeq \dots \preccurlyeq \bigcup_{i < \omega} \mathfrak{M_0} \eqqcolon \mathfrak{M}_\omega \preccurlyeq \mathfrak{M}_{\omega + 1} \preccurlyeq \dots \preccurlyeq \mathfrak{M}_\lambda \coloneqq \bigcup_{i < \lambda} \mathfrak{M}_i
+ 		\end{equation*}
+ 		
+ 		\textit{Behauptung:} $\mathfrak{M}_\lambda$ ist $\lambda$-saturiert: Sei $A \subseteq M_\lambda, \abs{A} < \lambda$ dann ist
+ 		\begin{equation*}
+	 		A = \bigcup_{i < \lambda} \abs{A \cap M_{i+1} \setminus M_i}
+ 		\end{equation*}
+ 		$\{ i \mid A \cap M_{i+1} \setminus M_i \neq \emptyset \} \subseteq \operatorname{Ord} \cap \lambda$
+ 		
+ 		$\lambda$ regulär $\Leftrightarrow$ Wenn $X \subseteq \lambda, \abs{X} < \lambda$ $\Rightarrow \sup X < \lambda$.
+ 		
+ 		Da $\lambda$ regulär, gibt es $\alpha < \lambda$ mit $A \subseteq M_\alpha$.
+ 		
+		$p \in S_1^{\mathfrak{M}_\lambda}(A) = S_1^{\mathfrak{M}_\alpha}(A)$ ist realisiert in $\mathfrak{M}_\lambda$, da sogar alle Typen aus $S_1^{\mathfrak{M}_\alpha}(M_\alpha)$ in $\mathfrak{M}_\lambda$ realisiert sind.
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Sei $T$ $\kappa$-stabil, und $\kappa$ regulär. Dann gibt es ein saturiertes Modell $\mathfrak{M} \models T$ mit $\abs{M} = \kappa$.
+ 	\end{corollary}
+ 
+ 	\begin{theorem}
+ 		Wenn $T$ $\kappa$-kategorisch ($\kappa > \aleph_0$) ist, dann ist $T$ $\aleph_0$-stabil und damit auch $\kappa$-stabil.
+ 	\end{theorem}
+ 
+ 	\begin{proof}[Beweisskizze]
+ 		Falls nicht, finde Modell der Kardinalität $\kappa$, das über abzählbar vielen Parametern nur abzählbar viele Typen realisiert.
+ 		
+ 		Modell der Kardinalität $\kappa$ welches über einem abzählbaren $A$ mehr als $\aleph_0$-viele Typen realisiert.
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Wenn $T$ $\kappa$-kategorisch ($\kappa > \aleph_0$). Dann ist das Modell der Kardinalität $\kappa$ saturiert.
+ 	\end{corollary}
+ 
+ 	\begin{proof}
+ 		Falls $\kappa$ regulär, dann gibt es ein saturiertes Modell der Mächtigkeit $\kappa$.
+ 		
+ 		Falls $\kappa$ singulär. Sei $\mathfrak{M} \models T, \abs{M} = \kappa$. Sei $A \subseteq M, \abs{A} < \kappa$. Dann $\abs{A} = \mu < \kappa$. Da $\kappa$ singulär, ist $\kappa \neq \mu^+$, d.h. $\mu^+ < \kappa$.
+ 		
+ 		Nach Lemma ist $\mathfrak{M}$ $\lambda$-saturiert, für alle regulären $\lambda < \kappa$, insbesondere also für $\lambda = \mu^+$.
+ 		
+ 		Somit sind alle Typen über $A$ in $\mathfrak{M}$ realisiert.
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		$T$ $\kappa$-kategorisch $\Leftrightarrow$ alle Modelle der Kardinalität $\kappa$ sind saturiert ($\kappa \geq \aleph_0$)
+ 	\end{corollary}
+ 
+ 	\begin{definition}
+ 		Sei $\mathfrak{M} \models T$ und $A \subseteq M$.
+ 		\begin{enumerate}
+ 			\item $\mathfrak{M}$ heißt elementare Primerweiterung von $A$, falls jede elementare Abbildung $A \hookrightarrow \mathfrak{N} \models T$ sich zu einer elementaren Einbettung $\mathfrak{M} \hookrightarrow \mathfrak{N}$ fortsetzen lässt.
+ 			\item Falls $A \subseteq B \subseteq M$, heißt $B$ konstruktibel über $A$ falls es eine Aufzählung $\{ b_i \mid i < \lambda \}$ von $B$ gibt, so dass $\operatorname{tp}(b_{j}/A \cup B_j)$ mit $B_j = \{ b_i \mid i < j \}$ isoliert ist.
+ 			\item $\mathfrak{M}$ heißt minimale Erweiterung von $A$, falls für jedes Modell $\mathfrak{N} \models T$ mit $A \subseteq N \subseteq M$ gilt $M = N$.
+ 		\end{enumerate}
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		$\mathfrak{M}$ ist Primerweiterung von $A$ $\Leftrightarrow$ $\mathfrak{M}_A$ Primmodell von $\operatorname{Th}(\mathfrak{M}_A)$
+ 	\end{remark}
+ 
+ 	\heading{Ziel:} In $\aleph_0$-stabilen Theorien existieren stets Primerweiterungen, d.h. gegeben $\mathfrak{M} \models T, A \subseteq M$ dann gibt es $\mathfrak{M}_0 \preccurlyeq \mathfrak{M}$ mit $A \subseteq M_0$ so, dass $\mathfrak{M}_0$ Primerweiterung von $A$.
+ 	
+ 	\textit{Schritt 1:} Konstruktible Erweiterungen sind prim.
+ 	
+ 	\textit{Schritt 2:} Konstruktible Erweiterungen existieren
+ 	
+ 	\begin{lemma}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M$. Wenn $M$ konstruktibel über $A$ ist, dann ist $\mathfrak{M}$ prim über $A$.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Sei $\{ M_i \mid i < \lambda \}$ Konstruktion von $M$ über $A$. Sei $\alpha_\emptyset: A \hookrightarrow \mathfrak{N}$ elementare Abbildung.
+ 		
+ 		Setze $\alpha_0$ induktiv zu elementaren Abbildungen
+ 		\begin{equation*}
+	 		\alpha_i: A \cup B_{i+1} \to \mathfrak{N}
+ 		\end{equation*}
+ 		fort.
+ 		
+ 		Angenommen $\alpha_j$ für $j < i$ ist konstruiert. Wenn $i$ Limeszahl ist, setze $\alpha_i = \bigcup_{j < i} \alpha_j$
+ 		\begin{equation*}
+	 		\alpha_j: A \cup B_{j+1} = A \cup \{ b_k \mid k < j + 1 \} = A \cup \{ b_k \mid k \leq j \} \to N
+ 		\end{equation*}
+ 		und
+ 		\begin{equation*}
+	 		\alpha_i: \bigcup_{j < i} A \cup B_{j+1} = A \cup \{ b_k \mid k < i \} \to N
+ 		\end{equation*}
+ 		
+ 		Wenn $i = j+1$, dann ist $\alpha_j$ definiert bis $b_j$ und $\operatorname{tp}(b_{j+1}/A \cup B_{j+1})$ ist isoliert, also $\tilde{\alpha}_j^{-1}(\operatorname{tp}(b_{j+1} / A \cup B_{j+1}))$ in $\mathfrak{N}$ realisiert durch $n_{j+1}$.
+ 		
+ 		D.h. $\alpha_j \cup \{ (b_{j+1}, n_{j+1}) \} = \eqqcolon \alpha_{j+1}$ ist elementare Fortsetzung.
+ 		
+ 		Am Ende erhält man $\alpha_\lambda: M \to N$ als elementare Einbettung.
+ 	\end{proof}
+ 
+ 	\begin{lemma}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M$. Dann existiert $\mathfrak{M_0} \preccurlyeq \mathfrak{M}, A \subseteq M$ und damit $M_0$ konstruktibel über $A$.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Betrachte Konstruktionen $B = \{ b_i \mid i < \lambda \}$ ohne Wiederholungen wobei $B \subseteq C$ genau dann wenn $C$ Verlängerung von $B$ ist, das heißt $B = \{ b_i \mid i < \lambda \}, C = \{ c_i \mid i < \lambda' \}$ mit $\lambda \leq \lambda', b_i = c_i$ für alle $i < \lambda$.
+ 		
+ 		Die Vereinigung einer aufsteigenden Kette von Konstruktionen ist wieder eine. $\emptyset$ ist eine Konstruktion.
+ 		
+ 		Mit Lemma von Zorn folgt: Es gibt maximale Konstruktion $B = \{ b_i \mid i < \lambda \}$
+ 		
+ 		\textit{Behauptung:} $A \cup B$ ist Universum einer elementaren Unterstruktur. Tarskis Test:
+ 		\begin{equation*}
+	 		\mathfrak{M} \models \exists x \varphi(x, \overline{a}, \overline{b})
+ 		\end{equation*}
+ 		zeige: in $A \cup B$ erfüllbar.
+ 		
+ 		Da $T$ $\aleph_0$-stabil, liegen die isolierten Typen dicht (über jeder Parametermenge). Also gibt es isolierten Typen $p \in S_1^\mathfrak{M}(\overline{a}, \overline{b})$. Mit $p \in \langle \varphi(x, \overline{a}, \overline{b}) \rangle$.
+ 		
+ 		Sei $c$ so dass $\mathfrak{M} \models \varphi(c, \overline{a}, \overline{b})$.
+ 		
+ 		$p = \operatorname{tp}(c/ \overline{a}, \overline{b})$ ist isoliert, also auch $\operatorname{tp}(a / A \cup B)$.
+ 		
+ 		Also wäre $B \circ c$ eine Konstruktion. Wegen der Maximalität muss bereits $c \in B$ gelten.
+ 	\end{proof}
 
 \end{document}
