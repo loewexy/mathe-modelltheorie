@@ -3742,5 +3742,160 @@
  		
  		Also wäre $B \circ c$ eine Konstruktion. Wegen der Maximalität muss bereits $c \in B$ gelten.
  	\end{proof}
+ 
+ 	\begin{theorem}
+ 		Konstruktible Erweiterungen sind atomar, das heißt wenn $\mathfrak{M} \models T, A \subseteq M$, $M$ konstruktibel über $A$, $\overline{m}$ als Tupel aus $M$: Dann ist $\operatorname{tp}^{\mathfrak{M}}(\overline{m}/A)$ isoliert.
+ 	\end{theorem}
+ 
+ 	\begin{lemma}
+ 		\begin{equation*}
+	 		\operatorname{tp}^\mathfrak{M}(a,b/A) \text{ ist isoliert} \Leftrightarrow \begin{cases}
+		 		\operatorname{tp}^\mathfrak{M}(a/b,A) \text{ isoliert} \\
+		 		\operatorname{tp}^\mathfrak{M}(b/A) \text{ isoliert}
+	 		\end{cases}
+ 		\end{equation*}
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Ohne Einschränkung $A = \emptyset$ (betrachte $\mathfrak{M}_A$). Schreibe $\operatorname{tp}$ statt $\operatorname{tp}^\mathfrak{M}$
+ 		
+ 		\heading{$\Rightarrow$} Sei $\varphi(x,y)$ isolierende Formel von $\operatorname{tp}(a,b)$ das heißt, wenn $\mathfrak{M} \models \varphi(a',b')$, dann $\operatorname{tp}(a',b') = \operatorname{tp}(a,b)$
+ 		
+ 		Behauptung: $\varphi(x,b)$ isoliert $\operatorname{tp(a(b))}$
+ 		
+ 		Beweis dazu: Wenn $\mathfrak{M} \models \varphi(a',b)$, dann $\operatorname{tp}(a',b) = \operatorname{tp}(a,b)$ also $\operatorname{tp}(a'/b) = \operatorname{tp}(a/b)$
+ 		
+ 		Behauptung: $\exists \varphi(x,y)$ isoliert $\operatorname{tp}(b)$
+ 		
+ 		Beweis dazu: Sei $\mathfrak{M} \models \exists x \varphi(x, b')$, dann existiert $a' \in M$ mit $\mathfrak{M} \models \varphi(a',b')$. Also $\operatorname{tp}(a',b') = \operatorname{tp}(a,b)$ und somit $\operatorname{tp}(b') = \operatorname{tp}(b)$.
+ 		
+ 		\heading{$\Leftarrow$} Angenommen $\chi(x,b)$ isoliere $\operatorname{tp}(a/b)$ und $\psi(y)$ isoliere $\operatorname{tp}(b)$
+ 		
+ 		Behauptung: $\chi(x,y) \land \psi(y)$ isoliert $\operatorname{tp}(a,b)$
+ 		
+ 		Beweis: Sei $\mathfrak{M} \models \chi(a',b') \land \psi(b')$
+ 		
+ 		Also insbesondere $\operatorname{tp}(b') = \operatorname{tp}(b)$, das heißt $\alpha: b \mapsto b'$ ist elementar und $\tilde{\alpha}: S_1(b') \to S_1(b)$ ein Homöomorphismus.
+ 		
+ 		Insbesondere isoliert $\chi(x,b')$ einen Typen in $S_1(b')$, nämlich $\tilde{\alpha}^{-1}(\operatorname{tp}(a/b))$.
+ 		
+ 		Da $\mathfrak{M} \models \chi(a',b')$ gilt $\operatorname{tp}(a'/b') = \tilde{\alpha}^{-1}(\operatorname{tp}(a/b))$
+ 		
+ 		Das heißt $a \mapsto a'$ ist Fortsetzung der elementaren Abbildung $b \mapsto b'$.
+ 		
+ 		Oder: $(a,b) \mapsto (a',b')$ ist elementar und damit $\operatorname{tp}(a,b) = \operatorname{tp}(a',b')$.
+ 	\end{proof}
+ 
+ 	\begin{proof}[Beweis des Satzes]
+ 		Sei $\mathfrak{M}$ konstruktibel über $A$ und $m_1, \dots, m_n \in M$.
+ 		
+ 		Zu zeigen: $\operatorname{tp}(m_1, \dots, m_n/A)$ ist isoliert.
+ 		
+ 		Es gibt eine Konstruktion $M = \{ m_i' \mid i < \lambda \}$ über $A$. Induktion üben den maximalen Index der Konstruktion, der in $(m_1, \dots, m_n)$ vorkommt.
+ 		
+ 		Induktionsanfang: $(m_0', \dots, m_0')$ $\operatorname{tp}(m_0'/A)$ isoliert (aus Definition der Konstruktion)
+ 		
+ 		$\operatorname{tp}(m_0'/A, m_0')$ isoliert (durch $x = m_0'$)
+ 		
+ 		Induktiv mit Lemma: $\operatorname{tp}(m_0', \dots, m_0' / A)$ ist isoliert.
+ 		
+ 		Induktionsschritt: Für alle $i < i_0$ sei bewiesen.
+ 		
+ 		Betrachte $\operatorname{tp}(m_{i_1}', \dots m_{i_n}' / A)$ mit $m_{i_0}' = m_{i_j}'$ für ein $j \in \{ 1, \dots, n \}$ und $i_j' \leq i_0$ für alle $j \in \{ 1, \dots, n \}$.
+ 		
+ 		$\operatorname{tp}(m_1, \dots, m_n / A)$ isoliert $\Leftrightarrow$ $\operatorname{tp}(m_{\sigma(1)}, \dots, m_{\sigma(n)} / A)$ ist isoliert für ein $\sigma \in S_n$.
+ 		
+ 		Also ohne Einschränkung $i_0 = i_1' \geq i_2' \geq \dots \geq i_n'$
+ 		
+ 		\begin{equation*}
+	 		\operatorname{tp}(m_{i_0}', m_{i_0}', \overline{m}') \text{ isoliert} \Leftrightarrow \begin{cases}
+		 		\operatorname{tp}(m_{i_0}', \overline{m}) \textit{ isoliert} \\
+		 		\underbrace{\operatorname{tp}(m_{i_0}' / m_{i_0}', \overline{m}) \text{ isoliert}}_\text{stets durch $x \doteq m_{i_0}'$}
+	 		\end{cases}
+ 		\end{equation*}
+ 		
+ 		Also ohne Einschränkung $m_{i_0}' > m_{i_2}'$
+ 		
+ 		Also betrachte $\operatorname{tp}(m_{i_0}', \overline{m}')$.
+ 		
+ 		Per Induktion $\operatorname{tp}(\overline{m}'/A)$ isoliert.
+ 		
+ 		Wir wissen $\operatorname{tp}(m_{i_0} / M_{i_0}')$ ist isoliert das heißt es gibt isolierende Formel $\varphi(x, \overline{b})$ mit $\overline{b} \in M_{i_0}'$. Also $\operatorname{tp}(m_{i_0}' / \overline{b}, A)$ isoliert.
+ 		
+ 		Dann ist auch $\operatorname{tp}(m_{i_0}/\overline{b}, \overline{m}', A)$ isoliert.
+ 		
+ 		Induktion sagt sogar $\operatorname{tp}(\overline{b}, \overline{m}' / A)$ isoliert.
+ 		
+ 		Iteriertes Lemma: $\operatorname{tp}(m_{i_0}', \overline{b}, \overline{m}' / A)$ isoliert.
+ 		
+ 		Erneutes Lemma: $\operatorname{tp}(m_{i_0}', \overline{m'} / A)$ isoliert.
+ 		
+ 		Smarte Induktion: Zeige: Wenn für alle $i < i_0$ $A(i)$ gilt, dann auch $A(i_0)$ für $i_0 = 0$ ist das der übliche Induktionsanfang.
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Sei $T$ $\aleph_0$-stabil, dann sind Primerweiterungen Atomar.
+ 	\end{corollary}
+ 
+ 	\begin{proof}
+ 		Sei $A \subseteq M, \mathfrak{M} \models T$.
+ 		
+ 		\begin{itemize}
+ 			\item Es gibt konstruktible Erweiterung $\mathfrak{M}_0$ von $A$
+ 			\item Falls $\mathfrak{N}$ Primerweiterung von $A$, dann gibt es elementare Einbettung $\mathfrak{N} \hookrightarrow \mathfrak{M}_0$ über $A$. Das heißt bis auf Isomorphie ist $\mathfrak{N} \subseteq \mathfrak{M}_0$. Somit ist $\mathfrak{N}$ atomar.
+ 		\end{itemize}
+ 	\end{proof}
+ 
+ 	\begin{remark}
+ 		In Wirklichkeit ist $\mathfrak{N} \cong \mathfrak{M}_0$, in $\aleph_0$-stabilen Theorien sind Primerweiterungen eindeutig.
+ 	\end{remark}
+ 
+ 	\begin{theorem}
+ 		Wenn $A$ minimale Erweiterung $\mathfrak{M}_0$ und Primerweiterung $\mathfrak{M}_1$ hat, dann $\mathfrak{M}_0 \cong \mathfrak{M}_1$.
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		$\alpha: \mathfrak{M}_1 \hookrightarrow \mathfrak{M}_0$, da $\mathfrak{M}_1$ Prim. $\operatorname{Bild}(\alpha) \preccurlyeq \mathfrak{M}_0$, also wegen Minimalität von $\mathfrak{M}_0$ gilt schon Gleichheit.
+ 	\end{proof}
+ 
+ 	\subsection{Vaught'sche Paare}
+ 	
+ 	($T$ vollständig, abzählbar, ohne endliche Modelle)
+ 	
+ 	\begin{definition}
+ 		Ein Vaught'sches Paar ist ein Tripel $(\mathfrak{M}, \mathfrak{N}, \varphi)$, wobei
+ 		\begin{itemize}
+ 			\item $\mathfrak{M} \precneqq \mathfrak{N} \models T$
+ 			\item $\varphi(x)$ ist $\mathcal{L}_M$-Formel mit $\varphi(M)$ unendlich
+ 			\item $\varphi(M) = \varphi(N)$ (d.h. wenn $\mathfrak{N} \models \varphi(a)$, dann $a \in M$)
+ 		\end{itemize}
+ 	\end{definition}
+ 
+ 	\begin{theorem}[ohne Beweis]
+ 		$T$ $\kappa$-kategorisch $\Rightarrow$ $T$ hat keine Vaught'schen Paare
+ 	\end{theorem}
+ 
+ 	\begin{definition}
+ 		Man sagt $T$ eliminiert den Quantor $\exists^\infty x$, falls es für jede Formel $\varphi(x, \overline{y})$ eine Schranke $n_\varphi$ gibt, so dass gilt:
+ 		
+ 		Falls $\mathfrak{M} \models T, \overline{a} \in M$, dann gilt entweder $\abs{\varphi(M, \overline{a})} \leq n_\varphi$ oder $\abs{\varphi(M, \overline{a})} \geq \aleph_0$.
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		Wenn $T$ den Quantor $\exists^\infty x$ wie in der Definition eliminiert, gilt
+ 		\begin{equation*}
+	 		\mathfrak{M} \models \exists^\infty x \varphi(x) \Leftrightarrow \mathfrak{M} \models \exists^{>n_\varphi} x \varphi(x)
+ 		\end{equation*}
+ 		
+ 		Umgekehrt: Wenn es für jedes $\varphi(x, \overline{y})$ eine Formel $\psi_\varphi(\overline{y})$ gibt, so dass für alle $\mathfrak{M}$ und $\overline{a}$ gilt
+ 		\begin{equation*}
+	 		\mathfrak{M} \models \exists^\infty x \varphi(x, \overline{a}) \Leftrightarrow \mathfrak{M} \models \psi_{ij} \varphi(\overline{a})
+ 		\end{equation*}
+ 		dann eliminiert $T$ den Quantor $\exists^\infty x$.
+ 	\end{remark}
+ 
+ 	\begin{theorem}
+ 		Wenn $T$ keine Vaught'schen Paare hat, dann eliminiert $T$ den Quantor $\exists^\infty x$.
+ 	\end{theorem}
 
 \end{document}
