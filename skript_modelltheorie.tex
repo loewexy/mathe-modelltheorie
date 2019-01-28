@@ -3674,7 +3674,7 @@
  		\begin{enumerate}
  			\item $\mathfrak{M}$ heißt elementare Primerweiterung von $A$, falls jede elementare Abbildung $A \hookrightarrow \mathfrak{N} \models T$ sich zu einer elementaren Einbettung $\mathfrak{M} \hookrightarrow \mathfrak{N}$ fortsetzen lässt.
  			\item Falls $A \subseteq B \subseteq M$, heißt $B$ konstruktibel über $A$ falls es eine Aufzählung $\{ b_i \mid i < \lambda \}$ von $B$ gibt, so dass $\operatorname{tp}(b_{j}/A \cup B_j)$ mit $B_j = \{ b_i \mid i < j \}$ isoliert ist.
- 			\item $\mathfrak{M}$ heißt minimale Erweiterung von $A$, falls für jedes Modell $\mathfrak{N} \models T$ mit $A \subseteq N \subseteq M$ gilt $M = N$.
+ 			\item $\mathfrak{M}$ heißt minimale Erweiterung von $A$, falls für jedes Modell $\mathfrak{N} \models T$ mit $A \subseteq N \preccurlyeq M$ gilt $M = N$.
  		\end{enumerate}
  	\end{definition}
  
@@ -3897,5 +3897,102 @@
  	\begin{theorem}
  		Wenn $T$ keine Vaught'schen Paare hat, dann eliminiert $T$ den Quantor $\exists^\infty x$.
  	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Angenommen $T$ eliminiert nicht $\exists^\infty x$: Dann gibt es $\varphi(x, \overline{y})$ und für jedes $k \in \setN$ existiert dann $\mathfrak{M}_k \models T$, $\overline{a}_k \in M$ mit $\aleph_0 > \abs{\varphi(M_k, \overline{a}_k)} \geq k$.
+ 		
+ 		Sei $\mathfrak{N}_k \succneqq \mathfrak{M}_k$.
+ 		
+ 		Dann gilt $\varphi(N_k, \overline{a}_k) = \varphi(M_k, \overline{a}_k)$ denn $\operatorname{Th}(M_k) \models \exists^{=k} x \varphi(x, \overline{a}_k)$.
+ 		
+ 		Sei $\mathcal{L}^+ = \mathcal{L} \cup \{ P, \overline{c} \}$.
+ 		
+ 		$\mathfrak{N}_k^+$ ist die $\mathcal{L}^+$-Struktur mit $P^{\mathfrak{N}_k^+} = M_k, \overline{c}^{\mathfrak{N}_k^+} = \overline{a}_k$.
+ 		
+ 		$\operatorname{Th}(\mathfrak{N}_k^+)$ sagt:
+ 		\begin{itemize}
+ 			\item $\mathfrak{N}_k^+$ ist Modell von $T$
+ 			\item $P$ ist Universum einer echten elementaren Unterstruktur.
+ 			\item $\varphi(N_k^+, \overline{c}) = \varphi(P, \overline{c})$ also $\forall x (\varphi(x, \overline{c}) \rightarrow Px)$
+ 			\item $\abs{\varphi(N_k^+, \overline{c})} > k, \exists^{\geq k} x \varphi(x, \overline{c})$
+ 		\end{itemize}
+ 	
+ 		Mit Kompaktheitssatz ist konsistent, die $\mathcal{L}^+$-Theorie
+ 		
+ 		$T \cup \{ \text{$P$ ist echte elementare Unterstruktur}, \forall x (\varphi(x, \overline{c}) \rightarrow P x) \} \cap \{ \exists^{\geq k} x \varphi(x, \overline{c}) \mid k \in \setN \}$.
+ 		
+ 		Modell $\mathfrak{N}$ davon ergibt $\mathfrak{M} \precneqq \mathfrak{N}$ mit $\varphi(M, \overline{c}) = \varphi(N, \overline{c})$ unendlich d.h. Vaught'sches Paar.
+ 	\end{proof}
+ 
+ 	\begin{definition}
+ 		Sei $\mathfrak{M}$ $\mathcal{L}$-Struktur, $\varphi(x)$ eine $\mathcal{L}_M$-Formel.
+ 		\begin{enumerate}
+ 			\item $\varphi(x)$ heißt minimal in $\mathfrak{M}$, falls für alle $\mathcal{L}_M$-Formeln $\psi(x)$ entweder $\varphi(M) \cap \psi(M)$ oder $\varphi(M) \cap \lnot \psi(M)$ endlich ist. Insbesondere soll $\varphi(M)$ unendlich sein.
+ 			\item $\varphi(x)$ heißt streng minimal bezüglich $\operatorname{Th}(\mathfrak{M})$, falls $\varphi(x)$ in jeder elementaren Erweiterung von $\mathfrak{M}$ minimal ist.
+ 			
+ 			Bemerkung: $\varphi(x) = \varphi(x, \overline{a})$ mit $\overline{a} \in M$.
+ 				
+ 			Dann $\varphi(x)$ ist streng minimal $\Leftrightarrow$ $\varphi(x)$ ist minimal in jedem Modell von $\operatorname{Th}(\mathfrak{M}_{\overline{a}})$
+ 			
+ 			\item Falls $x \doteq x$ (streng) minimal in $\mathfrak{M}$ ist, heißt $\mathfrak{M}$ (streng) minimal.
+ 			
+ 			$T$ heißt streng minimal falls $x \doteq x$ streng minimal in einem Modell von $t$ ist.
+ 		\end{enumerate}
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		$\mathfrak{M}$ minimal im Sinne dieser Definition und $\mathfrak{M}$ minimal als minimale Erweiterung von $\emptyset$ haben nichts miteinander zu tun!
+ 	\end{remark}
+ 
+ 	\begin{example}
+ 		\begin{enumerate}
+ 			\item $(\setQ, <)$ ist nicht streng minimal, denn $x > q$ spalten $\setQ$ in 2 unendliche Mengen.
+ 			\item $(\setN, +, \cdot)$ ist nicht minimal, z.B. ist die Menge der Primzahlen definierbar.
+ 			\item Unendliche Mengen ohne Struktur oder ähnliches, z.B. Äquivalenzrelation, unendlich, alle Klassen 2-elementig sind streng minimal.
+ 			\item Vektorräume sind streng minimal.
+ 			\item $ACF_p, ACF_0$ mit QE d.h. definierbare Teilmengen von $K \models ACF$ sind Boolesche Kombinationen von Nullstellenmengen von Polynomen und damit streng minimal.
+ 			\item ÄR $E$ mit je einer Klasse der Mächtigkeit $n \geq 0$. $x \doteq x$ ist minimal im Primmodell $\mathfrak{M}_0$. Sobald es eine unendliche Klasse $a/E$ gibt, definiert $E x a$ eine unendliche-kounendliche Menge.
+ 		\end{enumerate}
+ 	\end{example}
+ 
+ 	\begin{theorem}
+ 		$T$ sei $\aleph_0$-stabil.
+ 		\begin{enumerate}
+ 			\item Für $\mathfrak{M} \models T$ gibt es minimale Formeln in $\mathfrak{M}$.
+ 			\item Falls $T$ keine Vaught'schen Paare hat, sind minimale Formeln streng minimal.
+ 		\end{enumerate}
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		\begin{enumerate}
+ 			\item Sei $\mathfrak{M} \models T$, insbesondere ist $M$ unendlich. Angenommen es gäbe keine minimale Formel $\varphi(x)$ in $\mathfrak{M}$. Nenne $\varphi(x)$ groß falls $\abs{\varphi(M)} \geq \aleph_0$. Dann ist $x \doteq x$ groß und keine große Formel ist minimal. D.h. jede große Formel lässt sich in zwei große Formeln aufspalten. Daraus ergibt sich ein binärer Baum, Widerspruch zu $\aleph_0$-stabil.
+ 			\item Sei $\varphi(x, \overline{a})$ minimal in $\mathfrak{M}$. Zeige: $\varphi(x, \overline{a})$ ist streng minimal. Da $T$ keine Vaught'schen Paare hat, wird $\exists^{=\infty} x$ eliminiert. Für $\mathcal{L}_M$-Formel $\psi(x, \overline{y})$ gibt es $n_\psi$ mit $\abs{\varphi(M, \overline{a}) \cap \psi(M, \overline{b})} < \aleph_0$, dann $\leq n_\psi$ für alle $\overline{b}$.
+ 			\begin{equation*}
+	 			\mathfrak{M} \models \forall \overline{y} ( \exists^{\leq n_\varphi} x ( \varphi(x, \overline{a}) \land \psi(x, \overline{y}) ) \lor \exists^{\leq n_{\lnot \psi}} x ( \varphi(x, \overline{a}) \land \lnot \psi(x, \overline{y}) ) )
+ 			\end{equation*}
+ 			Falls $\mathfrak{M} \preccurlyeq \mathfrak{N}$, gilt dies auch in $\mathfrak{N}$. Da $\psi$ beliebig, ist $\varphi(x, \overline{a})$ auch minimal in $\mathfrak{N}$.
+ 		\end{enumerate}
+ 	\end{proof}
+ 
+ 	\subsection{Matroide}
+ 	
+ 	\begin{definition}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M$.
+ 		\begin{enumerate}
+ 			\item $\varphi(x, \overline{a})$ $\mathcal{L}_A$-Formel heißt algebraische Formel, falls $\varphi(M, \overline{a})$ endlich ist.
+ 			\item $a \in M$ heißt algebraisch über $A$, falls es eine algebraische $\mathcal{L}_A$-Formel $\varphi(x)$ gibt mit $\mathfrak{M} \models \varphi(a)$.
+ 			\item Ein Typ $p \in S_1^\mathfrak{M}(A)$ heißt algebraisch, falls er eine algebraische Formel enthält.
+ 			\item $\operatorname{acl}(A) = \operatorname{acl}^\mathfrak{M}(A) = \{ a \in M \mid a \text{ ist algebraisch über $A$} \}$
+ 		\end{enumerate}
+ 	\end{definition}
+ 
+ 	\begin{remark}
+ 		Äquivalent sind:
+ 		\begin{itemize}
+ 			\item $a \in \operatorname{acl}(A)$
+ 			\item $\operatorname{tp}^\mathfrak{M}(a/A)$ ist algebraisch
+ 			\item $\operatorname{tp}^\mathfrak{M}(a/A)$ hat in jedem $\mathfrak{N} \succcurlyeq \mathfrak{M}$ nur endlich viele Realisierungen
+ 		\end{itemize}
+ 	\end{remark}
 
 \end{document}
