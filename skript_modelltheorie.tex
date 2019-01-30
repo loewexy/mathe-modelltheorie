@@ -3994,5 +3994,144 @@
  			\item $\operatorname{tp}^\mathfrak{M}(a/A)$ hat in jedem $\mathfrak{N} \succcurlyeq \mathfrak{M}$ nur endlich viele Realisierungen
  		\end{itemize}
  	\end{remark}
+ 
+ 	\begin{lemma}
+ 		Seien $A,B \subseteq M$ und $\mathfrak{M} \models T$
+ 		\begin{enumerate}
+ 			\item $A \subseteq B \Rightarrow \operatorname{acl}(A) \subseteq \operatorname{acl}(B)$
+ 			\item $A \subseteq \operatorname{acl}(A)$
+ 			\item $\operatorname{acl}(A) = \operatorname{acl}(\operatorname{acl}(A))$
+ 			\item $\operatorname{acl}(A) = \bigcup_{A_0 \subseteq_\text{endl} A} \operatorname{acl}(A_0)$
+ 		\end{enumerate}
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		\begin{enumerate}
+ 			\item klar
+ 			\item $a \in A: x \doteq a$ ist algebraische Formel, also $a \in \operatorname{acl}(\{ a \}) \subseteq \operatorname{acl}(A)$
+ 			\item Sei $a \in \operatorname{acl}(\operatorname{acl}(A))$ etwa, $a \in \operatorname{acl}(b_1, \dots, b_k)$ mit $b_i \in \operatorname{acl}(A)$
+ 			
+ 			\begin{equation*}
+	 			\mathfrak{M} \models \varphi(a, b_1, \dots, b_k) \land \exists^{\geq m} x \varphi(x, b_1, \dots, b_k) \land \bigwedge_{i=1}^k (\psi_i(b_i) \land \exists^{\geq m_i} y \psi_i(y)
+ 			\end{equation*}
+ 			
+ 			Behauptung:
+ 			\begin{equation*}
+	 			\exists y_1, \dots \exists y_k (\varphi(x, y_1, \dots, y_k) \land \bigwedge_{i=1}^k \psi_i(y_i) \land \exists^{\geq m} x \varphi(x, y_1, \dots, y_n))
+ 			\end{equation*}
+ 			ist algebraische $\mathcal{L}_A$-Formel, die von $a$ erfüllt wird.
+ 			
+ 			Alles offensichtlich bis auf algebraisch: Jedes $\psi_i$ hat höchstens $m_i$ Realisierungen für jede Wahl von Realisierungen $y_1, \dots, y_n$ der $\psi_i$ hat $\varphi(x, y_1, \dots, y_k)$ höchstens $m$ Realisierungen. Insgesamt: höchstens $m \cdot m_1 \cdot m_2 \dots m_k$ Realisierungen für $x$.
+ 			
+ 			\item $\supseteq$ ist klar wegen 1)
+ 			
+ 			$\subseteq$ klar, da jede Formel nur endlich viele Parameter hat
+ 		\end{enumerate}
+ 	\end{proof}
+ 
+ 	\begin{lemma}
+ 		Algebraische Typen sind isoliert.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M, p \in S_1^{\mathfrak{M}}(A)$ algebraischer Typ, d.h. $p$ enthält eine algebraische $\mathcal{L}_A$-Formel.
+ 		
+ 		Wähle $\mathcal{L}_A$-Formel $\varphi(x) \in p$ mit $\abs{\varphi(M)}$ minimal.
+ 		
+ 		Behauptung: $\varphi$ isoliert $p$ das heißt $\mathfrak{M} \models \varphi(b) \Rightarrow \operatorname{tp}^\mathfrak{M}(b/A) = p$.
+ 		
+ 		Es gibt Realisierung $b' \in M$ von $p$ z.B. da die endlich vielen Realisierungen von $\varphi$ alle schon in $\mathfrak{M}$ liegen müssen, $p$ durch ein $b' \in \mathfrak{M}^* \succcurlyeq \mathfrak{M}$ realisiert wird und dann $\mathfrak{M}^* \models \varphi(b')$ gilt.
+ 		
+ 		Angenommen $\operatorname{tp}^\mathfrak{M}(b/A) \neq \operatorname{tp}^\mathfrak{M}(b'/A) = p$. Dann existiert $\mathcal{L}_A$-Formel $\psi \in p \setminus \operatorname{tp}^\mathfrak{M}(b/A)$. Das heißt $\varphi \land \psi \in p$.
+ 		\begin{equation*}
+	 		\abs{(\varphi \land \psi)(M)} < \abs{\varphi(M)} \qquad \lightning
+ 		\end{equation*}
+ 	\end{proof}
+ 
+ 	\begin{lemma}
+ 		Sei $A \subseteq \mathfrak{M} \models T$ und $B \subseteq \mathfrak{N} \models T$ mit $f:A \to B$ elementar.
+ 		
+ 		Dann setzt sich $f$ zu elementarer Abbildung $\operatorname{acl}(A) \to \operatorname{acl}(B)$ fort.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Sei $a \in \operatorname{acl}(A) \setminus A$. $\operatorname{tp}^\mathfrak{M}(a/A)$ ist isoliert durch eine algebraische Formel. Also ist auch $\tilde{f}^{-1}(\operatorname{tp}^\mathfrak{M}(a/A)) \in S_1^\mathfrak{N}(B)$ durch eine algebraische Formel isoliert und daher in $\mathfrak{N}$ durch ein über $B$ algebraisches Element $b$ realisiert. Setze $f$ durch $a \mapsto b$ fort.
+ 	\end{proof}
+ 
+ 	\begin{remark}
+ 		$\mathcal{L}$ abzählbar, dann $\abs{\mathcal{L}_A} \leq \max \{ \aleph_0, \abs{A} \}$. Also $\abs{\operatorname{acl}(A)} \leq \max \{ \aleph_0, \abs{A} \}$.
+ 	\end{remark}
+ 
+ 	\begin{definition}
+ 		Sei $M$ eine Menge und $cl: \operatorname{Pot}(M) \to \operatorname{Pot}(M)$. $(M, cl)$ heißt Matroid (oder Prägeometrie) falls gilt:
+ 		\begin{enumerate}
+ 			\item $A \subseteq cl(A)$
+ 			\item $cl(cl(A)) = cl(A)$
+ 			\item $cl(A) = \bigcup_{A_0 \subseteq_\text{endl} A} cl(A_0)$
+ 			\item $a \in cl(A \cup \{ b \} ) \setminus cl(A) \Rightarrow b \in cl(A \cup \{ a \})$
+ 		\end{enumerate}
+ 	\end{definition}
+ 
+ 	\begin{example}
+ 		\begin{enumerate}
+ 			\item $M$ Menge, $cl(A) = A$
+ 			\item $M$ Vektorraum, $cl(A) = $ linearer Abschluss von $A$, d.h. der von $A$ erzeuge Untervektorraum $\langle A \rangle$.
+ 			\item $M$ algebraisch abgeschlossener Körper, $cl(A) = $ algebraischer Abschluss (im Sinne der Algebra) der erzeugten Unterkörper
+ 		\end{enumerate}
+ 	\end{example}
+ 
+ 	\begin{theorem}
+ 		\begin{enumerate}
+ 			\item Sei $T$ streng minimal, $\mathfrak{M} \models T$, dann ist $(M, \operatorname{acl})$ ein Matroid.
+ 			\item Sei $T$ beliebig, $\mathfrak{M} \models T$, $\varphi(x, \overline{c})$ streng minimal. Dann ist $(\varphi(M), \operatorname{acl}_{\overline{c}})$ ein Matroid wobei $\operatorname{acl}_{\overline{c}}(A) = \operatorname{acl(A \cup \{ c_1, \dots, c_k \})}$
+ 		\end{enumerate}
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Es fehlt nur noch die Austauscheigenschaft:
+ 		Sei $a \in \varphi(M), a \notin \operatorname{acl}_{\overline{c}}(A), a \in \operatorname{acl}_{\overline{c}(A,b)}$.
+ 		
+ 		Sei $\mathfrak{M} \models \psi(a,b) \land \forall y \exists^{\leq k} \psi(x,y)$ mit $\psi$ einer $\mathcal{L}_{A, \overline{c}}$-Formel.
+ 		
+ 		Beh: $\psi(a,y) \land \varphi(y)$ algebraisiert $b$ über $a, A, \overline{c}$.
+ 		
+ 		Angenommen nicht: Dann ist $\psi(a,M) \cap \varphi(M)$ unendlich also co-endlich. Seien $a = a_0, \dots, a_k$ paarweise verschiedene Realisierungen von $\operatorname{tp}(a/A, \overline{c})$ (nicht algebraisch!) in $\mathfrak{M}^* \succcurlyeq \mathfrak{M}$.
+ 		
+ 		In $\mathfrak{M}^*$ ist $\psi(a, M^*) \cap \varphi(M^*)$ immer noch co-endlich.
+ 		
+ 		Da $\operatorname{tp}(a/ \dots) = \operatorname{tp}(a_i / \dots)$, ist auch $\psi(a_i, M^*) \cap \varphi(M^*)$ co-endlich.
+ 		
+ 		Es folgt
+ 		\begin{equation*}
+	 		\psi(a_0, M^*) \cap \psi(a_1, M^*) \cap \dots \cap \psi(a_k, M^*) \cap \varphi(M^*).
+ 		\end{equation*}
+ 		ist co-endlich in $\varphi(M^*)$.
+ 		
+ 		Das heißt es gibt $b' \in M^*$ mit $\mathfrak{M}^* \models \varphi(b') \land \psi(a_0, b') \land \dots \land \psi(a_k, b')$ aber $\mathfrak{M}^* \models \forall y \exists^{\leq k} x \psi(x,y)$. $\lightning$
+ 	\end{proof}
+ 
+ 	\begin{lemma}
+ 		Sei $\mathfrak{M} \models T, \varphi(k) = \varphi(x, \overline{c})$ streng minimale Formel $\overline{c} \subseteq A \subseteq M$. Dann existiert genau ein nicht-algebraischer Typ in $S_1^\mathfrak{M}(A)$, der $\varphi(x)$ enthält.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		$p = \{ \psi(x) \mid \psi \text{$\mathcal{L}_A$-Formel}, \varphi(M) \land \psi(M) \text{ unendlich} \}$
+ 		\begin{itemize}
+ 			\item $p$ ist konsistent: $\psi \in p$, dann ist $\varphi(M) \cap \psi(M)$ sogar co-endlich in $\varphi(M)$ also folgt: $\psi_1, \dots, \psi_n \in p$: $\varphi(M) \cap \psi_1(M) \cap \dots \cap \psi_n(M)$ co-endlich, also $\neq \emptyset$.
+ 			\item $p$ ist maximal: Da $\varphi$ streng minimal, ist entweder $\varphi(M) \cap \psi(M)$ oder $\varphi(M) \cap \lnot \psi(M)$ unendlich.
+ 		\end{itemize}
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Streng minimale Theorien sind $\aleph_0$-stabil.
+ 	\end{corollary}
+ 
+ 	\begin{proof}
+ 		Sei $\mathfrak{M} \models T, A \subseteq M$
+ 		\begin{equation*}
+	 		\abs{S_1^\mathfrak{M}(A)} \leq \max \{ \aleph_0, \abs{A} \} + 1
+ 		\end{equation*}
+ 		also $\kappa$-stabil für alle $\kappa$.
+ 	\end{proof}
 
 \end{document}
