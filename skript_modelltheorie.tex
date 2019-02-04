@@ -4133,5 +4133,114 @@
  		\end{equation*}
  		also $\kappa$-stabil für alle $\kappa$.
  	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Wenn $\varphi(x, \overline{c})$ streng minimal, $\overline{c} \subseteq A$ und $a_1, \dots, a_n$ so, dass $a_{i+1} \notin \operatorname{acl}(a_1, \dots, a_i)$ für alle $i$ $a_i \in \varphi(M, \overline{c})$.
+ 		
+ 		Dann ist $\operatorname{tp}(a_1, \dots, a_n / A)$ eindeutig bestimmt. Denn $\operatorname{tp}(a_1 / A), \operatorname{tp}(a_2 / A, a_1), \dots$ ist jeweils der eindeutige nicht algebraische Typ!
+ 	\end{corollary}
+ 
+ 	\begin{definition}
+ 		Sei $(M, \operatorname{cl})$ ein Matroid.
+ 		
+ 		\begin{enumerate}
+ 			\item $X \subseteq M$ ist Erzeugendensystem, falls $\operatorname{cl}(X) = M$.
+ 			\item $X \subseteq M$ heißt unabhängig, falls $x_0 \notin \operatorname{cl}(X \setminus \{ x_0 \})$ für alle $x_0 \in X$
+ 			\item $X \subseteq M$ heißt Basis, falls $X$ unabhängiges Erzeugendensystem ist.
+ 		\end{enumerate}
+ 	\end{definition}
+ 
+ 	\begin{lemma}
+ 		Sei $(a_i)_{i < \alpha}$ so, dass $a_j \notin \operatorname{cl}(\{ a_i \mid i < j \})$. Dann ist $\{ a_i \mid i < \alpha \}$ unabhängig.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Angenommen $a_j \in \operatorname{cl}(\{ a_i \mid i \neq j \})$. Seien $i_1 < \dots < i_k$ so, dass $a_j \in \operatorname{cl}(a_{i_1}, \dots, a_{i_k})$ mit $j \notin \{ i_1, \dots, i_k \}$ und $k$ minimal.
+ 		
+ 		Falls $j < i_k$: $a_j \notin \operatorname{cl}(a_{i_1}, \dots, a_{i_{k-1}})$ wegen Minimalität von $k$.
+ 		
+ 		Austausch: $a_{i_k} \in \operatorname{cl}(a_{i_1}, \dots, a_{i_{k-1}}, a_j)$
+ 		
+ 		Also o.B.d.A. $j \geq i_k$: $a_j \in \operatorname{cl}(a_{i_1}, \dots, a_{i_k}) \subseteq \operatorname{cl}(\{ a_i  \mid i < j \})$ $\lightning$
+ 	\end{proof}
+ 
+ 	\begin{corollary}
+ 		Der eindeutige Typ aus der vorangehenden Folgerung ist der eindeutige Typ eines über $A$ unabhängigen $n$-Tupels, also von der Reihenfolge der Koordinaten unabhängig!
+ 	\end{corollary}
+ 
+ 	\begin{lemma}
+ 		Sei $A$ unabhängig im Matroid $(M, \operatorname{cl})$ und für $x \in M$ gelte $x \notin \operatorname{cl}(A)$. Dann ist $A \cup \{ x \}$ unabhängig. 
+ 	\end{lemma}
+ 
+ 	\begin{lemma}
+ 		Jede unabhängige Teilmenge lässt sich zu einer Basis erweitern.
+ 	\end{lemma}
+ 
+ 	\begin{theorem}
+ 		Sei $(M, \operatorname{cl})$ ein Matroid. Alle Basen haben die gleiche Mächtigkeit, die Dimension von $M$ genannt wird.
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		Sei $A$ unabhängig, $B$ ein Erzeugendensystem. Wir zeigen: $\abs{A} \leq \abs{B}$ (der Satz folgt!)
+ 		
+ 		\heading{1) Fall:} Sei $A$ endlich. Zeige: Für jedes $a \in A$ gibt es $b \in B$ mit $(A \setminus \{a\}) \cup \{ b \}$ ist unabhängig (als Multimenge, das heißt das gleiche $b$ darf nicht doppelt gewählt werden!).
+ 		
+ 		Dann folgt die Aussage mit Induktion.
+ 		
+ 		Also Beweis: Wähle ein $b \notin \operatorname{cl}(A \setminus \{ a \}) \cap B$ das existiert, denn $B \subseteq \operatorname{cl}(A \setminus \{ A \})$ $\Rightarrow a \in \operatorname{cl}(B) \subseteq \operatorname{cl}(A \setminus \{ a \})  \lightning$.
+ 		
+ 		Nach Lemma ist $A \setminus \{ a \} \cup \{ b \}$ ist unabhängig.
+ 		
+ 		\heading{2) Fall:} Sei $A$ unendlich. Erweitere $A$ zu Basis $A'$. Dann $\abs{A} \leq \abs{A'}$. Es reicht die Behauptung für $A'$ zu zeigen.
+ 		
+ 		Für jedes $b \in B$ gibt es ein endliches $A_b \subseteq A'$ mit $b \in \operatorname{cl}(A_b)$. Dann ist $B \subseteq \operatorname{cl}(\bigcup_{b \in B} A_b)$.
+ 		
+ 		Also ist $\bigcup_{b \in B} A_b$ Erzeugendensystem, somit $= A'$. Da $A'$ unabhängig ist, ist $a \in \operatorname{cl}(A' \setminus \{ a \})$ für jedes $a \in A'$, das heißt $A' \setminus \{a\}$ kein Erzeugendensystem) also:
+ 		\begin{equation*}
+	 		\abs{A'} = \abs{ \bigcup_{b \in B} A_b } \leq \abs{B} \cdot \aleph_0 = \abs{B}
+ 		\end{equation*}
+ 	\end{proof}
+ 
+ 	\begin{theorem}
+ 		Sei $\varphi(x)$ streng minimal in $T$ mit $\mathfrak{M}_1, \mathfrak{M}_2 \models T$. Seien $(a_i)_{i < \alpha}, (b_i)_{i < \alpha}$ unabhängig in $\varphi(M_1)$ bzw. $\varphi(M_2)$.
+ 		
+ 		Dann
+ 		\begin{enumerate}
+ 			\item $(a_i \mapsto b_i)_{i < \alpha}$ ist elementare Abbildung
+ 			\item Falls $\{ a_i \mid i < \alpha \}, \{ b_i \mid i < \alpha \}$ Basen, dann setzt sich $a_i \mapsto b_i$ zu partiellem Isomorphismus $\varphi(M_1) \to \varphi(M_2)$ fort.
+ 		\end{enumerate}
+ 	\end{theorem}
+ 
+ 	\begin{proof}
+ 		\begin{enumerate}
+ 			\item $a_i \mapsto b_i$ setzt sich fort zu elementarer Abbildung:
+ 			\begin{equation*}
+	 			\operatorname{acl}(\{ a_i \mid i < \alpha \}) \to \operatorname{acl}(\{ b_i \mid i < \alpha \})
+ 			\end{equation*}
+ 			Diese schränkt sich ein zu
+ 			\begin{equation*}
+	 			f: \operatorname{acl}(\{ a_i \mid i < \alpha \}) \cap \varphi(M_1) \to \operatorname{acl}(\{ b_i \mid i < \alpha \}) \cap \varphi(M_2)
+ 			\end{equation*}
+ 			Zu zeigen noch: $f$ ist surjektiv!
+ 			
+ 			Angenommen $b \in \varphi(M_2) \setminus \operatorname{Bild}(f)$. Dann ist $\operatorname{tp}^{\mathfrak{M}_2}(b / \{ b_i \mid i < \alpha \})$ algebraisch also $\operatorname{tp}^{\mathfrak{M}_2}(b / \operatorname{Bild}(f))$.
+ 			
+ 			Also ist auch $\tilde{f}(\operatorname{tp}^{\mathfrak{M}_2}(b / \operatorname{Bild}(f)))$ algebraisch, somit durch ein $a \in \varphi(M_1)$ realisiert. Dann muss $f(a)$ den $\operatorname{tp}^{\mathfrak{M}_2}(b / \operatorname{Bild}(f))$ realisieren. $\lightning$
+ 		\end{enumerate}
+ 	\end{proof}
+ 
+ 	\begin{lemma}
+ 		$T$ habe ein elementares Primmodell $\mathfrak{M}_0$. Dann ist $\operatorname{Th}(\mathfrak{M}_0)$ $\kappa$-kategorisch für $\kappa > \aleph_0$, dann ist $T$ $\kappa$-kategorisch.
+ 	\end{lemma}
+ 
+ 	\begin{proof}
+ 		Seien $\mathfrak{M}_1, \mathfrak{M}_2 \models T, \abs{M_1} = \abs{M_2} = \kappa$. Dann gibt es elementare Einbettungen $\alpha_i: \mathfrak{M}_i \hookrightarrow \mathfrak{M}_j$ also $(\mathfrak{M}_i)_{\alpha_i(\mathfrak{M}_0)} \models \operatorname{Th}(\mathfrak{M}_0))$.
+ 		
+ 		Nach Voraussetzugn ist $(\mathfrak{M}_1)_{\alpha_1(M_0)} \cong (\mathfrak{M}_2)_{\alpha_2(M_0)}$ also auch $\mathfrak{M}_1 \cong \mathfrak{M}_2$.
+ 	\end{proof}
+ 
+ 	\begin{theorem}[Baldwin, Lachlan, eine Hälfte]
+ 		$T$ abzählbar, vollständig und ohne endliche Modelle, $\aleph_0$-stabil und ohne Vaught'sche Paare. Dann ist $T$ $\kappa$-kategorisch für alle $\kappa > \aleph_0$.
+ 	\end{theorem}
 
 \end{document}
